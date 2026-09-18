@@ -1,0 +1,2 @@
+# Optional if Pandoc is already installed and available on PATH.
+pypandoc_binary==1.17

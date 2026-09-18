@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ stylesheet_url }}">
+    {{ math_script }}
+</head>
+<body>
+    <a class="skip-link" href="#article">跳转到正文</a>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="{{ home_url }}" class="logo">LeonBlog</a>
+            <nav class="main-nav" aria-label="主导航">
+                {{ main_navigation }}
+            </nav>
+        </div>
+    </header>
+
+    <div class="article-layout">
+        <aside class="series-sidebar" aria-label="内容导航">
+            <div class="sidebar-inner">
+                <!-- Generated from metadata for the current category; no category heading or counts. -->
+                <nav class="content-tree" aria-label="课程与章节">
+                    {{ sidebar }}
+                </nav>
+            </div>
+        </aside>
+
+        <main class="article-content" id="article" tabindex="-1">
+            <article>
+                <header class="article-header">
+                    <div class="article-meta" aria-label="文章位置">{{ breadcrumbs }}</div>
+                    <h1>{{ title }}</h1>
+                </header>
+                {{ body }}
+                {{ pagination }}
+            </article>
+        </main>
+
+        <aside class="toc-sidebar" aria-label="本文目录">
+            <details class="toc-inner" open>
+                <summary class="toc-heading">本文目录</summary>
+                <!-- Local TOC is generated from converted article headings. -->
+                <nav class="toc-list" aria-label="文章小节">
+                    {{ toc }}
+                </nav>
+            </details>
+        </aside>
+    </div>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div><strong>LeonBlog</strong><p>记录数学、密码学、科研与项目。</p></div>
+            <p class="footer-quote">“Per Aspera Ad Astra.”</p>
+            <!-- Replace the label with the actual filing number when supplied. -->
+            <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">ICP备案</a>
+        </div>
+    </footer>
+</body>
+</html>
