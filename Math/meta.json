@@ -1,4 +1,96 @@
 {
   "title": "Math",
-  "order": 1
+  "order": 1,
+  "description": "",
+  "subjects": [
+    {
+      "directory": "M01-LinearAlgebra",
+      "title": "线性代数",
+      "order": 2,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        },
+        {
+          "order": 2,
+          "file": "01-matrices.tex",
+          "title": "矩阵"
+        }
+      ]
+    },
+    {
+      "directory": "M02-MathematicalAnalysis-I",
+      "title": "数学分析(上)",
+      "order": 3,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    },
+    {
+      "directory": "M03-MathematicalAnalysis-II",
+      "title": "数学分析(下)",
+      "order": 4,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    },
+    {
+      "directory": "M04-DiscreteMathematics",
+      "title": "离散数学",
+      "order": 5,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    },
+    {
+      "directory": "M05-CombinatoricsAndGraphTheory",
+      "title": "组合学与图论",
+      "order": 6,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    },
+    {
+      "directory": "M06-ProbabilityTheory",
+      "title": "概率论",
+      "order": 7,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    },
+    {
+      "directory": "M07-MathematicalStatistics",
+      "title": "数理统计",
+      "order": 8,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
+    }
+  ]
 }

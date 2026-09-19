@@ -55,39 +55,50 @@ python -m unittest discover -s WebCode/tests -v
 ## 内容发现与元数据
 
 根目录下的非隐藏目录被当作分类，排除 `WebCode`、`Output`、`__pycache__`。
-课程（或日记月份）位于分类的下一层，使用现有的课程级格式：
+每个分类只使用分类根目录中的一个 `meta.json`，课程（或日记月份）和章节信息
+都集中写在该文件中：
 
 ```json
 {
-  "title": "线性代数",
-  "order": 2,
-  "chapters": [
-    {"order": 1, "file": "00-introduction.tex", "title": "导言"},
-    {"order": 2, "file": "01-matrices.tex", "title": "矩阵"}
+  "title": "Math",
+  "order": 1,
+  "description": "这里填写首页 Math 卡片的文字",
+  "subjects": [
+    {
+      "directory": "M01-LinearAlgebra",
+      "title": "线性代数",
+      "order": 2,
+      "chapters": [
+        {"order": 1, "file": "00-introduction.tex", "title": "导言"},
+        {"order": 2, "file": "01-matrices.tex", "title": "矩阵"}
+      ]
+    }
   ]
 }
 ```
 
+- `description` 是首页大类卡片下由你填写的文字；空字符串不会生成说明段落。
+- `directory` 指向分类下的英文科目目录。
 - 课程与章节按各自的 `order` 升序排列，不根据文件编号或数组位置推断顺序。
 - `file` 是同目录下的英文 `.tex` 文件名，保留编号，不允许跳出课程目录。
 - `title` 只影响显示文字，不改变生成路径。
 - 同一分类内课程的 `order`、同一课程内章节的 `order` 不能重复。
 - 多篇课程使用手风琴目录，当前课程默认展开；单篇课程直接链接到文章。
 - 左侧只展示当前分类下的课程与章节，不显示“返回首页”“内容目录”、分类名称或数量。
-- 目前没有分类级元数据时，分类名沿用目录名，分类按目录名稳定排序。
-  如果需要中文名称和显式排序，可在分类目录中提供只含现有字段
-  `title` 和 `order` 的 `meta.json`，例如 `{"title":"数学","order":1}`。
+- 缺少分类级 `meta.json` 的分类不会生成内容，并给出警告。
+- 科目和月份目录中不允许再放置 `meta.json`；构建会提示将其合并到分类文件。
 - 当前分类顺序由各分类根目录的 `meta.json` 明确规定：Math、Crypto、
   Project、Research、Tool、Diary。顶部导航和首页卡片共用这一顺序。
 - 正文内小节目录从转换后的标题生成；课程和章节导航只使用元数据。
 
-现在线性代数以及 `Diary/2026-08`、`Diary/2026-09` 已配置元数据。
-新增日记月份时，在该月份目录下添加同格式的 `meta.json`，`chapters` 中引用
-当月的 `.tex` 文件；月份 `order` 使用如 `202608` 的年月整数。Diary 会按
+线性代数以及 `Diary/2026-08`、`Diary/2026-09` 已分别登记在 `Math/meta.json`
+和 `Diary/meta.json` 中。新增日记月份时，在 `Diary/meta.json` 的 `subjects`
+中增加一项，并在 `chapters` 中引用当月的 `.tex` 文件；月份 `order` 使用如
+`202608` 的年月整数。Diary 会按
 `order` 倒序排列，因此时间较新的月份会同时出现在分类卡片和文章页左侧目录前面。
 只有一个文件的月份在左侧目录中直接显示链接，不出现展开按钮。
-未配置的课程和日记会逐项警告并跳过；
-不会猜测标题或自动创建元数据。元数据未列出的 `.tex` 文件也会警告。
+未登记的课程和日记目录会逐项警告并跳过；不会猜测标题或自动创建元数据。
+元数据未列出的 `.tex` 文件也会警告。
 `.md` 不属于本版构建入口。
 
 `01-matrices.tex` 目前没有正文，默认生成“本章内容尚在整理中”的占位页并警告。
@@ -116,7 +127,7 @@ Output/
 同样自动生成；既有分类图标继续使用已有资源。
 
 每个分类根目录下都有一个 `icon/` 目录，用于保存该分类中不同科目或月份卡片
-未来使用的独立图标：
+使用的独立图标：
 
 ```text
 Math/icon/
@@ -127,8 +138,9 @@ Tool/icon/
 Diary/icon/
 ```
 
-当前构建仍使用分类默认图标。科目图标的文件命名以及它与 `meta.json` 的关联字段
-尚未确定；确定约定后再接入构建，避免根据文件名猜测图标归属。
+科目图标按对应科目的 `order` 数字命名。例如，`order` 为 `5` 的科目使用
+`icon/5.svg`。构建时会把图标复制到分类输出目录，并在分类首页的对应卡片中使用。
+如果某个科目尚未提供相应 SVG，构建会继续使用该大类的默认图标。
 
 LaTeX 由 [Pandoc](https://pandoc.org/MANUAL.html) 转为 HTML，公式保留为 TeX，
 由 [MathJax](https://docs.mathjax.org/en/v3.2/web/components/index.html) 渲染。

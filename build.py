@@ -56,6 +56,7 @@ class Category:
     directory: Path
     title: str
     order: int
+    description: str
     subjects: list[Subject] = field(default_factory=list)
 
     @property
@@ -110,72 +111,82 @@ def discover(root: Path, warnings: list[str]) -> list[Category]:
         within(root, directory)
         path_component(directory.name, directory)
         category_meta = directory / "meta.json"
-        if category_meta.exists():
-            within(directory, category_meta)
-            meta = read_metadata(category_meta)
-            title = require(meta, "title", str, category_meta)
-            order = require(meta, "order", int, category_meta)
-        else:
-            title, order = directory.name, 0
-        category = Category(directory, title, order)
+        if not category_meta.is_file():
+            warnings.append(f"{category_meta}: missing; category has no generated content")
+            continue
+        within(directory, category_meta)
+        meta = read_metadata(category_meta)
+        title = require(meta, "title", str, category_meta)
+        order = require(meta, "order", int, category_meta)
+        description = meta.get("description", "")
+        if not isinstance(description, str):
+            raise BuildError(f"{category_meta}: description must be a string")
+        subject_entries = require(meta, "subjects", list, category_meta)
+        category = Category(directory, title, order, description)
         if list(directory.glob("*.tex")):
             raise BuildError(f"{directory}: place article sources in subject directories")
-        for subject_dir in sorted(directory.iterdir()):
-            if not subject_dir.is_dir() or subject_dir.name.startswith("."):
-                continue
-            within(directory, subject_dir)
-            meta_path = subject_dir / "meta.json"
-            if not meta_path.exists():
-                if any(subject_dir.rglob("*.tex")):
-                    warnings.append(f"{meta_path}: missing; subject not included")
-                continue
-            path_component(subject_dir.name, subject_dir)
-            within(subject_dir, meta_path)
-            meta = read_metadata(meta_path)
-            title = require(meta, "title", str, meta_path)
-            order = require(meta, "order", int, meta_path)
-            entries = require(meta, "chapters", list, meta_path)
+        nested_metadata = sorted(directory.glob("*/meta.json"))
+        if nested_metadata:
+            raise BuildError(f"{nested_metadata[0]}: nested metadata is not supported; merge it into {category_meta}")
+        subject_directories, subject_orders = set(), set()
+        for subject_index, subject_entry in enumerate(subject_entries):
+            subject_prefix = f"subjects[{subject_index}]."
+            if not isinstance(subject_entry, dict):
+                raise BuildError(f"{category_meta}: subjects[{subject_index}] must be an object")
+            subject_name = require(subject_entry, "directory", str, category_meta, subject_prefix)
+            path_component(subject_name, category_meta)
+            if subject_name.casefold() in subject_directories:
+                raise BuildError(f"{category_meta}: {subject_prefix}duplicate directory")
+            subject_directories.add(subject_name.casefold())
+            subject_dir = within(directory, directory / subject_name)
+            if not subject_dir.is_dir():
+                raise BuildError(f"{category_meta}: {subject_prefix}directory does not exist: {subject_name}")
+            subject_title = require(subject_entry, "title", str, category_meta, subject_prefix)
+            subject_order = require(subject_entry, "order", int, category_meta, subject_prefix)
+            if subject_order in subject_orders:
+                raise BuildError(f"{category_meta}: {subject_prefix}duplicate order")
+            subject_orders.add(subject_order)
+            entries = require(subject_entry, "chapters", list, category_meta, subject_prefix)
             chapters, files, orders = [], set(), set()
             for index, entry in enumerate(entries):
-                prefix = f"chapters[{index}]."
+                prefix = f"{subject_prefix}chapters[{index}]."
                 if not isinstance(entry, dict):
-                    raise BuildError(f"{meta_path}: chapters[{index}] must be an object")
-                filename = require(entry, "file", str, meta_path, prefix)
-                path_component(filename, meta_path)
+                    raise BuildError(f"{category_meta}: {prefix[:-1]} must be an object")
+                filename = require(entry, "file", str, category_meta, prefix)
+                path_component(filename, category_meta)
                 if Path(filename).suffix != ".tex":
-                    raise BuildError(f"{meta_path}: {prefix}file must be a .tex filename")
-                chapter_title = require(entry, "title", str, meta_path, prefix)
-                chapter_order = require(entry, "order", int, meta_path, prefix)
+                    raise BuildError(f"{category_meta}: {prefix}file must be a .tex filename")
+                chapter_title = require(entry, "title", str, category_meta, prefix)
+                chapter_order = require(entry, "order", int, category_meta, prefix)
                 if filename.casefold() in files or chapter_order in orders:
-                    raise BuildError(f"{meta_path}: {prefix}duplicate file or order")
+                    raise BuildError(f"{category_meta}: {prefix}duplicate file or order")
                 files.add(filename.casefold())
                 orders.add(chapter_order)
                 source = within(subject_dir, subject_dir / filename)
                 if not source.is_file():
-                    raise BuildError(f"{meta_path}: {prefix}file does not exist: {filename}")
+                    raise BuildError(f"{category_meta}: {prefix}file does not exist: {filename}")
                 output = f"{directory.name}/{subject_dir.name}/{Path(filename).stem}.html"
                 if Path(filename).stem.casefold() == "index":
-                    raise BuildError(f"{meta_path}: index.tex conflicts with the subject index")
+                    raise BuildError(f"{category_meta}: {prefix}index.tex conflicts with the subject index")
                 chapters.append(Chapter(source, chapter_title, chapter_order, output))
             for source in sorted(subject_dir.rglob("*.tex")):
                 if source.parent != subject_dir or source.name.casefold() not in files:
-                    warnings.append(f"{source}: not listed in {meta_path}; not included")
+                    warnings.append(f"{source}: not listed in {category_meta}; not included")
             if not chapters:
-                warnings.append(f"{meta_path}: chapters is empty; subject not included")
+                warnings.append(f"{category_meta}: {subject_prefix}chapters is empty; subject not included")
                 continue
-            category.subjects.append(Subject(subject_dir, title, order,
+            category.subjects.append(Subject(subject_dir, subject_title, subject_order,
                                               sorted(chapters, key=lambda c: c.order)))
+        for subject_dir in sorted(path for path in directory.iterdir()
+                                  if path.is_dir() and path.name != "icon"):
+            if subject_dir.name.casefold() not in subject_directories and any(subject_dir.rglob("*.tex")):
+                warnings.append(f"{subject_dir}: not listed in {category_meta}; not included")
         # Diary is a timeline: newer month metadata orders appear first.
         # Academic and other categories retain the normal ascending order.
         category.subjects.sort(
             key=lambda s: (s.order, s.directory.name),
             reverse=directory.name == "Diary",
         )
-        seen = set()
-        for subject in category.subjects:
-            if subject.order in seen:
-                raise BuildError(f"{directory}: duplicate subject order {subject.order}")
-            seen.add(subject.order)
         categories.append(category)
     return sorted(categories, key=lambda c: (c.order, c.directory.name))
 
@@ -394,9 +405,12 @@ def page_values(categories: list[Category], category: Category, page: str, title
 
 def subject_card(category: Category, subject: Subject) -> str:
     """Render a subject with the same card component used by the homepage."""
-    icon = ICONS.get(category.directory.name)
+    subject_icon = category.directory / "icon" / f"{subject.order}.svg"
+    icon_path = (f"{category.directory.name}/icon/{subject.order}.svg"
+                 if subject_icon.is_file()
+                 else f"assets/icons/{ICONS[category.directory.name]}.svg")
     icon_html = (f'<div class="category-icon {category.directory.name.lower()}-icon">'
-                 f'<img src="{relative_url(category.output, f"assets/icons/{icon}.svg")}" alt=""></div>')
+                 f'<img src="{relative_url(category.output, icon_path)}" alt=""></div>')
     return (f'<a class="category-card" href="{relative_url(category.output, subject.chapters[0].output)}">'
             f'{icon_html}<h2>{escape(subject.title)}</h2>'
             f'<p>{len(subject.chapters)} 篇文章</p>'
@@ -420,6 +434,13 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                 copy_static_file(path, destination)
     count, cards = 0, []
     for category in categories:
+        icon_source = category.directory / "icon"
+        if icon_source.is_dir():
+            for path in sorted(icon_source.glob("*.svg")):
+                within(icon_source, path)
+                destination = stage / category.directory.name / "icon" / path.name
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                copy_static_file(path, destination)
         for subject in category.subjects:
             subject_index = f"{category.directory.name}/{subject.directory.name}/index.html"
             subject_values = page_values(categories, category, subject_index, subject.title)
@@ -453,8 +474,9 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
         icon_html = (f'<div class="category-icon {category.directory.name.lower()}-icon">'
                      f'<img src="assets/icons/{icon}.svg" alt=""></div>') if icon else ''
         cards.append(f'<a class="category-card" href="{quote(category.output)}">{icon_html}'
-                     f'<h2>{escape(category.title)}</h2><p>{len(category.subjects)} 个主题</p>'
-                     '<span class="category-arrow" aria-hidden="true">→</span></a>')
+                     f'<h2>{escape(category.title)}</h2>'
+                     + (f'<p>{escape(category.description)}</p>' if category.description else '')
+                     + '<span class="category-arrow" aria-hidden="true">→</span></a>')
     write_page(stage, "index.html", render(home_template,
                {"main_navigation": main_navigation(categories, "index.html", None),
                 "category_cards": "\n".join(cards)}))

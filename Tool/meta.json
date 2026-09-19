@@ -1,4 +1,6 @@
 {
   "title": "Tool",
-  "order": 5
+  "order": 5,
+  "description": "",
+  "subjects": []
 }

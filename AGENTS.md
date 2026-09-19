@@ -176,24 +176,29 @@ Before adding new metadata fields:
 
 Do not create multiple incompatible metadata formats for different subjects.
 
-### Current Subject Metadata Schema
+### Current Category Metadata Schema
 
-`Math/M01-LinearAlgebra/meta.json` establishes the current subject-level format:
+Each major category has exactly one `meta.json` in its root directory. Subject and chapter metadata are nested inside that file. Do not create `meta.json` files inside subject or chapter directories.
+
+`Math/meta.json` establishes the current category-level format:
 
 ```json
 {
-  "title": "线性代数",
-  "order": 2,
-  "chapters": [
+  "title": "Math",
+  "order": 1,
+  "description": "",
+  "subjects": [
     {
-      "order": 1,
-      "file": "00-introduction.tex",
-      "title": "导言"
-    },
-    {
+      "directory": "M01-LinearAlgebra",
+      "title": "线性代数",
       "order": 2,
-      "file": "01-matrices.tex",
-      "title": "矩阵"
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "导言"
+        }
+      ]
     }
   ]
 }
@@ -203,18 +208,22 @@ Field meanings:
 
 | Field | Type | Meaning |
 | --- | --- | --- |
-| `title` | string | Chinese display title of the subject. |
-| `order` | integer | Subject display order within its parent category; smaller values appear first. |
-| `chapters` | array of objects | Chapter entries for this subject. |
-| `chapters[].order` | integer | Chapter display order within this subject; smaller values appear first. |
-| `chapters[].file` | string | Source `.tex` filename, resolved relative to the directory containing this `meta.json`. |
-| `chapters[].title` | string | Chinese display title of the chapter. |
+| `title` | string | Category display title. |
+| `order` | integer | Category order used by the main navigation and homepage cards. |
+| `description` | string | User-written text shown on the homepage category card; an empty string hides the text. |
+| `subjects` | array of objects | Subjects or Diary month entries in this category. |
+| `subjects[].directory` | string | English subject directory name, relative to the category directory. |
+| `subjects[].title` | string | Human-readable subject name. |
+| `subjects[].order` | integer | Subject display order within its category. |
+| `subjects[].chapters` | array of objects | Chapter entries for the subject. |
+| `subjects[].chapters[].order` | integer | Chapter display order within its subject. |
+| `subjects[].chapters[].file` | string | Source `.tex` filename, relative to the subject directory. |
+| `subjects[].chapters[].title` | string | Chinese display title of the chapter. |
 
-Use this format when adding metadata for other subjects with the same structure.
-One subject-level `meta.json` describes the subject and its chapter files; separate chapter directories or per-chapter metadata files are not required by this format.
+Use this single category-level format for all categories. Empty categories use an empty `subjects` array.
 
 Generate subject and chapter navigation labels from the corresponding `title` fields, and sort by the corresponding `order` fields rather than filesystem enumeration, filename prefixes, or array position.
-The metadata order is independent of the numbering in paths: this example deliberately records subject `order: 2` in `M01-LinearAlgebra`, and chapter `order: 1` for `00-introduction.tex`. Do not automatically make these numbers match.
+The metadata order is independent of numbering in paths. Do not automatically make these numbers match. Diary subjects are the exception to normal display direction: larger month orders appear first.
 
 The `file` value must match the actual source filename, including its numeric prefix and `.tex` extension. When renaming a referenced source file, update its metadata entry as well.
 Display titles do not have to be literal translations of filenames: `00-introduction.tex` is displayed as `导言` in this example.
@@ -230,7 +239,7 @@ A key architectural decision is:
 
 **Chapter Chinese names should be stored in metadata rather than extracted from `.tex` files whenever possible.**
 
-For the current subject format, Chinese chapter titles are stored in `chapters[].title` in the subject's `meta.json`, alongside the corresponding `.tex` filenames in `chapters[].file`.
+For the current category format, Chinese chapter titles are stored in `subjects[].chapters[].title` in the category's `meta.json`, alongside the corresponding `.tex` filenames in `subjects[].chapters[].file`.
 
 This allows the build system to generate navigation without opening and parsing every `.tex` document merely to discover its title.
 

@@ -1,4 +1,31 @@
 {
   "title": "Diary",
-  "order": 6
+  "order": 6,
+  "description": "",
+  "subjects": [
+    {
+      "directory": "2026-08",
+      "title": "2026年8月",
+      "order": 202608,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "2026-08.tex",
+          "title": "2026年8月日记"
+        }
+      ]
+    },
+    {
+      "directory": "2026-09",
+      "title": "2026年9月",
+      "order": 202609,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "2026-09.tex",
+          "title": "2026年9月日记"
+        }
+      ]
+    }
+  ]
 }
