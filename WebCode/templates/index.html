@@ -1,51 +1,96 @@
 <!DOCTYPE html>
-
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Leon 的个人知识笔记，记录数学、密码学、科研、项目与日常思考。">
     <title>LeonBlog</title>
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-
-<body>
-    <header class ="site-header"><!-- 网站顶部 -->
-        <div class="header-container"><!-- 顶部容器 -->
-            <div class="logo">
-                LeonBlog
-            </div>
-
-            <nav class="main-nav">
-                {{ main_navigation }}
-            </nav>
+<body class="home-page">
+    <a class="skip-link" href="#main">跳转到正文</a>
+    <header class="site-header">
+        <div class="header-container">
+            <a href="index.html" class="logo" aria-label="LeonBlog 首页">LeonBlog</a>
+            <nav class="main-nav" aria-label="主导航">{{ main_navigation }}</nav>
         </div>
     </header>
-
-    <main>
-        <section class="hero">
+    <main class="landing-main" id="main" tabindex="-1">
+        <section class="hero" aria-labelledby="home-title">
+            <img class="hero-image" src="assets/images/background.jpg" alt="" fetchpriority="high">
             <div class="hero-content">
-                <h1>Per Aspera Ad Astra</h1>
-                <p>循此苦旅,以达天际.穿越逆境,直抵繁星</p>
+                <h1 id="home-title">Per Aspera Ad Astra</h1>
+                <p>循此苦旅，以达天际。穿越逆境，直抵繁星。</p>
             </div>
         </section>
-
-        <section class="category-section">
-            <div class="category-container">
-                {{ category_cards }}
+        <section class="category-section" aria-label="探索分类">
+            <div class="category-container">{{ category_cards }}</div>
+        </section>
+        <section class="about-section" id="about" aria-labelledby="about-title">
+            <div class="section-heading">
+                <div>
+                    <h2 id="about-title">About Me</h2>
+                    <p>A brief introduction</p>
+                </div>
+            </div>
+            <div class="about-layout">
+                <figure class="profile-portrait">
+                    <div class="avatar-frame">
+                        <img src="assets/images/avatar.jpg" alt="山湖前背着背包的少年背影插画" width="194" height="194" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>
+                        <p class="portrait-motto">Keep learning, keep exploring.</p>
+                        <div class="portrait-rule" aria-hidden="true"></div>
+                        <p class="portrait-caption">A more open mind, a brighter tomorrow.</p>
+                    </figcaption>
+                </figure>
+                <div class="about-card">
+                    <!-- Personal introduction: edit the text and links here. -->
+                    <h3>你好，我是 Leon</h3>
+                    <div class="about-copy">
+                        <div>
+                            <p>一名对密码学充满热情的学生，正在探索数学、密码学与计算机科学的交叉领域。</p>
+                            <p>我喜欢从理论中发现美，也乐于通过实践构建有意义的项目。这个博客记录了我在学习、研究与成长过程中的思考与积累，希望能与志同道合的朋友交流，共同进步。</p>
+                            <p>道阻且长，行则将至。</p>
+                        </div>
+                        <blockquote class="about-quote">
+                            <p>Better Tools<br>Brighter Minds</p>
+                            <cite>— Leon</cite>
+                        </blockquote>
+                    </div>
+                    <ul class="interest-tags" aria-label="兴趣方向">
+                        <li><a class="tag-crypto" href="Crypto/index.html">Cryptography</a></li>
+                        <li><a class="tag-math" href="Math/index.html">Mathematics</a></li>
+                        <li><a class="tag-research" href="Research/index.html">Research</a></li>
+                        <li><a class="tag-project" href="Project/index.html">Projects</a></li>
+                    </ul>
+                    <div class="about-actions">
+                        <a class="profile-link" href="https://github.com/Leon5428" target="_blank" rel="noopener noreferrer" aria-label="GitHub：Leon5428（新窗口打开）">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6m-3-14-2 16"/></svg>
+                            GitHub <span class="link-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <!-- Add a mailto link here when a public email address is supplied. -->
+                        <details class="profile-more">
+                            <summary>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H5v18h14V8Zm0 0v5h5M8 12h8m-8 4h6"/></svg>
+                                Read More <span class="profile-more-label">· 关于这里</span>
+                            </summary>
+                            <p>这里按学科整理知识，也保留学习过程中的问题、尝试与日常片段。从一篇笔记出发，慢慢连接起更完整的理解。</p>
+                            <p>你可以从上方分类开始阅读，或在 <a href="Diary/index.html">Diary</a> 中看看最近的记录。</p>
+                        </details>
+                    </div>
+                </div>
             </div>
         </section>
-
     </main>
-
-
     <footer class="site-footer">
         <div class="footer-container">
             <div><strong>LeonBlog</strong><p>记录数学、密码学、科研与项目。</p></div>
             <p class="footer-quote">“Per Aspera Ad Astra.”</p>
-            <!-- Replace the label with the actual filing number when supplied. -->
             <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">ICP备案</a>
         </div>
     </footer>
-
 </body>
 </html>

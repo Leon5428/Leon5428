@@ -2,6 +2,7 @@
   "title": "Math",
   "order": 1,
   "description": "",
+  "subtitle": "从公理与定义出发，寻找结构与证明之美。",
   "subjects": [
     {
       "directory": "M01-LinearAlgebra",

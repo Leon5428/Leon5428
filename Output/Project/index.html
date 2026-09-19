@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="把想法写成代码，在实践中寻找答案。">
     <title>Project | LeonBlog</title>
+    <link rel="icon" href="../assets/icons/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/category.css">
 </head>
 <body class="category-page">
-    <a class="skip-link" href="#subjects">跳转到科目列表</a>
+    <a class="skip-link" href="#subjects">跳转到内容列表</a>
     <header class="site-header">
         <div class="header-container">
             <a href="../index.html" class="logo">LeonBlog</a>
@@ -20,15 +24,20 @@
 <a href="../Diary/index.html">Diary</a></nav>
         </div>
     </header>
-    <main>
-        <section class="hero category-hero">
+    <main class="landing-main">
+        <section class="hero category-hero" aria-labelledby="category-title">
+            <img class="hero-image" src="../assets/images/hero-project.jpg" alt="" fetchpriority="high">
             <div class="hero-content">
-                <h1>Project</h1>
-                <p>0 个科目 · 0 篇文章</p>
+                <h1 id="category-title">Project</h1>
+                <p>把想法写成代码，在实践中寻找答案。</p>
             </div>
         </section>
-        <section class="category-section" id="subjects" tabindex="-1" aria-label="科目列表">
-            <div class="category-container"><div class="category-empty"><h2>内容正在整理中</h2><p>新的科目会陆续收录在这里。</p></div></div>
+        <section class="category-section" id="subjects" tabindex="-1" aria-labelledby="collection-title">
+            <div class="collection-heading">
+                <h2 id="collection-title">科目与笔记</h2>
+                <p>持续记录，慢慢积累</p>
+            </div>
+            <div class="category-container"><div class="category-empty"><span aria-hidden="true">✧</span><h3>留一处空白，等待新的思考。</h3><p>这里的内容正在慢慢整理，敬请期待。</p><a href="../index.html">探索其他分类 <span aria-hidden="true">→</span></a></div></div>
         </section>
     </main>
     <footer class="site-footer">

@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page_title }}</title>
+    <link rel="icon" href="{{ favicon_url }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ base_stylesheet_url }}">
     <link rel="stylesheet" href="{{ stylesheet_url }}">
     {{ math_script }}
 </head>
-<body>
+<body class="article-page">
     <a class="skip-link" href="#article">跳转到正文</a>
     <header class="site-header">
         <div class="header-container">
@@ -18,14 +20,15 @@
         </div>
     </header>
 
-    <div class="article-layout">
+    <div class="article-layout{{ article_layout_class }}">
         <aside class="series-sidebar" aria-label="内容导航">
-            <div class="sidebar-inner">
+            <details class="series-panel" open>
+                <summary class="series-toggle">科目与章节</summary>
                 <!-- Generated from metadata for the current category; no category heading or counts. -->
                 <nav class="content-tree" aria-label="课程与章节">
                     {{ sidebar }}
                 </nav>
-            </div>
+            </details>
         </aside>
 
         <main class="article-content" id="article" tabindex="-1">
@@ -34,12 +37,12 @@
                     <div class="article-meta" aria-label="文章位置">{{ breadcrumbs }}</div>
                     <h1>{{ title }}</h1>
                 </header>
-                {{ body }}
+                <div class="article-body">{{ body }}</div>
                 {{ pagination }}
             </article>
         </main>
 
-        <aside class="toc-sidebar" aria-label="本文目录">
+        <aside class="toc-sidebar" aria-label="本文目录"{{ toc_visibility }}>
             <details class="toc-inner" open>
                 <summary class="toc-heading">本文目录</summary>
                 <!-- Local TOC is generated from converted article headings. -->

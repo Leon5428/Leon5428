@@ -2,6 +2,7 @@
   "title": "Diary",
   "order": 6,
   "description": "",
+  "subtitle": "留下日常的片段，也记下思考的轨迹。",
   "subjects": [
     {
       "directory": "2026-08",

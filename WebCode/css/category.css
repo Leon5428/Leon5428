@@ -1,137 +1,34 @@
-/* Category overview. Reading pages retain their independent three-column layout. */
-.category-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background: #fcfcfd;
+/* Category landing pages share the homepage's visual language. */
+.category-page .hero-content { min-height: 320px; }
+.category-page .hero h1 { font-size: clamp(42px, 5vw, 62px); }
+.category-page .category-section { padding: 30px 0 64px; }
+.collection-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 18px; }
+.collection-heading h2 { margin: 0; font-size: 21px; font-weight: 400; }
+.collection-heading p { margin: 0; color: var(--muted); font-size: 12px; }
+.category-page .category-container { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.category-page .category-card { min-height: 194px; padding: 24px; }
+.category-page .category-card h2 { font-size: 19px; }
+.category-page .category-card p { font-size: 12px; }
+.category-empty { grid-column: 1 / -1; padding: 42px 32px; border: 1px solid var(--line); border-radius: 6px; background: linear-gradient(120deg, var(--surface), #fff); }
+.category-empty > span { display: block; margin-bottom: 16px; color: #879eb1; font-size: 24px; }
+.category-empty h3 { margin: 0 0 10px; font-size: 23px; font-weight: 400; }
+.category-empty p { margin: 0; color: var(--muted); font-size: 14px; }
+.category-empty a { display: inline-block; margin-top: 22px; color: var(--accent); font-size: 13px; text-decoration: none; }
+.category-empty a:hover { text-decoration: underline; }
+@media (max-width: 1020px) {
+    .category-page .category-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-
-.category-page .site-header,
-.category-page .site-footer { background: #fff; }
-
-.category-page .header-container,
-.category-page .footer-container { max-width: 1200px; }
-
-.category-main {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 64px 32px 96px;
-    flex: 1;
-}
-
-.category-intro {
-    padding-bottom: 36px;
-    border-bottom: 1px solid var(--line);
-}
-
-.category-eyebrow {
-    margin: 0 0 18px;
-    color: var(--muted);
-    font-size: 13px;
-    letter-spacing: 0.08em;
-}
-
-.category-eyebrow span { margin: 0 12px; color: #b0bccb; }
-
-.category-intro h1 {
-    margin: 0 0 16px;
-    color: #0f172a;
-    font-size: clamp(40px, 5vw, 58px);
-    font-weight: 500;
-    line-height: 1.2;
-    overflow-wrap: anywhere;
-}
-
-.category-description {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px 32px;
-    color: var(--muted);
-}
-
-.category-description p { margin: 0; font-size: 16px; }
-.category-description .category-statistics { font-size: 13px; white-space: nowrap; }
-.category-statistics span { margin: 0 12px; color: #a0aec0; }
-
-.subject-section { margin-top: 36px; }
-.subject-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
-.subject-section-heading h2 { margin: 0; font-size: 18px; font-weight: 600; }
-.subject-section-heading > span { color: var(--muted); font-size: 12px; }
-.subject-cards { display: grid; gap: 22px; }
-
-.subject-card {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.6fr);
-    overflow: hidden;
-    border: 1px solid #dde5ef;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 3px 16px rgb(23 32 51 / 2%);
-}
-
-.subject-card-intro {
-    min-width: 0;
-    padding: 30px 32px;
-    background: #f3f6fb;
-    border-right: 1px solid var(--line);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.subject-code { color: #587398; font-size: 12px; letter-spacing: 0.12em; }
-.subject-card h3 { margin: 12px 0 26px; font-size: 26px; line-height: 1.45; font-weight: 600; overflow-wrap: anywhere; }
-.subject-start {
-    display: inline-flex;
-    align-items: center;
-    gap: 20px;
-    min-height: 42px;
-    padding: 8px 15px;
-    margin-top: auto;
-    border: 1px solid #ccd9ed;
-    border-radius: 6px;
-    background: #fff;
-    color: #2455a4;
-    font-size: 13px;
-    text-decoration: none;
-}
-.subject-start:hover { border-color: var(--accent); background: var(--selected); }
-
-.subject-card-content { min-width: 0; padding: 26px 32px; }
-.subject-card-label { margin: 0 0 8px; color: var(--muted); font-size: 12px; }
-.subject-chapters { margin: 0; padding: 0; list-style: none; }
-.subject-chapters li + li { border-top: 1px solid #edf0f5; }
-.subject-chapters a {
-    min-height: 56px;
-    padding: 12px 6px;
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-    color: #334155;
-    font-size: 15px;
-    text-decoration: none;
-    border-radius: 4px;
-}
-.subject-chapters a:hover { color: var(--accent); background: #f8faff; }
-.subject-chapter-number { flex: 0 0 24px; color: #8795aa; font-size: 12px; font-variant-numeric: tabular-nums; }
-.subject-chapter-title { flex: 1; overflow-wrap: anywhere; }
-.subject-chapter-arrow { color: #8a9bb3; }
-.category-empty { padding: 48px 32px; border: 1px dashed #cbd5e1; border-radius: 12px; background: #fff; }
-.category-empty h3 { margin: 0 0 10px; font-size: 22px; }
-.category-empty p { margin: 0; color: var(--muted); font-size: 15px; }
-
 @media (max-width: 760px) {
-    .category-main { padding: 36px 20px 56px; }
-    .category-intro { padding-bottom: 26px; }
-    .category-description { flex-direction: column; gap: 14px; }
-    .subject-section { margin-top: 28px; }
-    .subject-section-heading > span { display: none; }
-    .subject-card { grid-template-columns: 1fr; }
-    .subject-card-intro { padding: 24px; border-right: 0; border-bottom: 1px solid var(--line); }
-    .subject-card h3 { margin: 8px 0 20px; font-size: 24px; }
-    .subject-card-content { padding: 20px 24px; }
-    .category-empty { padding: 32px 24px; }
+    .category-page .category-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .category-page .category-card { min-height: 184px; padding: 20px; }
+    .category-page .hero-content { min-height: 280px; }
+}
+@media (max-width: 480px) {
+    .category-page .hero-content { min-height: 250px; }
+    .category-page .category-card { min-height: 182px; padding: 18px 15px; }
+    .category-page .category-card h2 { font-size: 17px; }
+    .collection-heading { gap: 10px; flex-wrap: wrap; }
+    .collection-heading h2 { font-size: 19px; }
+    .category-empty { padding: 30px 24px; }
+    .category-page .category-section { padding-bottom: 40px; }
 }

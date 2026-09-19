@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ category_description }}">
     <title>{{ page_title }}</title>
+    <link rel="icon" href="{{ favicon_url }}" type="image/svg+xml">
+    <link rel="stylesheet" href="{{ base_stylesheet_url }}">
     <link rel="stylesheet" href="{{ stylesheet_url }}">
+    <link rel="stylesheet" href="{{ category_stylesheet_url }}">
 </head>
 <body class="category-page">
-    <a class="skip-link" href="#subjects">跳转到科目列表</a>
+    <a class="skip-link" href="#subjects">跳转到内容列表</a>
     <header class="site-header">
         <div class="header-container">
             <a href="{{ home_url }}" class="logo">LeonBlog</a>
             <nav class="main-nav" aria-label="主导航">{{ main_navigation }}</nav>
         </div>
     </header>
-    <main>
-        <section class="hero category-hero">
+    <main class="landing-main">
+        <section class="hero category-hero" aria-labelledby="category-title">
+            <img class="hero-image" src="{{ hero_image_url }}" alt="" fetchpriority="high">
             <div class="hero-content">
-                <h1>{{ title }}</h1>
-                <p>{{ subject_count }} 个科目 · {{ chapter_count }} 篇文章</p>
+                <h1 id="category-title">{{ title }}</h1>
+                <p>{{ category_description }}</p>
             </div>
         </section>
-        <section class="category-section" id="subjects" tabindex="-1" aria-label="科目列表">
+        <section class="category-section" id="subjects" tabindex="-1" aria-labelledby="collection-title">
+            <div class="collection-heading">
+                <h2 id="collection-title">{{ collection_title }}</h2>
+                <p>{{ collection_summary }}</p>
+            </div>
             <div class="category-container">{{ subject_cards }}</div>
         </section>
     </main>

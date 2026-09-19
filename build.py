@@ -57,6 +57,7 @@ class Category:
     title: str
     order: int
     description: str
+    subtitle: str = ""
     subjects: list[Subject] = field(default_factory=list)
 
     @property
@@ -121,8 +122,11 @@ def discover(root: Path, warnings: list[str]) -> list[Category]:
         description = meta.get("description", "")
         if not isinstance(description, str):
             raise BuildError(f"{category_meta}: description must be a string")
+        subtitle = meta.get("subtitle", "")
+        if not isinstance(subtitle, str):
+            raise BuildError(f"{category_meta}: subtitle must be a string")
         subject_entries = require(meta, "subjects", list, category_meta)
-        category = Category(directory, title, order, description)
+        category = Category(directory, title, order, description, subtitle)
         if list(directory.glob("*.tex")):
             raise BuildError(f"{directory}: place article sources in subject directories")
         nested_metadata = sorted(directory.glob("*/meta.json"))
@@ -398,9 +402,12 @@ def page_values(categories: list[Category], category: Category, page: str, title
     return {"page_title": escape(f"{title} | LeonBlog"), "title": escape(title),
             "home_url": relative_url(page, "index.html"),
             "stylesheet_url": relative_url(page, "css/article.css"),
+            "base_stylesheet_url": relative_url(page, "css/base.css"),
+            "favicon_url": relative_url(page, "assets/icons/favicon.svg"),
             "main_navigation": main_navigation(categories, page, category),
-            "breadcrumbs": f'<span>{escape(category.title)}</span>',
-            "sidebar": sidebar(category, page), "body": "", "pagination": "", "toc": "", "math_script": ""}
+            "breadcrumbs": f'<a href="{relative_url(page, category.output)}">{escape(category.title)}</a>',
+            "sidebar": sidebar(category, page), "body": "", "pagination": "", "toc": "", "math_script": "",
+            "toc_visibility": " hidden", "article_layout_class": " no-toc"}
 
 
 def subject_card(category: Category, subject: Subject) -> str:
@@ -436,7 +443,9 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
     for category in categories:
         icon_source = category.directory / "icon"
         if icon_source.is_dir():
-            for path in sorted(icon_source.glob("*.svg")):
+            for path in sorted(icon_source.iterdir()):
+                if not path.is_file() or path.suffix.lower() not in {".svg", ".txt"}:
+                    continue
                 within(icon_source, path)
                 destination = stage / category.directory.name / "icon" / path.name
                 destination.parent.mkdir(parents=True, exist_ok=True)
@@ -444,17 +453,19 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
         for subject in category.subjects:
             subject_index = f"{category.directory.name}/{subject.directory.name}/index.html"
             subject_values = page_values(categories, category, subject_index, subject.title)
-            subject_values["body"] = '<ul>' + ''.join(
+            subject_values["body"] = '<ol class="subject-index-list">' + ''.join(
                 f'<li><a href="{relative_url(subject_index, c.output)}">{escape(c.title)}</a></li>'
-                for c in subject.chapters) + '</ul>'
+                for c in subject.chapters) + '</ol>'
             write_page(stage, subject_index, render(article_template, subject_values))
             for chapter in subject.chapters:
                 body, toc, math = convert(pandoc, chapter, subject, stage, warnings)
                 values = page_values(categories, category, chapter.output, chapter.title)
                 values.update(body=body, toc=toc,
                               sidebar=sidebar(category, chapter.output, chapter), pagination=pagination(subject, chapter))
+                if toc:
+                    values.update(toc_visibility="", article_layout_class="")
                 values["breadcrumbs"] += ('<span class="meta-divider" aria-hidden="true">/</span>'
-                                          f'<span>{escape(subject.title)}</span>')
+                                          f'<a href="{relative_url(chapter.output, subject_index)}">{escape(subject.title)}</a>')
                 values["page_title"] = escape(f"{chapter.title} · {subject.title} | LeonBlog")
                 if math:
                     script_url = mathjax_url if urlsplit(mathjax_url).scheme else relative_url(chapter.output, mathjax_url)
@@ -462,12 +473,27 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                 write_page(stage, chapter.output, render(article_template, values))
                 count += 1
         values = page_values(categories, category, category.output, category.title)
+        hero_image = f"assets/images/hero-{category.directory.name.lower()}.jpg"
+        if not (root / "WebCode" / hero_image).is_file():
+            hero_image = "assets/images/background.jpg"
+        subject_count = len(category.subjects)
+        chapter_count = sum(len(subject.chapters) for subject in category.subjects)
+        collection_title = "日记归档" if category.directory.name == "Diary" else "科目与笔记"
+        collection_summary = (f"{subject_count} 个月份 · {chapter_count} 篇记录"
+                              if category.directory.name == "Diary"
+                              else f"{subject_count} 个科目 · {chapter_count} 篇文章")
+        empty_card = ('<div class="category-empty"><span aria-hidden="true">✧</span>'
+                      '<h3>留一处空白，等待新的思考。</h3><p>这里的内容正在慢慢整理，敬请期待。</p>'
+                      f'<a href="{relative_url(category.output, "index.html")}">探索其他分类 <span aria-hidden="true">→</span></a></div>')
         values.update(
             stylesheet_url=relative_url(category.output, "css/style.css"),
-            subject_count=str(len(category.subjects)),
-            chapter_count=str(sum(len(subject.chapters) for subject in category.subjects)),
+            category_stylesheet_url=relative_url(category.output, "css/category.css"),
+            hero_image_url=relative_url(category.output, hero_image),
+            category_description=escape(category.subtitle or category.description or "按主题整理，循章节阅读。", quote=True),
+            collection_title=collection_title,
+            collection_summary=collection_summary if subject_count else "持续记录，慢慢积累",
             subject_cards=''.join(subject_card(category, subject) for subject in category.subjects)
-                          or '<div class="category-empty"><h2>内容正在整理中</h2><p>新的科目会陆续收录在这里。</p></div>',
+                          or empty_card,
         )
         write_page(stage, category.output, render(category_template, values))
         icon = ICONS.get(category.directory.name)
