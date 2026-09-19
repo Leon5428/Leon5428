@@ -28,7 +28,7 @@ MANIFEST = ".build-manifest.json"
 TOKEN = re.compile(r"\{\{\s*([a-z_]+)\s*\}\}")
 # Presentation assets from the existing homepage, not a content discovery list.
 ICONS = {"Math": "pi", "Crypto": "lock-keyhole", "Research": "file-text",
-         "Project": "cuboid", "Diary": "pencil-line"}
+         "Project": "cuboid", "Tool": "wrench", "Diary": "pencil-line"}
 
 
 class BuildError(Exception):
@@ -165,7 +165,12 @@ def discover(root: Path, warnings: list[str]) -> list[Category]:
                 continue
             category.subjects.append(Subject(subject_dir, title, order,
                                               sorted(chapters, key=lambda c: c.order)))
-        category.subjects.sort(key=lambda s: (s.order, s.directory.name))
+        # Diary is a timeline: newer month metadata orders appear first.
+        # Academic and other categories retain the normal ascending order.
+        category.subjects.sort(
+            key=lambda s: (s.order, s.directory.name),
+            reverse=directory.name == "Diary",
+        )
         seen = set()
         for subject in category.subjects:
             if subject.order in seen:
@@ -260,7 +265,7 @@ def copy_resource(subject: Subject, chapter: Chapter, url: str, stage: Path) -> 
     target = PurePosixPath(chapter.output).parent / source.relative_to(subject.directory).as_posix()
     destination = within(stage, stage / str(target))
     destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source, destination)
+    copy_static_file(source, destination)
     suffix = (f"?{parsed.query}" if parsed.query else "") + (f"#{parsed.fragment}" if parsed.fragment else "")
     return relative_url(chapter.output, str(target)) + suffix
 
@@ -367,7 +372,15 @@ def pagination(subject: Subject, chapter: Chapter) -> str:
 def write_page(stage: Path, path: str, text: str) -> None:
     destination = within(stage, stage / path)
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(text, encoding="utf-8", newline="\n")
+    destination.write_text(text, encoding="utf-8", newline="\r\n")
+
+
+def copy_static_file(source: Path, destination: Path) -> None:
+    """Copy static assets while keeping generated text files in CRLF format."""
+    if source.suffix.lower() in {".css", ".html", ".js", ".json", ".md", ".svg", ".txt", ".xml"}:
+        destination.write_text(read_text(source), encoding="utf-8", newline="\r\n")
+    else:
+        shutil.copyfile(source, destination)
 
 
 def page_values(categories: list[Category], category: Category, page: str, title: str) -> dict[str, str]:
@@ -380,24 +393,14 @@ def page_values(categories: list[Category], category: Category, page: str, title
 
 
 def subject_card(category: Category, subject: Subject) -> str:
-    """Category browsing card; all chapter labels/order still come from metadata."""
-    prefix = re.match(r"([A-Za-z]*\d+)[-_]", subject.directory.name)
-    code = f'<span class="subject-code">{escape(prefix[1])}</span>' if prefix else ''
-    rows = []
-    for chapter in subject.chapters:
-        number = re.match(r"(\d+)[-_]", chapter.source.stem)
-        number_html = (f'<span class="subject-chapter-number" aria-hidden="true">{number[1]}</span>'
-                       if number else '')
-        rows.append(f'<li><a href="{relative_url(category.output, chapter.output)}">{number_html}'
-                    f'<span class="subject-chapter-title">{escape(chapter.title)}</span>'
-                    '<span class="subject-chapter-arrow" aria-hidden="true">↗</span></a></li>')
-    return ('<article class="subject-card"><div class="subject-card-intro">'
-            f'{code}<h3>{escape(subject.title)}</h3>'
-            f'<a class="subject-start" href="{relative_url(category.output, subject.chapters[0].output)}"'
-            f' aria-label="开始阅读：{escape(subject.title, quote=True)}">'
-            '开始阅读<span aria-hidden="true">→</span></a></div>'
-            '<div class="subject-card-content"><p class="subject-card-label">章节</p>'
-            '<ol class="subject-chapters">' + ''.join(rows) + '</ol></div></article>')
+    """Render a subject with the same card component used by the homepage."""
+    icon = ICONS.get(category.directory.name)
+    icon_html = (f'<div class="category-icon {category.directory.name.lower()}-icon">'
+                 f'<img src="{relative_url(category.output, f"assets/icons/{icon}.svg")}" alt=""></div>')
+    return (f'<a class="category-card" href="{relative_url(category.output, subject.chapters[0].output)}">'
+            f'{icon_html}<h2>{escape(subject.title)}</h2>'
+            f'<p>{len(subject.chapters)} 篇文章</p>'
+            '<span class="category-arrow" aria-hidden="true">→</span></a>')
 
 
 def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
@@ -414,7 +417,7 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                 within(source, path)
                 destination = stage / name / path.relative_to(source)
                 destination.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(path, destination)
+                copy_static_file(path, destination)
     count, cards = 0, []
     for category in categories:
         for subject in category.subjects:
@@ -439,11 +442,11 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                 count += 1
         values = page_values(categories, category, category.output, category.title)
         values.update(
-            category_stylesheet_url=relative_url(category.output, "css/category.css"),
+            stylesheet_url=relative_url(category.output, "css/style.css"),
             subject_count=str(len(category.subjects)),
             chapter_count=str(sum(len(subject.chapters) for subject in category.subjects)),
             subject_cards=''.join(subject_card(category, subject) for subject in category.subjects)
-                          or '<div class="category-empty"><h3>笔记正在整理中</h3><p>新的主题会陆续收录在这里。</p></div>',
+                          or '<div class="category-empty"><h2>内容正在整理中</h2><p>新的科目会陆续收录在这里。</p></div>',
         )
         write_page(stage, category.output, render(category_template, values))
         icon = ICONS.get(category.directory.name)
