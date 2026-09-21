@@ -5,7 +5,7 @@
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(250, 252, 253, .91), rgba(250, 252, 253, .56) 48%, rgba(250, 252, 253, .08)); }
 .hero-content { min-height: 320px; padding: 64px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .hero h1 { max-width: 780px; margin: 0 0 18px; color: #15263a; font-size: clamp(32px, 3.25vw, 46px); line-height: 1.25; letter-spacing: -1.3px; text-wrap: balance; }
-.hero p { max-width: 38em; margin: 0; color: #4e6276; font-size: 15px; line-height: 1.9; }
+.hero p { max-width: 38em; margin: 0; color: #4e6276; font-size: 15px; line-height: 1.9; text-wrap: balance; }
 .category-section { padding: 24px 0 0; }
 .category-container { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
 .category-card {
@@ -68,7 +68,7 @@
 .profile-link svg, .profile-more svg { width: 16px; height: 16px; flex-shrink: 0; }
 .profile-link .link-arrow { color: var(--muted); margin-left: 3px; }
 .profile-more { flex: 1; min-width: 140px; }
-.profile-more > summary { list-style: none; }
+.profile-more > summary { list-style: none; white-space: nowrap; }
 .profile-more > summary::-webkit-details-marker { display: none; }
 .profile-more > summary::after { content: "+"; color: var(--muted); margin-left: 7px; }
 .profile-more[open] > summary::after { content: "−"; }
@@ -88,6 +88,7 @@
     .hero-content { min-height: 300px; padding: 48px 28px; }
 }
 @media (max-width: 640px) {
+    .hero::before { background: linear-gradient(90deg, rgba(250, 252, 253, .94), rgba(250, 252, 253, .78) 60%, rgba(250, 252, 253, .32)); }
     .hero-content { min-height: 265px; padding: 40px 24px; }
     .hero h1 { font-size: 34px; letter-spacing: -.8px; }
     .hero p { max-width: 22em; font-size: 13px; }
@@ -100,6 +101,7 @@
     .section-heading h2 { font-size: 27px; }
     .about-card { padding: 24px; }
     .about-section { padding-bottom: 40px; }
+    .profile-more-label { display: none; }
 }
 @media (max-width: 480px) {
     .landing-main { width: calc(100% - 40px); }

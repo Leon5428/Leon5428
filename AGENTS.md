@@ -211,6 +211,7 @@ Field meanings:
 | `title` | string | Category display title. |
 | `order` | integer | Category order used by the main navigation and homepage cards. |
 | `description` | string | User-written text shown on the homepage category card; an empty string hides the text. |
+| `subtitle` | string, optional | Category hero introduction, independent of homepage card text; falls back to `description` or a default introduction. |
 | `subjects` | array of objects | Subjects or Diary month entries in this category. |
 | `subjects[].directory` | string | English subject directory name, relative to the category directory. |
 | `subjects[].title` | string | Human-readable subject name. |
@@ -837,3 +838,26 @@ Do not rush into generating large amounts of implementation code when the user i
 When architecture has not yet been finalized, help preserve flexibility.
 
 Once a convention has been explicitly established, follow it consistently throughout the project.
+
+## 33. Current Visual Design and Assets
+
+Use the homepage concept `WebCode/首页概念图2.png` as the visual reference: white surfaces,
+muted blue-gray colors, serif headings, thin borders, generous whitespace, and restrained motion.
+The homepage has six category cards in the established order and an About Me section with a
+circular illustrated avatar, introduction, interest links, GitHub, and an expandable Read More.
+Only add public contact details supplied by the user; do not invent an email address.
+
+`WebCode/css/base.css` owns shared colors, type, navigation, footer, focus and reduced-motion
+styles. Load it before page styles. `style.css` owns homepage and shared hero/cards,
+`category.css` owns category refinements, and `article.css` owns reading layout.
+
+Category hero images use `WebCode/assets/images/hero-{lowercase-category-directory}.jpg`.
+The six existing categories use distinct images with a consistent muted palette; the homepage
+retains `background.jpg`. Missing category images fall back to that background. The profile
+image is `avatar.jpg`; generated-image prompts are recorded in `visual-assets.md` alongside it.
+
+Subject card SVGs use `{Category}/icon/{subject.order}.svg`, falling back to the category icon.
+Keep the category-root metadata convention; the optional `subtitle` field edits the category
+hero introduction while `description` continues to control homepage card text.
+
+Preserve the user's CRLF requirement for all edited and generated text files, encoded as UTF-8.

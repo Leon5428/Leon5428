@@ -291,7 +291,7 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
                                      read_text(chapter.source), chapter.source))
     if not document["blocks"]:
         warnings.append(f"{chapter.source}: no article body; generated an explicit placeholder")
-        return '<p class="article-lead">本章内容尚在整理中。</p>', "", False
+        return '<p class="empty-article">本章内容尚在整理中。</p>', "", False
     headings, ids = [], {}
     has_math = False
     all_nodes = list(nodes(document["blocks"]))
@@ -342,7 +342,8 @@ def main_navigation(categories: list[Category], page: str, active: Category | No
     links = [f'<a href="{relative_url(page, "index.html")}"'
              + (' class="active" aria-current="page"' if active is None else '') + '>Home</a>']
     for category in categories:
-        state = ' class="active"' if category is active else ''
+        current = "page" if page == category.output else "location"
+        state = f' class="active" aria-current="{current}"' if category is active else ''
         links.append(f'<a href="{relative_url(page, category.output)}"{state}>{escape(category.title)}</a>')
     return "\n".join(links)
 

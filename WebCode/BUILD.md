@@ -45,8 +45,8 @@ python build.py --check
 # 将未配置、未列入元数据和空正文等警告视为错误
 python build.py --strict
 
-# 回归测试（需要 Pandoc）
-python -m unittest discover -s WebCode/tests -v
+# 检查构建脚本语法
+python -m py_compile build.py
 ```
 
 默认预览地址：`http://127.0.0.1:8000/`。预览仅绑定本机；修改源文件后
@@ -63,6 +63,7 @@ python -m unittest discover -s WebCode/tests -v
   "title": "Math",
   "order": 1,
   "description": "这里填写首页 Math 卡片的文字",
+  "subtitle": "从公理与定义出发，寻找结构与证明之美。",
   "subjects": [
     {
       "directory": "M01-LinearAlgebra",
@@ -78,6 +79,7 @@ python -m unittest discover -s WebCode/tests -v
 ```
 
 - `description` 是首页大类卡片下由你填写的文字；空字符串不会生成说明段落。
+- `subtitle` 是分类首页大标题下的文字，独立于首页卡片说明；省略时使用 `description` 或默认介绍。
 - `directory` 指向分类下的英文科目目录。
 - 课程与章节按各自的 `order` 升序排列，不根据文件编号或数组位置推断顺序。
 - `file` 是同目录下的英文 `.tex` 文件名，保留编号，不允许跳出课程目录。
@@ -125,6 +127,22 @@ Output/
 分类首页复用网站首页的 Hero 和卡片模板：Hero 标题显示分类名，卡片自动显示
 该分类下的科目或日记月份，并链接到相应的第一篇文章。主页分类卡片和顶部导航
 同样自动生成；既有分类图标继续使用已有资源。
+
+### 页面外观与个人介绍
+
+- 首页个人介绍位于 `WebCode/templates/index.html` 的 `about-section`，可以直接修改简介、兴趣标签和链接。
+- GitHub 按钮指向 `Leon5428`；尚未提供公开邮箱，因此不生成 Email 按钮。Read More 在当前页展开网站介绍。
+- 头像是 `WebCode/assets/images/avatar.jpg`，使用生成的背影插画，按圆形裁切显示。
+- 六个分类首页分别使用 `WebCode/assets/images/hero-math.jpg`、`hero-crypto.jpg`、
+  `hero-project.jpg`、`hero-research.jpg`、`hero-tool.jpg`、`hero-diary.jpg`。
+  图片名按分类目录英文名的小写形式匹配；缺少对应图片时回退到 `background.jpg`。
+- 首页保留 `background.jpg`。所有图片均随构建复制到本地输出，无需远程图片服务。
+- 新配图由内置 imagegen 生成，提示词与图片说明见 `WebCode/assets/images/visual-assets.md`。
+- `base.css` 统一字体、色彩、页眉、导航、页脚与键盘焦点；`style.css` 管理首页和共用卡片；
+  `category.css` 管理分类首页；`article.css` 管理文章阅读区。模板必须先加载 `base.css`。
+- 桌面首页保留六张并列卡片，小屏幕自动调整列数；窄屏主导航可横向滚动。
+  文章目录使用原生折叠控件，无小节的文章隐藏右侧目录，并扩展阅读区。
+- 源码、元数据和生成的文本文件都使用 UTF-8、CRLF。
 
 每个分类根目录下都有一个 `icon/` 目录，用于保存该分类中不同科目或月份卡片
 使用的独立图标：

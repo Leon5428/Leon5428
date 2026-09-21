@@ -3,5 +3,54 @@
   "order": 2,
   "description": "",
   "subtitle": "在数学与计算之间，探索安全背后的原理。",
-  "subjects": []
+  "subjects": [
+    {
+      "directory": "C01-MathematicalFoundationsOfPublicKeyCryptography",
+      "title": "公钥密码学的数学基础",
+      "order": 1,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "课程说明"
+        }
+      ]
+    },
+    {
+      "directory": "C02-IntroductionToCryptography",
+      "title": "密码学导论",
+      "order": 2,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "课程说明"
+        }
+      ]
+    },
+    {
+      "directory": "C03-Cryptanalysis",
+      "title": "密码分析学",
+      "order": 3,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "课程说明"
+        }
+      ]
+    },
+    {
+      "directory": "C04-PrivacyCalculation",
+      "title": "隐私计算",
+      "order": 4,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-introduction.tex",
+          "title": "课程说明"
+        }
+      ]
+    }
+  ]
 }
