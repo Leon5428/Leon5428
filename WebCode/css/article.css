@@ -1,3 +1,29 @@
+/* Match article Latin text to the TeX family used by MathJax 3.2. */
+@font-face {
+    font-family: "Leon TeX";
+    src: url("../assets/fonts/mathjax/MathJax_Main-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF;
+}
+@font-face {
+    font-family: "Leon TeX";
+    src: url("../assets/fonts/mathjax/MathJax_Main-Italic.woff") format("woff");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF;
+}
+@font-face {
+    font-family: "Leon TeX";
+    src: url("../assets/fonts/mathjax/MathJax_Main-Bold.woff") format("woff");
+    font-weight: 600 900;
+    font-style: normal;
+    font-display: swap;
+    unicode-range: U+0020-007E, U+00A0-00FF;
+}
+
 /* Reading layout. Shared colors, type, navigation and footer live in base.css. */
 .article-layout {
     display: grid;
@@ -123,7 +149,7 @@
 .meta-divider { color: #b1beca; }
 .article-header h1 { margin: 16px 0 0; font-size: clamp(32px, 3.4vw, 44px); font-weight: 600; line-height: 1.4; letter-spacing: -0.025em; }
 .article-content .article-subtitle { margin: 10px 0 0; color: var(--muted); font-size: 16px; }
-.article-body { font-size: 17px; line-height: 2; }
+.article-body { font-family: "Leon TeX", var(--serif); font-size: 17px; line-height: 2; }
 .article-body > :first-child { margin-top: 0; }
 .article-body > :last-child { margin-bottom: 0; }
 .article-body h2 { margin: 42px 0 18px; font-size: 27px; font-weight: 600; line-height: 1.5; }

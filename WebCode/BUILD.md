@@ -172,6 +172,18 @@ python build.py --mathjax-url assets/vendor/mathjax/es5/tex-svg.js
 脚本不会自行下载 MathJax；本地路径相对于 `Output`，会转换为各页的相对 URL。
 MathJax 扩展需要保留原分发目录结构。
 
+### 正文英文与数学字体
+
+文章正文的英文、数字使用 `WebCode/assets/fonts/mathjax/` 中本地保存的
+MathJax Main 字体，与现有 MathJax 3.2 公式的 TeX 字体风格配套。
+中文保持原有衬线字体，代码保持等宽字体，首页和导航字体不受影响。
+字体在 `article.css` 中通过 `@font-face` 声明，随构建复制，许可见字体目录。
+
+数学变量即使出现在中文句子中，也应写成 `$t$`、`$n$`、`$s$`、`$D$`；
+例如 `$(t,n)$秘密共享方案`、`任意$t$个参与者`。这样变量与下标公式中的字母
+才使用同一种数学斜体。Alice、Bob 等普通英文名称直接写正文，保留正体。
+构建器不会自动把所有英文字母转为数学符号。
+
 支持 Pandoc 可解析的标题、段落、列表、代码、表格、图片及文内引用。
 引用的本地图片与 PDF 附件会复制到对应课程输出目录；图片建议使用
 PNG、JPEG、SVG 等浏览器格式，不能直接用 PDF 当图片。

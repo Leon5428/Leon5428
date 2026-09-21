@@ -861,3 +861,8 @@ Keep the category-root metadata convention; the optional `subtitle` field edits 
 hero introduction while `description` continues to control homepage card text.
 
 Preserve the user's CRLF requirement for all edited and generated text files, encoded as UTF-8.
+
+Article-body Latin text uses locally bundled MathJax Main fonts from version 3.2.2,
+declared in article.css and stored in WebCode/assets/fonts/mathjax with the SIL OFL.
+Keep Chinese serif fallbacks and monospace code styles. Mathematical variables in
+prose must use TeX math delimiters; ordinary English names remain upright text.
