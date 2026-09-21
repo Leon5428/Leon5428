@@ -49,6 +49,11 @@
           "order": 1,
           "file": "00-introduction.tex",
           "title": "课程说明"
+        },
+        {
+          "order": 2,
+          "file": "01-ThresholdCryptography1.tex",
+          "title": "门限密码1"
         }
       ]
     }
