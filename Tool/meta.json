@@ -3,5 +3,33 @@
   "order": 5,
   "description": "",
   "subtitle": "收集顺手的工具，让日常工作更从容。",
-  "subjects": []
+  "subjects": [
+    {
+      "directory": "T01-Latex",
+      "title": "LaTeX",
+      "order": 1,
+      "chapters": [
+        {
+          "order": 1,
+          "file": "00-installation-and-configuration.tex",
+          "title": "LaTeX 配置与安装"
+        },
+        {
+          "order": 2,
+          "file": "01-beginner.tex",
+          "title": "LaTeX 初级教程"
+        },
+        {
+          "order": 3,
+          "file": "02-intermediate.tex",
+          "title": "LaTeX 中级教程"
+        },
+        {
+          "order": 4,
+          "file": "03-advanced.tex",
+          "title": "LaTeX 高级教程"
+        }
+      ]
+    }
+  ]
 }

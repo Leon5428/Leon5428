@@ -298,6 +298,11 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
     for node in all_nodes:
         kind, content = node["t"], node.get("c")
         if kind in {"RawBlock", "RawInline"}:
+            # Figure alignment is handled by article.css, not raw TeX in HTML.
+            if content[0] in {"latex", "tex"} and content[1].strip() == r"\centering":
+                node.update(t="Plain" if kind == "RawBlock" else "Str",
+                            c=[] if kind == "RawBlock" else "")
+                continue
             raise BuildError(f"{chapter.source}: unsupported raw {content[0]}: {content[1][:100]}")
         if kind == "Header":
             # The page owns h1; source sections start at h2. IDs cannot collide with layout IDs.
