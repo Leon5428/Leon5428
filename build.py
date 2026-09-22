@@ -4,11 +4,13 @@
 from __future__ import annotations
 
 import argparse
+from collections.abc import Iterator, Mapping
 from dataclasses import dataclass, field
 from functools import partial
 from html import escape
 from html.parser import HTMLParser
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from importlib import import_module
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -19,11 +21,13 @@ import subprocess
 import sys
 import tempfile
 import time
+from typing import Any, TypeVar, cast
 import uuid
 from urllib.parse import quote, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent
+T = TypeVar("T")
 MATHJAX_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"
 MANIFEST = ".build-manifest.json"
 TOKEN = re.compile(r"\{\{\s*([a-z_]+)\s*\}\}")
@@ -83,11 +87,13 @@ def read_metadata(path: Path) -> dict:
     return value
 
 
-def require(value: dict, key: str, kind: type, path: Path, prefix: str = ""):
+def require(value: Mapping[str, object], key: str, kind: type[T], path: Path,
+            prefix: str = "") -> T:
     result = value.get(key)
-    if type(result) is not kind or (kind is str and not result.strip()):
+    if type(result) is not kind or (isinstance(result, str) and not result.strip()):
         raise BuildError(f"{path}: {prefix}{key} must be a non-empty {kind.__name__}")
-    return result
+    # Exact type validation above also rejects booleans where integers are required.
+    return cast(T, result)
 
 
 def within(base: Path, path: Path) -> Path:
@@ -210,7 +216,7 @@ def find_pandoc(root: Path, explicit: str | None = None) -> str:
         if candidate.is_file():
             return str(candidate)
     try:
-        import pypandoc
+        pypandoc = import_module("pypandoc")
         return pypandoc.get_pandoc_path()
     except (ImportError, OSError):
         raise BuildError("Pandoc is required. Install it or run: python -m venv .venv; "
@@ -229,7 +235,8 @@ def run_pandoc(pandoc: str, arguments: list[str], source: str, context: Path) ->
     return result.stdout
 
 
-def nodes(value):
+def nodes(value: object) -> Iterator[dict[str, Any]]:
+    """Walk Pandoc's heterogeneous JSON nodes; payload shape depends on node type."""
     if isinstance(value, dict):
         if "t" in value:
             yield value
@@ -240,10 +247,11 @@ def nodes(value):
             yield from nodes(child)
 
 
-def inline_text(inlines: list) -> str:
+def inline_text(inlines: list[dict[str, Any]]) -> str:
     parts = []
     for node in inlines:
-        kind, content = node.get("t"), node.get("c")
+        kind = node["t"]
+        content: Any = node.get("c")
         if kind == "Str":
             parts.append(content)
         elif kind in {"Space", "SoftBreak", "LineBreak"}:
@@ -297,7 +305,8 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
     has_math = False
     all_nodes = list(nodes(document["blocks"]))
     for node in all_nodes:
-        kind, content = node["t"], node.get("c")
+        kind = node["t"]
+        content: Any = node.get("c")
         if kind in {"RawBlock", "RawInline"}:
             # Figure alignment is handled by article.css, not raw TeX in HTML.
             if content[0] in {"latex", "tex"} and content[1].strip() == r"\centering":
@@ -524,15 +533,15 @@ class PageLinks(HTMLParser):
         self.ids: set[str] = set()
         self.links: list[str] = []
 
-    def handle_starttag(self, tag, attrs):
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = dict(attrs)
         if identifier := attributes.get("id"):
             if identifier in self.ids:
                 raise BuildError(f"Duplicate HTML id: {identifier}")
             self.ids.add(identifier)
         for name in ("href", "src"):
-            if name in attributes:
-                self.links.append(attributes[name])
+            if target := attributes.get(name):
+                self.links.append(target)
 
 
 def validate_output(stage: Path) -> None:
