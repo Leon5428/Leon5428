@@ -192,8 +192,8 @@
     max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 14px 4px;
-    margin: 26px 0;
+    padding: 2px 4px;
+    margin: 10px 0;
     text-align: center;
     scrollbar-width: thin;
 }

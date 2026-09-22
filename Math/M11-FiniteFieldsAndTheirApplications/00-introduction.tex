@@ -7,7 +7,7 @@
 \begin{document}
 有限域这门课是我在大三上学期的限选课，不得不说这门课有点难度，尤其是前面牵扯到了很多近世代数的内容，并且需要很多近世代数的内容作为必备的基础知识，再加上这门课主要讲有限域，和我之前自学的近世代数的内容有些差异（因为近世代数的内容中群环域基本是均分的），所以我单独开了一个小分类在这里，希望能重点整理一些有限域的内容。
 
-下面我们先开始讲一些前置内容（这些内容其实都能够在近世代数中找到，这里为了方便再在下面讲述一遍）：
+下面我们先开始讲一些前置内容（这些内容其实都能够在近世代数中找到，这里为了方便再在下面讲述一遍，但是不会再举例子了）：
 
 \section*{群的定义和例子}
 
@@ -16,15 +16,52 @@
 \circ :& S\times S\rightarrow S\\
 &(a,b)\mapsto a\circ b
 \end{align*}
+称为集合$S$上的二元运算，比如整数集上的加法。
 
+定义：给定一个非空集合$G$及其上的一个二元运算$\circ$，我们说$G$对于$\circ$构成一个群，若：
+\begin{enumerate}
+\item 结合律：$\forall a,b,c\in G,a\circ(b\circ c)=(a\circ b)\circ c$
+\item 单位元：$\exists e\in G s.t.\forall a\in G a\circ e=e\circ a$
+\item 逆元：$\forall a\in G,\exists b\in G s.t. a\circ b=b\circ a=e$ 我们称此元素$b$为元素$a$的逆元，记成$a^{-1}$。
+\end{enumerate}
 
+特别地，如果一个群$G$满足$\forall a,b\in G,a\circ b=b\circ a$，我们称这样的群为Abel群，也叫做交换群，对于这一类群，我们经常把$a\circ b$写作$a+b$，把$e$写成0，把$a^{-1}$写成$-a$，对于其他的那些普通的群，我们有如下的记号：
+\begin{align*}
+a^n&=a\circ a\circ a\circ \cdots \circ a\\
+a^0&=e\\
+a^{-n}&=(a^{-1})^n
+\end{align*}
 
+定义：若群$G$中含有有限多个元素，则称其为有限群，群$G$元素的个数称为$G$的阶，记为$|G|$。
 
+定义：给定群$(G,\cdot)$，若：
+\begin{align*}
+\forall a\in G\;\; s.t.\;(\forall b\in G\;\; \exists j\in Z\;\; s.t.\;\;b=a^j)
+\end{align*}
 
+则称群$G$为循环群，$a$为$G$的一个生成元，也记为$G=<a>$。
 
+定义：给定群$(G,\cdot)$及其子集$H$，如果$H$自身在$G$的运算$\cdot$下构成了一个群，我们就称$H$为$G$的一个子群，记为$H\leqslant G$。
 
+需要注意的是，有限群的子群一定是有限群，而无限群的子群可能是有限群，也可能是无限群。
+定义：若子群$<a>$为有限群，则将群$<a>$的阶$|<a>|$也称为元素$a$的阶
 
+定义：给定群$G$的子集$S$，我们用$<S>$表示由$S$中所有有限多个元素幂乘积形成的子群，另外，若$<S>=G$，我们称$S$生成$G$。举例：1生成整数集$Z$。
 
+证明：元素$a$的阶$|<a>|$是使得$a^{|<a>|}=1$成立的最小正整数。
 
+不妨我们令$<a>$中有$n$个元素，观察下面的$n+1$个元素：
+\begin{align*}
+1,a,a^2,a^3,a^4,...,a^n
+\end{align*}
+在这$n+1$个元素中必然有两个元素$a^i,a^j$是相等的（不妨令$0\leqslant i<j\leqslant n$），那么就会有：
+\begin{align*}
+a^i=a^j\Rightarrow 1=a^{j-i}
+\end{align*}
 
+也就是说，至少存在一个整数$j-i$，使得$a^{j-i}=1$，我们记满足这一条件的最小整数为$m$，显然$m\leqslant n$，那下面$m$个元素中将不可能有重复的元素：
+\begin{align*}
+1,a,a^2,a^3,a^4,...,a^{m-1}
+\end{align*}
+否则就会违背$m$是满足这一条件的最小整数的假设，但是又因为$a^m=1$，所以对于任意的$k$满足$m\leqslant k\leqslant n$，都能做带余除法使得$k=qn+r(0\leqslant r<m)$，使得$a^k=a^r$，这就会使得$<a>$中最多有$m$个元素，也就是$n\leqslant m$，所以$m,n$只好相等，故$|<a>|$就是使得$a^{|<a>|}=1$成立的最小正整数。
 \end{document}

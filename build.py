@@ -18,6 +18,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 import uuid
 from urllib.parse import quote, unquote, urlsplit
 
@@ -564,6 +565,19 @@ def validate_output(stage: Path) -> None:
                     raise BuildError(f"{path.relative_to(stage)}: missing CSS asset {match[1]}")
 
 
+def same_file_content(source: Path, destination: Path) -> bool:
+    """Compare bytes without relying on timestamps or cached comparisons."""
+    if not destination.is_file() or source.stat().st_size != destination.stat().st_size:
+        return False
+    with source.open("rb") as original, destination.open("rb") as existing:
+        while True:
+            chunk = original.read(65536)
+            if chunk != existing.read(65536):
+                return False
+            if not chunk:
+                return True
+
+
 def publish_file(source: Path, destination: Path) -> None:
     """Copy bytes into a sibling file, then atomically replace the destination.
 
@@ -572,11 +586,25 @@ def publish_file(source: Path, destination: Path) -> None:
     project users. A regular new file here inherits the output directory ACL.
     Do not use tempfile or copy2 for this destination-side file.
     """
+    if same_file_content(source, destination):
+        return
     temporary = destination.with_name(f".build-{uuid.uuid4().hex}.tmp")
     try:
         with temporary.open("xb") as target, source.open("rb") as original:
             shutil.copyfileobj(original, target)
-        os.replace(temporary, destination)
+        for attempt in range(5):
+            try:
+                os.replace(temporary, destination)
+                break
+            except PermissionError as exc:
+                if attempt == 4:
+                    raise BuildError(
+                        f"{destination}: cannot replace output after 5 attempts; "
+                        "the previous file has been preserved. Close programs using this file "
+                        "and check its read-only attribute and directory write permissions, "
+                        "then rerun the build."
+                    ) from exc
+                time.sleep(0.1 * 2 ** attempt)
     finally:
         temporary.unlink(missing_ok=True)
 
