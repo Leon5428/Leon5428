@@ -69,5 +69,18 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 
 现在我们证明完成了，回过头来思考，从1到$a^{n-1}$次方内会有重复的元素吗？当然不会有，要是有的话$<a>$中压根不能凑出$n$个元素。另外需要说明的是，上面这些证明仅限于子群$<a>$是一个有限群。
 
+\section*{等价关系和等价类}
+
+定义：我们称集合$S\times S$的一个子集$R$为等价关系，若：
+\begin{enumerate}
+\item 自反性：$\forall s\in S,\;(s,s)\in R$
+\item 对称性：若$(s,t)\in R$，则$(t,s)\in R$
+\item 传递性：若$(s,t)\in R,\;(t,u)\in R$，则$(s,u)\in R$
+\end{enumerate}
+取$s\in S$，我们记$s$的等价类为：
+\begin{align*}
+[s]={t\in S:\;(s,t)\in R}
+\end{align*}
+
 
 \end{document}
