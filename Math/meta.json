@@ -138,6 +138,11 @@
           "order": 1,
           "file": "00-introduction.tex",
           "title": "基础前置"
+        },
+        {
+          "order": 2,
+          "file": "01-chapter2.tex",
+          "title": "环与域"
         }
       ]
     }

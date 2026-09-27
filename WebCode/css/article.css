@@ -158,8 +158,13 @@
 .article-body :is(h2, h3, h4, h5, h6, section), #article { scroll-margin-top: 28px; }
 .article-body p { margin: 0 0 22px; }
 .article-body :is(ul, ol) { margin: 18px 0 24px; padding-left: 1.5em; }
+.article-body ol { margin-top: 8px; padding-left: 2.5em; }
+.article-body p:has(+ ol) { margin-bottom: 8px; }
 .article-body li { padding-left: 0.2em; }
 .article-body li + li { margin-top: 8px; }
+.article-body ol > li + li { margin-top: 4px; }
+.article-body ol > li > p { margin-bottom: 8px; }
+.article-body ol > li > p:last-child { margin-bottom: 0; }
 .article-body li::marker { color: var(--muted); }
 .article-body a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .article-body a:hover { text-decoration-color: currentColor; }
