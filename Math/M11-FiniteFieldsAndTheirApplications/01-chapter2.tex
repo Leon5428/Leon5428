@@ -68,12 +68,12 @@ ar_1,ar_2,...,ar_n
 \end{align*}
 我们称如上定义的环为$R$模$J$的剩余类环(根据定义很容易证明这是一个环)。
 
-但是仅仅说明这些还不够，我们对二元运算的要求是任意两对相同的元素做运算得到的结果必须是相同的，不能出现两对相同的元素做运算得到不同结果的情况，对于我们定义的第一个运算，$(a+J)+(b+J)&:=(a+b)+J$，假设$a+J=a'+J,b+J=b'+J$，所以：
+但是仅仅说明这些还不够，我们对二元运算的要求是任意两对相同的元素做运算得到的结果必须是相同的，不能出现两对相同的元素做运算得到不同结果的情况，对于我们定义的第一个运算，$(a+J)+(b+J):=(a+b)+J$，假设$a+J=a'+J,b+J=b'+J$，所以：
 \begin{align*}
 (a'+b')+J=(a'+J)+(b'+J)=(a+J)+(b+J)=(a+b)+J
 \end{align*}
 
-所以任意两对相同的元素做运算得到的结果是相同的，这是良定义的，对于我们定义的第二个运算，$(a+J)\cdot(b+J)&:=ab+J$，不妨，我们记$a=a'+r,b=b'+s$，其中$r,s\in J$，所以：
+所以任意两对相同的元素做运算得到的结果是相同的，这是良定义的，对于我们定义的第二个运算，$(a+J)\cdot(b+J):=ab+J$，不妨，我们记$a=a'+r,b=b'+s$，其中$r,s\in J$，所以：
 \begin{align*}
 (a'+J)(b'+J)&=a'b'+J\\
 &=(a-r)(b-s)+J\\
@@ -82,5 +82,38 @@ ar_1,ar_2,...,ar_n
 &=(a+J)(b+J)
 \end{align*}
 
+另外，需要特别说明的是，我们刚才使用的这个陪集$(R,+)/(J,+)$中的这个$J$，它是一个理想，而不仅仅只是一个子环，之所以这样是因为理想具有吸收性质，但是子环是没有这一个性质的，如果只是子环的话，那么我们刚才定义出的运算就不会是良定义的，那根本构不成剩余类环。
 
+举个例子：集合$(n)$是由整数集合$Z$中由元素$n$生成的主理想环，即所有$n$的倍数，于是我们得到剩余类环$Z/(n)$。
+
+环同态基本定理：给定两个环$R$和$S$，以及环同态$\varphi:R\rightarrow S$，我们有核$ker\varphi$是$R$的理想，且$S\cong R/ker\varphi$。
+
+核$ker\varphi$是$R$的理想证明起来比较简单，这里就不写了，我们先来证明$S\cong R/ker\varphi$，也就是构造一个$S$与$R/ker\varphi$之间的双射。我们这样构造这个映射$\Phi$：
+\begin{align*}
+\Phi(a+ker\varphi)=\varphi(a)
+\end{align*}
+
+首先我们需要证明这个映射是良定义的，不妨设我们有$a+ker\varphi=b+ker\varphi$，那我们就要证明$\Phi(a+ker\varphi)=\Phi(b+ker\varphi)$，也就是证明$\varphi(a)=\varphi(b)$。因为我们有$a+ker\varphi=b+ker\varphi$，所以就会有$a-b\in ker\varphi$，故$\varphi(a-b)=0$，故:
+\begin{align*}
+\varphi(a)-\varphi(b)=0
+\end{align*}
+虽然上面这个式子是成立的，但是这个式子并不能直接使用同态的性质来得到，需要做一些推导，尤其是证明$\varphi(-b)=-\varphi(b)$，这一点是很重要的。
+
+我们证明完这个映射是良定义的之后，还需要证明这个映射是同态的，否则是不可能得到两个环同构的。我们需要证明映射$\Phi$保持加法：
+\begin{align*}
+\Phi((a+ker\varphi)+(b+ker\varphi))&=\Phi((a+b)+ker\varphi)\\
+&=\varphi(a+b)\\
+&=\varphi(a)+\varphi(b)\\
+&=\Phi(a+K)+\Phi(b+K)
+\end{align*}
+
+接下来证明映射$\Phi$保持乘法：
+\begin{align*}
+    \Phi((a+K)(b+K))&=\Phi(ab+K)\\
+    &=\varphi(ab)\\
+    &=\varphi(a)\varphi(b)\\
+    &=\Phi(a+K)\Phi(b+K)
+\end{align*}
+
+综上这个映射$\Phi$是一个环同态。
 \end{document}
