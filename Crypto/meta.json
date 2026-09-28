@@ -52,8 +52,13 @@
         },
         {
           "order": 2,
-          "file": "01-ThresholdCryptography1.tex",
-          "title": "门限密码1"
+          "file": "01-ThresholdCryptography.tex",
+          "title": "门限密码"
+        },
+        {
+          "order": 3,
+          "file": "02-SecureMulti-PartyComputation.tex",
+          "title": "安全多方计算"
         }
       ]
     }
