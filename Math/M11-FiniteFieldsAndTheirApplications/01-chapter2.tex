@@ -5,5 +5,82 @@
 \usepackage{xcolor}
 \usepackage{enumitem}
 \begin{document}
-暂无内容
+\section*{环和域的定义}
+
+环$(R,+,\cdot)$是一个集合$R$，并在其上定义满足如下性质的两类二元运算：
+\begin{enumerate}
+\item $(R,+)$是交换群
+\item 运算$\cdot$满足结合律
+\item 分配律，对于$\forall a,b,c\in R$:
+\begin{align*}
+a\cdot(b+c)=ab+ac\\
+(b+c)\cdot a=ba+ca
+\end{align*}
+\end{enumerate}
+除了普通的环之外，我们还有很多特殊的环：
+定义(1)幺环：具有乘法单位元的环，即存在$\exists e\in R,ae=ea=a$
+定义(2)交换环：运算$\cdot$是交换的，即$\forall a,b\in R, ab=ba$
+定义(3)整环：具有非零单位元的交换环，且满足$ab=0\Rightarrow a=0$或者$b=0$
+定义(4)域：交换环，且$R$中的非零元素在二元运算$\cdot$下构成群。
+
+定理：任一有限整环均为域
+
+由于有限整环已经是交换环了，我们只需要证明有限整环中的非零元素在二元运算$\cdot$下构成群。由于环的定义，那么二元运算$\cdot$满足结合律是显然的，由于整环的定义，那么二元运算$\cdot$是有单位元的，所以我们只需要证明，对于有限整环中任意的非零元素，都应该有逆元。
+
+任取非零元素$a\in R$，因为$R$是有限整环，假设：
+\begin{align*}
+R={0,r_1,r_2,...,r_n}
+\end{align*}
+其中$r_1,r_2,...,r_n$是$R$的全部非零元素，我们现在考虑如下$n$个元素：
+\begin{align*}
+ar_1,ar_2,...,ar_n
+\end{align*}
+由于整环是没有零因子的，所以上述$n$个元素全部非零并且都属于$R$，而且易证这$n$个元素互不相同(依旧反证法)，所以这两组元素其实就是同一组元素：
+\begin{align*}
+\{ar_1,ar_2,...,ar_n\}=\{r_1,r_2,...,r_n\}
+\end{align*}
+所以左边必定存在某个$ar_i=1$，1就是乘法单位元，之所以存在是因为这是整环，所以对于任意的非零元素$a$，我们都能找到其逆元$r_i$，综上可得任一有限整环均为域。
+
+定义：我们称环$R$的一个子集$S$为$R$的子环，如果$S$在$R$的两类二元运算下封闭，并且在这两类运算下构成环。
+
+定义：我们称环$R$的一个子集$J$为$R$的理想，如果$J$是$R$的子环，并且：
+\begin{align*}
+\forall a\in J,\forall r\in R,a\cdot r\in J
+\end{align*}
+
+另外，给定交换环$R$和它的元素$a$，容易验证最小的包含$a$的理想是$(a)=\{ra+na:r\in R,n\in Z\}$，进一步地，如果$R$包含单位元，那么$(a)=\{ra:r\in R\}$。
+
+我们很容易证明这是一个理想，卡定义即可，那如何证明这是最小的包含$a$的理想呢？这也不难理解，我们假设一个最小理想，证明二者相等即可。
+
+定义：给定环$R$和环$S$，我们称映射$\varphi:R\rightarrow S$为一个同态，如果对于$\forall a,b\in R$：
+\begin{align*}
+\varphi(a+b)&=\varphi(a)+\varphi(b)\\
+\varphi(ab)&=\varphi(a)\varphi(b)
+\end{align*}
+同态映射$\varphi$的核$ker\varphi$是环$R$的理想。
+
+定义：给定交换环$R$和它的一个理想$J$，如果$\exists a\in R$，$J=(a)$，则我们称$J$为主理想，也称$J$是由元素$a$生成的主理想。
+
+我们可以在陪集$(R,+)/(J,+)$上定义如下的运算，使其构成环：
+\begin{align*}
+(a+J)+(b+J)&:=(a+b)+J\\
+(a+J)\cdot(b+J)&:=ab+J\\
+\end{align*}
+我们称如上定义的环为$R$模$J$的剩余类环(根据定义很容易证明这是一个环)。
+
+但是仅仅说明这些还不够，我们对二元运算的要求是任意两对相同的元素做运算得到的结果必须是相同的，不能出现两对相同的元素做运算得到不同结果的情况，对于我们定义的第一个运算，$(a+J)+(b+J)&:=(a+b)+J$，假设$a+J=a'+J,b+J=b'+J$，所以：
+\begin{align*}
+(a'+b')+J=(a'+J)+(b'+J)=(a+J)+(b+J)=(a+b)+J
+\end{align*}
+
+所以任意两对相同的元素做运算得到的结果是相同的，这是良定义的，对于我们定义的第二个运算，$(a+J)\cdot(b+J)&:=ab+J$，不妨，我们记$a=a'+r,b=b'+s$，其中$r,s\in J$，所以：
+\begin{align*}
+(a'+J)(b'+J)&=a'b'+J\\
+&=(a-r)(b-s)+J\\
+&=ab-as-rb+rs+J\\
+&=ab+J\\
+&=(a+J)(b+J)
+\end{align*}
+
+
 \end{document}
