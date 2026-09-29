@@ -119,14 +119,6 @@
     transition: color 160ms ease, background-color 160ms ease;
 }
 
-.chapter-number {
-    flex: 0 0 20px;
-    font-family: var(--sans);
-    font-size: 11px;
-    font-variant-numeric: tabular-nums;
-    opacity: 0.8;
-}
-
 .subject-heading:hover,
 .subject-link:hover,
 .chapter-link:hover { background: var(--surface); color: var(--text); }
@@ -157,6 +149,8 @@
 .article-body h4 { margin: 26px 0 12px; font-size: 19px; line-height: 1.6; }
 .article-body :is(h2, h3, h4, h5, h6, section), #article { scroll-margin-top: 28px; }
 .article-body p { margin: 0 0 22px; }
+.article-body > p:not(.empty-article) { text-indent: 2em; }
+.article-body > p:has(> .math.display, > img, > svg) { text-indent: 0; }
 .article-body :is(ul, ol) { margin: 18px 0 24px; padding-left: 1.5em; }
 .article-body ol { margin-top: 8px; padding-left: 2.5em; }
 .article-body p:has(+ ol) { margin-bottom: 8px; }

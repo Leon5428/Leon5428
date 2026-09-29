@@ -379,12 +379,9 @@ def sidebar(category: Category, page: str, current: Chapter | None = None) -> st
         parts.append(f'<summary class="subject-heading"><span>{escape(subject.title)}</span></summary>')
         parts.append('<ol class="chapter-list">')
         for chapter in subject.chapters:
-            number = re.match(r"(\d+)[-_]", chapter.source.stem)
-            number_html = (f'<span class="chapter-number" aria-hidden="true">{number[1]}</span>'
-                           if number else '')
             state = ' aria-current="page"' if chapter is current else ''
             parts.append(f'<li><a class="chapter-link" href="{relative_url(page, chapter.output)}"{state}>'
-                         f'{number_html}<span>{escape(chapter.title)}</span></a></li>')
+                         f'<span>{escape(chapter.title)}</span></a></li>')
         parts.append('</ol></details>')
     return "\n".join(parts)
 
