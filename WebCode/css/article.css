@@ -148,11 +148,14 @@
 .article-body h3 { margin: 32px 0 14px; font-size: 22px; font-weight: 600; line-height: 1.6; }
 .article-body h4 { margin: 26px 0 12px; font-size: 19px; line-height: 1.6; }
 .article-body :is(h2, h3, h4, h5, h6, section), #article { scroll-margin-top: 28px; }
-.article-body p { margin: 0 0 22px; }
-.article-body > p:not(.empty-article) { text-indent: 2em; }
-.article-body > p:has(> .math.display, > img, > svg) { text-indent: 0; }
+.article-body p { margin: 0 0 12px; text-indent: 2em; }
+.article-body p.empty-article,
+.article-body p:has(> .math.display:only-child, > img:only-child, > svg:only-child) { text-indent: 0; }
+/* Pandoc wraps display equations in paragraphs; tighten both sides of that wrapper. */
+.article-body p:has(> .math.display:only-child),
+.article-body p:has(+ p > .math.display:only-child) { margin-bottom: 6px; }
 .article-body :is(ul, ol) { margin: 18px 0 24px; padding-left: 1.5em; }
-.article-body ol { margin-top: 8px; padding-left: 2.5em; }
+.article-body ol { margin-top: 8px; padding-left: 2.5em; list-style: none; }
 .article-body p:has(+ ol) { margin-bottom: 8px; }
 .article-body li { padding-left: 0.2em; }
 .article-body li + li { margin-top: 8px; }
@@ -183,7 +186,7 @@
 
 /* Wide equations, source code and tables scroll within the reading column. */
 .article-body mjx-container { overflow-wrap: normal; }
-.article-body .math.display { display: block; max-width: 100%; }
+.article-body .math.display { display: block; max-width: 100%; text-indent: 0; }
 .article-body .formula-box,
 .article-body .math-display,
 .article-body mjx-container[display="true"],
@@ -192,7 +195,8 @@
     overflow-x: auto;
     overflow-y: hidden;
     padding: 2px 4px;
-    margin: 10px 0;
+    margin: 6px 0;
+    text-indent: 0;
     text-align: center;
     scrollbar-width: thin;
 }
