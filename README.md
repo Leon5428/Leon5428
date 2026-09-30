@@ -2,9 +2,13 @@
 
 # ✨ Leon 的个人空间
 
-<img src="./WebCode/assets/images/banner.svg" width="100%" alt="Hello, I'm Leon. Mathematics / Cryptography / Code. Per Aspera Ad Astra." />
+<img src="./WebCode/assets/images/banner.png" width="100%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
-**把知识学明白，也把它讲明白。**
+<a href="https://github.com/Leon5428?tab=overview">
+  <img src="./WebCode/assets/images/contributions.svg" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+</a>
+
+<!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
 
 [📐 Math](https://github.com/Leon5428/Leon5428/tree/HEAD/Math) · [🔐 Crypto](https://github.com/Leon5428/Leon5428/tree/HEAD/Crypto) · [🧩 Project](https://github.com/Leon5428/Leon5428/tree/HEAD/Project) · [🔬 Research](https://github.com/Leon5428/Leon5428/tree/HEAD/Research) · [🛠 Tool](https://github.com/Leon5428/Leon5428/tree/HEAD/Tool) · [✍ Diary](https://github.com/Leon5428/Leon5428/tree/HEAD/Diary)
 
