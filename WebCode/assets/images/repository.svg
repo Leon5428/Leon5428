@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="224" viewBox="0 0 800 224" role="img" aria-labelledby="title desc">
+  <title id="title">Leon5428/Leon5428 repository</title>
+  <desc id="desc">2 stars, 0 forks, 37 commits on the default branch main. Snapshot refreshed 2026-09-30.</desc>
+  <rect x="1" y="1" width="798" height="222" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <path d="M29 29h17v22H29z M33 29v22 M37 34h5" fill="none" stroke="#8b949e" stroke-width="1.5"/>
+    <text x="58" y="48" font-size="23" font-weight="600" fill="#79c0ff">Leon5428/Leon5428</text>
+    <rect x="694" y="27" width="75" height="25" rx="12" fill="none" stroke="#30363d"/>
+    <text x="731" y="44" text-anchor="middle" font-size="12" fill="#8b949e">Public</text>
+    <text x="29" y="84" font-size="16" fill="#c9d1d9">LeonBlog · 数学、密码学与个人知识笔记</text>
+    <text x="29" y="109" font-size="13" fill="#8b949e">LaTeX notes · Python builds · A static home for learning</text>
+    <path d="M29 128h740" stroke="#21262d"/>
+    <text x="29" y="162" font-size="17" fill="#e3b341">★ 2 Stars</text>
+    <text x="209" y="162" font-size="17" fill="#bc8cff">⑂ 0 Forks</text>
+    <text x="389" y="162" font-size="17" fill="#7ee787">◷ 37 Commits</text>
+    <circle cx="665" cy="156" r="5" fill="#3d6117"/>
+    <text x="679" y="162" font-size="15" fill="#c9d1d9">TeX</text>
+    <text x="29" y="201" font-size="12" fill="#8b949e">Default branch: main · Refreshed 2026-09-30</text>
+  </g>
+</svg>

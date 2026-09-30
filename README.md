@@ -1,7 +1,4 @@
 <div align="center">
-
-# ✨ Leon 的个人空间
-
 <img src="./WebCode/assets/images/banner.png" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
@@ -42,7 +39,11 @@
 ## 🚀 Action
 
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
-
+<p align="center">
+  <a href="https://github.com/Leon5428/Leon5428">
+    <img src="./WebCode/assets/images/repository.svg" width="100%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+  </a>
+</p>
 <!-- Dynamic cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
@@ -115,6 +116,14 @@
 | [LaTeX 安装与配置](https://github.com/Leon5428/Leon5428/blob/HEAD/Tool/T01-Latex/00-installation-and-configuration.tex) | 给刚开始使用 LaTeX 的同学的一份入门说明。 |
 
 ## 🏗 Behind LeonBlog
+
+<p align="center">
+  <a href="https://github.com/Leon5428/Leon5428">
+    <img src="./WebCode/assets/images/repository.svg" width="100%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+  </a>
+</p>
+
+<!-- Refresh both local cards: python WebCode/update_contributions.py -->
 
 我希望做一个能长期维护的知识网站：文章按学科组织，公式清楚，源码可以追溯，笔记能够随着理解一起成长。
 
