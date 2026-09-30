@@ -12,15 +12,21 @@
 \item $(R,+)$是交换群
 \item 运算$\cdot$满足结合律
 \item 分配律，对于$\forall a,b,c\in R$:
+
 \begin{align*}
 a\cdot(b+c)=ab+ac\\
 (b+c)\cdot a=ba+ca
 \end{align*}
+
 \end{enumerate}
 除了普通的环之外，我们还有很多特殊的环：
+
 定义(1)幺环：具有乘法单位元的环，即存在$\exists e\in R,ae=ea=a$
+
 定义(2)交换环：运算$\cdot$是交换的，即$\forall a,b\in R, ab=ba$
+
 定义(3)整环：具有非零单位元的交换环，且满足$ab=0\Rightarrow a=0$或者$b=0$
+
 定义(4)域：交换环，且$R$中的非零元素在二元运算$\cdot$下构成群。
 
 定理：任一有限整环均为域
@@ -28,22 +34,29 @@ a\cdot(b+c)=ab+ac\\
 由于有限整环已经是交换环了，我们只需要证明有限整环中的非零元素在二元运算$\cdot$下构成群。由于环的定义，那么二元运算$\cdot$满足结合律是显然的，由于整环的定义，那么二元运算$\cdot$是有单位元的，所以我们只需要证明，对于有限整环中任意的非零元素，都应该有逆元。
 
 任取非零元素$a\in R$，因为$R$是有限整环，假设：
+
 \begin{align*}
 R={0,r_1,r_2,...,r_n}
 \end{align*}
+
 其中$r_1,r_2,...,r_n$是$R$的全部非零元素，我们现在考虑如下$n$个元素：
+
 \begin{align*}
 ar_1,ar_2,...,ar_n
 \end{align*}
+
 由于整环是没有零因子的，所以上述$n$个元素全部非零并且都属于$R$，而且易证这$n$个元素互不相同(依旧反证法)，所以这两组元素其实就是同一组元素：
+
 \begin{align*}
 \{ar_1,ar_2,...,ar_n\}=\{r_1,r_2,...,r_n\}
 \end{align*}
+
 所以左边必定存在某个$ar_i=1$，1就是乘法单位元，之所以存在是因为这是整环，所以对于任意的非零元素$a$，我们都能找到其逆元$r_i$，综上可得任一有限整环均为域。
 
 定义：我们称环$R$的一个子集$S$为$R$的子环，如果$S$在$R$的两类二元运算下封闭，并且在这两类运算下构成环。
 
 定义：我们称环$R$的一个子集$J$为$R$的理想，如果$J$是$R$的子环，并且：
+
 \begin{align*}
 \forall a\in J,\forall r\in R,a\cdot r\in J
 \end{align*}
@@ -53,27 +66,33 @@ ar_1,ar_2,...,ar_n
 我们很容易证明这是一个理想，卡定义即可，那如何证明这是最小的包含$a$的理想呢？这也不难理解，我们假设一个最小理想，证明二者相等即可。
 
 定义：给定环$R$和环$S$，我们称映射$\varphi:R\rightarrow S$为一个同态，如果对于$\forall a,b\in R$：
+
 \begin{align*}
 \varphi(a+b)&=\varphi(a)+\varphi(b)\\
 \varphi(ab)&=\varphi(a)\varphi(b)
 \end{align*}
-同态映射$\varphi$的核$ker\varphi$是环$R$的理想。
+
+同态映射$\varphi$的核$\ker\varphi$是环$R$的理想。
 
 定义：给定交换环$R$和它的一个理想$J$，如果$\exists a\in R$，$J=(a)$，则我们称$J$为主理想，也称$J$是由元素$a$生成的主理想。
 
 我们可以在陪集$(R,+)/(J,+)$上定义如下的运算，使其构成环：
+
 \begin{align*}
 (a+J)+(b+J)&:=(a+b)+J\\
 (a+J)\cdot(b+J)&:=ab+J\\
 \end{align*}
+
 我们称如上定义的环为$R$模$J$的剩余类环(根据定义很容易证明这是一个环)。
 
 但是仅仅说明这些还不够，我们对二元运算的要求是任意两对相同的元素做运算得到的结果必须是相同的，不能出现两对相同的元素做运算得到不同结果的情况，对于我们定义的第一个运算，$(a+J)+(b+J):=(a+b)+J$，假设$a+J=a'+J,b+J=b'+J$，所以：
+
 \begin{align*}
 (a'+b')+J=(a'+J)+(b'+J)=(a+J)+(b+J)=(a+b)+J
 \end{align*}
 
 所以任意两对相同的元素做运算得到的结果是相同的，这是良定义的，对于我们定义的第二个运算，$(a+J)\cdot(b+J):=ab+J$，不妨，我们记$a=a'+r,b=b'+s$，其中$r,s\in J$，所以：
+
 \begin{align*}
 (a'+J)(b'+J)&=a'b'+J\\
 &=(a-r)(b-s)+J\\
@@ -86,79 +105,95 @@ ar_1,ar_2,...,ar_n
 
 举个例子：集合$(n)$是由整数集合$Z$中由元素$n$生成的主理想环，即所有$n$的倍数，于是我们得到剩余类环$Z/(n)$。
 
-环同态基本定理：给定两个环$R$和$S$，以及环同态$\varphi:R\rightarrow S$，我们有核$ker\varphi$是$R$的理想，且$S\cong R/ker\varphi$。反之，给定$R$的任一理想$J$，映射：
+环同态基本定理：给定两个环$R$和$S$，以及环同态$\varphi:R\rightarrow S$，我们有核$\ker\varphi$是$R$的理想，且$S\cong R/\ker\varphi$。反之，给定$R$的任一理想$J$，映射：
+
 \begin{align*}
 \Psi : & R\rightarrow R/J\\
 &a\mapsto \Psi(a)=a+J
 \end{align*}
-是环同态，且其核$ker\Psi=J$
 
-核$ker\varphi$是$R$的理想证明起来比较简单，这里就不写了，我们先来证明$S\cong R/ker\varphi$，也就是构造一个$S$与$R/ker\varphi$之间的双射。我们这样构造这个映射$\Phi$：
+是环同态，且其核$\ker\Psi=J$
+
+核$\ker\varphi$是$R$的理想证明起来比较简单，这里就不写了，我们先来证明$S\cong R/\ker\varphi$，也就是构造一个$S$与$R/\ker\varphi$之间的双射。我们这样构造这个映射$\Phi$：
+
 \begin{align*}
-\Phi(a+ker\varphi)=\varphi(a)
+\Phi(a+\ker\varphi)=\varphi(a)
 \end{align*}
 
-首先我们需要证明这个映射是良定义的，不妨设我们有$a+ker\varphi=b+ker\varphi$，那我们就要证明$\Phi(a+ker\varphi)=\Phi(b+ker\varphi)$，也就是证明$\varphi(a)=\varphi(b)$。因为我们有$a+ker\varphi=b+ker\varphi$，所以就会有$a-b\in ker\varphi$，故$\varphi(a-b)=0$，故:
+首先我们需要证明这个映射是良定义的，不妨设我们有$a+\ker\varphi=b+\ker\varphi$，那我们就要证明$\Phi(a+\ker\varphi)=\Phi(b+\ker\varphi)$，也就是证明$\varphi(a)=\varphi(b)$。因为我们有$a+\ker\varphi=b+\ker\varphi$，所以就会有$a-b\in \ker\varphi$，故$\varphi(a-b)=0$，故:
+
 \begin{align*}
 \varphi(a)-\varphi(b)=0
 \end{align*}
+
 虽然上面这个式子是成立的，但是这个式子并不能直接使用同态的性质来得到，需要做一些推导，尤其是证明$\varphi(-b)=-\varphi(b)$，这一点是很重要的。
 
 我们证明完这个映射是良定义的之后，还需要证明这个映射是同态的，否则是不可能得到两个环同构的。我们需要证明映射$\Phi$保持加法：
+
 \begin{align*}
-\Phi((a+ker\varphi)+(b+ker\varphi))&=\Phi((a+b)+ker\varphi)\\
+\Phi((a+\ker\varphi)+(b+\ker\varphi))&=\Phi((a+b)+\ker\varphi)\\
 &=\varphi(a+b)\\
 &=\varphi(a)+\varphi(b)\\
-&=\Phi(a+ker\varphi)+\Phi(b+ker\varphi)
+&=\Phi(a+\ker\varphi)+\Phi(b+\ker\varphi)
 \end{align*}
 
 接下来证明映射$\Phi$保持乘法：
+
 \begin{align*}
-    \Phi((a+ker\varphi)(b+ker\varphi))&=\Phi(ab+ker\varphi)\\
+    \Phi((a+\ker\varphi)(b+\ker\varphi))&=\Phi(ab+\ker\varphi)\\
     &=\varphi(ab)\\
     &=\varphi(a)\varphi(b)\\
-    &=\Phi(a+ker\varphi)\Phi(b+ker\varphi)
+    &=\Phi(a+\ker\varphi)\Phi(b+\ker\varphi)
 \end{align*}
 
 综上这个映射$\Phi$是一个环同态，接下来我们需要证明这个映射是一个双射：
 
-我们先证明$\Phi$是单射，假设$\varphi(a)=\varphi(b)$，也就是$\Phi(a+ker\varphi)=\Phi(b+ker\varphi)$，并且$\varphi(a-b)=0$，也就是$a-b\in ker\varphi$，所以$a+ker\varphi=b+ker\varphi$，也就是说，当有两个元素映射到同一个像的时候，这两个元素必然是相同的，所以这是一个双射。
+我们先证明$\Phi$是单射，假设$\varphi(a)=\varphi(b)$，也就是$\Phi(a+\ker\varphi)=\Phi(b+\ker\varphi)$，并且$\varphi(a-b)=0$，也就是$a-b\in \ker\varphi$，所以$a+\ker\varphi=b+\ker\varphi$，也就是说，当有两个元素映射到同一个像的时候，这两个元素必然是相同的，所以这是一个双射。
 
 之后我们再来证明$\Phi$是一个满射，这其实依赖于映射$\varphi$，如果映射$\varphi$是一个满射的话，那么$\Phi$就是一个满射，所以定理里面应该指出$\varphi$是满射的，否则是证明不出来的。
 
-证明完双射之后，我们就可以说环同构$S\cong R/ker\varphi$成立了。
+证明完双射之后，我们就可以说环同构$S\cong R/\ker\varphi$成立了。
 
-至于定理中的给定$R$的任一理想$J$，映射$\Psi$是环同态，且其核$ker\Psi=J$，你也可以将其表述为，对于环中的任何一个理想$J$，都可以找到一个环同态，使其核恰好就是$J$，这个环同态也被叫做自然投影或者典范投影。
+至于定理中的给定$R$的任一理想$J$，映射$\Psi$是环同态，且其核$\ker\Psi=J$，你也可以将其表述为，对于环中的任何一个理想$J$，都可以找到一个环同态，使其核恰好就是$J$，这个环同态也被叫做自然投影或者典范投影。
 
 定理：给定任一素数$p$，剩余类环$Z/(p)$构成一个大小为$p$的域。
 
 这是不难证明的，因为剩余类环里面的元素其实就是模$p$的剩余类，这里面显然是有模加模乘有零元单位元并且满足各种条件的，所以这就是一个域。我们可以根据这个剩余类环来构造出特定的域来。
 
 举例：给定素数$p$，令$F_p=\{0,1,...,p-1\}$，定义映射：
+
 \begin{align*}
 \varphi:&Z/(p)\rightarrow F_p\\
 &a+(p)\mapsto a,a\in F_p
 \end{align*}
+
 可以验证$F_p$在如下定义的两类运算下：
+
 \begin{align*}
 a+b &:=\varphi(a+b+(p))\\
 ab &:=\varphi(ab+(p))
 \end{align*}
+
 构成阶为$p$的有限域，但是我想在这里注意的是，剩余类环$Z/(p)$是一个域，$F_p$也是一个域，这两个域上的加法运算虽然都使用+来表示，但是这两个域上的加法运算是不一样的。
 
 定义：给定环$R$，若存在正整数$n$使得:
+
 \begin{align*}
 \forall r\in R, n\cdot r=0
 \end{align*}
-我们称使得上式成立的最小正整数为$R$的特征，记为$char(R)$，如果不存在这样的正整数，则称$R$的特征为0。
+
+我们称使得上式成立的最小正整数为$R$的特征，记为$\operatorname{char}(R)$，如果不存在这样的正整数，则称$R$的特征为0。
 
 这是容易理解的，因为如果不存在这样的正整数，那么取$n=0$即可直接满足等式。特征为0的域有很多，比如$Q,R,C$。
 
 定理：令$R\neq\{0\}$为一整环，若$R$的特征为某一正整数$n$，则$n$必定为素数。
+
 实际上，只要是对无零因子环，其特征存在就必定为素数。我们使用反证法就可以很好地证明这一点，我们假设$n$不是素数，存在$n_1<n,n_2<n$使得$n=n_1n_2$，那么环中肯定会存在一个非零元$a$使得$n_1a\neq 0,n_2a\neq 0$，但是：
+
 \begin{align*}
 (n_1a)(n_2a)=n_1n_2a^2=0
 \end{align*}
+
 这与$R$是无零因子环是矛盾的。
 
 我在大二上学期看到这个证明过程的时候，我觉得这是没有问题的，但是我现在大三上了，再回过头来看这个证明，我开始怀疑这个非零元$a$是否真的存在，为什么会有这样的怀疑呢？是因为$n$虽然是满足等式的最小正整数，但是这是对任意元素成立的，并不能说它就是对于某特定元素等式成立的最小正整数，所以哪怕$na=0$，其实也有可能出现$n_1a=0$或者$n_2a=0$的情况。
@@ -166,9 +201,11 @@ ab &:=\varphi(ab+(p))
 所以可能存在这样的情况：环中的元素有三类，第一类是$n_1a= 0,n_2a= 0$，第二类与第三类是$n_1a=0,n_2a=0$中只有一个成立。但是这三类不能同时存在，为什么呢，因为如果$n_1a= 0,n_2a= 0$同时成立的话，那$n_1,n_2$的最大公因子必然是$a$的等式成立最小正整数的倍数，那此时第二、三类就不可能成立，那环中所有的元素都是第一类的话，$n$就不会是这个环的特征了，所以第一类情况不成立。
 
 对于第二、三类情况，具体来说就是环中有一部分元素满足$n_1a=0,n_2a\neq 0$，另一部分元素满足$n_1b\neq0,n_2b=0$，这是有可能成立的，但是这种情况下我们也是能证明特征必须是素数的，我们只需取：
+
 \begin{align*}
 (n_2a)(n_1b)=n(ab)=0
 \end{align*}
+
 但是因为$n_2a\neq 0,n_1b\neq0$，这与该环是无零因子环是矛盾的，所以特征必然是素数。
 
 我写完补充的这些，还是觉得课本原来的证明过程是有问题的，或者说是考虑不周的。
@@ -176,22 +213,28 @@ ab &:=\varphi(ab+(p))
 根据这个定理，我们就可以有推论：有限域的特征都是素数。要证明这个推论只需要证明有限域的特征大于0即可。
 
 我们从有限域$F$中任取一个元素$a$，考虑下面的元素序列：
+
 \begin{align*}
 a,2a,3a,...
 \end{align*}
+
 由于是有限域，$F$中只有有限多个元素，但是这里有无穷多个元素，所以必然有一对$(i,j)$，不妨$i<j$，满足$ia=ja$，也就是$(j-i)a=0$，所以说对于每个非零元素$a_i$，都存在一个正整数$n_i$，使得二者相乘等于0，所以我们直接取$N=n_1n_2...n_m$，这样肯定会有$Na=0$，故确实存在一个正整数使得条件成立，故有限域特征必然大于0。
 
 练习：令$R$为一个交换环且其特征为素数$p$，我们有：
+
 \begin{align*}
 &(a+b)^{p^n}=a^{p^n}+b^{p^n}\\
 &(a-b)^{p^n}=a^{p^n}-b^{p^n}\\
 \end{align*}
 
 我们先来考虑最基础的情况$(a+b)^p$，展开就是：
+
 \begin{align*}
 a^p+C(p,1)a^{p-1}b+C(p,2)a^{p-2}b^2+...+C(p,p-1)ab^{p-1}+b^p
 \end{align*}
+
 由于$p$是素数，所以肯定会有$p|C(p,k)$，再加上该环的特征就是素数$p$，所以就会有：
+
 \begin{align*}
 (a+b)^p=a^p+b^p
 \end{align*}
@@ -199,60 +242,76 @@ a^p+C(p,1)a^{p-1}b+C(p,2)a^{p-2}b^2+...+C(p,p-1)ab^{p-1}+b^p
 接下来我们从$p$推广到$p^n$，使用数学归纳法即可。
 
 当我们证明减法时，将$b$替换为$-b$，然后进行分情况讨论。首先我们需要知道的是：
+
 \begin{align*}
 b+(-1)b=[1+(-1)]b=0b=0
 \end{align*}
+
 这样我们就可以把$-b$替换为$(-1)b$，之所以要做这样的替换，是因为当我们把$b$替换为$-b$的时候，展开得到的其实是下面的式子：
+
 \begin{align*}
 (a-b)^{p^n}=a^{p^n}+(-b)^{p^n}
 \end{align*}
+
 但是$-b$这个整体是没有办法运算的，所以我们需要把$-b$替换为$(-1)b$，再因为环$R$是一个交换环，所以就可以改写为：
+
 \begin{align*}
 a^{p^n}+(-b)^{p^n}=a^{p^n}+(-1)^{p^n}b^{p^n}
 \end{align*}
+
 我们根据刚才的$-b$替换为$(-1)b$其实就能得知，环中的元素乘以-1其实就是找到这个元素的逆元，那-1的$p^n$就容易理解了，不断地由于找逆元而在1与-1之间反复横跳，又因为$p^n$肯定是奇数，所以最后就是-1，也就是：
+
 \begin{align*}
 a^{p^n}+(-b)^{p^n}=a^{p^n}+(-1)^{p^n}b^{p^n}=a^{p^n}+(-1)b^{p^n}=a^{p^n}-b^{p^n}
 \end{align*}
+
 还有一种特殊情况，就是$p=2$，此时就会有$2b=0$，移项也就是有$b=-b$，所以$(-b)^{p^n}=b^{p^n}$。所以也是成立的。
 
 \section*{域上多项式}
 
 定义：给定环$R$及自变量$x$，环$R$上的多项式可以写成：
+
 \begin{align*}
 f(x)=a_0+a_1x+\cdots +a_nx^n=\sum_{i=0}^n a_ix^i
 \end{align*}
 
 其中$n$是非负整数，系数$a_i,0\leqslant i\leqslant n$，是环$R$中的元素，给定两个多项式：
+
 \begin{align*}
 f(x)=\sum_{i=0}^n a_ix^i,\;\;g(x)=\sum_{j=0}^m b_jx^j
 \end{align*}
 
 不妨假定$n\leqslant m$，我们定义：
+
 \begin{align*}
 &f(x)+g(x)=\sum_{i=0}^m(a_i+b_i)x^i (a_i=0,n\leqslant i\leqslant m)\\
 &f(x)g(x)=\sum_{k=0}^{m+n}c^kx^k,\;\;c_k=\sum_{i+j=k}a_ib_j
 \end{align*}
+
 我们称$R$上全体多项式在以上两类运算下构成的环为多项式环，并记成$R[x]$。
 
 定义：给定$R$上多项式$f(x)=\sum_{i=0}^na_ix^i,a_n\neq 0$，我们称：
 \begin{enumerate}
 \item $a_n:$首项系数
 \item $a_0:$常数项
-\item $n:$多项式$f$的度数，记为$deg(f)$
-\item $deg(0)=-\infty$
+\item $n:$多项式$f$的度数，记为$\deg(f)$
+\item $\deg(0)=-\infty$
 \item 首1多项式若$a_n=1$
 \end{enumerate}
 
 练习：给定环$R$和$f(x),g(x)\in R[x]$，我们有：
+
 \begin{align*}
-&deg(f+g)\leqslant max(deg(f),deg(g))\\
-&deg(fg)\leqslant deg(f)+deg(g)
+&\deg(f+g)\leqslant \max(\deg(f),\deg(g))\\
+&\deg(fg)\leqslant \deg(f)+\deg(g)
 \end{align*}
+
 若环$R$是一个整环，则：
+
 \begin{align*}
-    deg(fg)=deg(f)+deg(g)
+    \deg(fg)=\deg(f)+\deg(g)
 \end{align*}
+
 之所以整环时能够直接取等，是因为整环是没有零因子的，不可能出现两个多项式最高次项系数相乘得0的情况。
 
 从现在开始我们令$F$为一个域并考虑多项式环$F[x]$。
@@ -260,35 +319,45 @@ f(x)=\sum_{i=0}^n a_ix^i,\;\;g(x)=\sum_{j=0}^m b_jx^j
 记号：给定$f,g\in F[x]$，若存在$h\in F[x]$，使得$g=f\cdot h$成立，则称$f$整除$g$，记为$f|g$。
 
 定理：给定非零多项式$g\in F[x]$，我们有：
+
 \begin{align*}
 \forall f\in F[x],\exists q,r\in F[x],s.t.f=qg+r
 \end{align*}
-其中$r=0$或者$deg(r)<deg(g)$
 
-证明：不妨设$deg(f)=m,deg(g)=n$，我们先考虑$m\geqslant n$的情况，设它们的最高次项分别是$a_mx^m$与$b_nx^n$，最高次项系数都不是0，我们现在希望使用$g(x)$的某个倍数，把$f(x)$的最高次项给消掉，所以乘$(a_mb_n^{-1})x^{(m-n)}$，这样：
+其中$r=0$或者$\deg(r)<\deg(g)$
+
+证明：不妨设$\deg(f)=m,\deg(g)=n$，我们先考虑$m\geqslant n$的情况，设它们的最高次项分别是$a_mx^m$与$b_nx^n$，最高次项系数都不是0，我们现在希望使用$g(x)$的某个倍数，把$f(x)$的最高次项给消掉，所以乘$(a_mb_n^{-1})x^{(m-n)}$，这样：
+
 \begin{align*}
 f(x)-(a_mb_n^{-1})x^{(m-n)}g(x)
 \end{align*}
+
 这样得到的新多项式次数一定会严格小于$m$，如果这个新多项式的次数还大于等于$n$的话，就可以重复上述步骤，因为每进行一次次数都会严格下降，所以这个过程一定会终止，并且最后要么最后的多项式次数为0，要么它的次数小于$n$。
 
 定理：多项式环$F(x)$是主理想环（主理想环是指每个理想都是主理想，也就是每一个理想都可以由一个元素生成）。
 
 证明：任取多项式环$F(x)$的一个理想$J$，若它为零理想，零理想本身就是一个主理想，若它不是零理想，则其中至少存在一个非零多项式，我们选择一个次数最低的多项式，不妨记为$g(x)$，那显然的，有$(g(x))\subseteq J$，我们任取$J$中的一个多项式$f(x)$，使用带余除法得到：
+
 \begin{align*}
 f(x)=q(x)f(x)+r(x)
 \end{align*}
+
 不难得到$r(x)$是属于$J$，但是这样就与$g(x)$次数最低相矛盾了，故$r(x)$只能等于0，也就有$J\subseteq (g(x))$，所以$J=(g(x))$，定理得证。
 
 定理：对于$F[x]$中的任一非零理想$J$，我们均可以找到唯一的首1多项式$g(x)\in F[x]$，使得$J=(g(x))$。
 
 证明：不妨我们取$J$的两个生成元，分别记为$g(x),h(x)$，因为$g(x)\in (h(x))$，所以存在$a(x)$，使得$g(x)=a(x)h(x)$，同理存在$b(x)$，使得$h(x)=b(x)g(x)$，所以：
+
 \begin{align*}
 g(x)=a(x)b(x)g(x)\Rightarrow [1-a(x)b(x)]g(x)=0\Rightarrow 1-a(x)b(x)=0
 \end{align*}
+
 这里我们其实就可以断定$a(x)$其实是个常数了，为什么呢？因为域上的多项式环其实是一个整环，整环上的多项式满足：
+
 \begin{align*}
-deg(fg)=deg(f)+deg(g)
+\deg(fg)=\deg(f)+\deg(g)
 \end{align*}
+
 这里由于$a(x)b(x)$的次数是0，所以它们的次数都只能是0，也就是常数，那为什么常数多项式一定会有逆元呢？这也不难理解，任意一个域上的常数的逆元都可以作为常数多项式出现在多项式环里面。所以综上可得：同一个非零理想的任意两个生成元，都只相差一个非零常数倍。
 
 既然互相只相差非零常数倍，故可以标准化为首1多项式，假设有两个首1多项式$g(x),h(x)$，由非零常数倍就肯定会有$g(x)=ch(x)$，但是由于两个都是首1多项式，所以$c$只能为1，也就是两个首1多项式是相等的，故唯一存在。
@@ -299,8 +368,5 @@ deg(fg)=deg(f)+deg(g)
 \item 每个整除$f_1$和$f_2$的多项式$c$都会整除$d$
 \end{enumerate}
 我们还可以将$d$写成$d=b_1f_1+b_2f_2$，其中$b_1,b_2\in F[x]$。
-
-
-
 
 \end{document}

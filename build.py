@@ -307,6 +307,16 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
     for node in all_nodes:
         kind = node["t"]
         content: Any = node.get("c")
+        if kind == "Para" and content and content[0].get("t") == "Str":
+            # Emphasize explicit academic labels, without guessing paragraph roles.
+            first = content[0]["c"]
+            label = re.match(r"^(定义[（(]\d+[)）]|(?:定义|定理|引理|命题|推论|证明|练习|例|记号)\d*[：:])", first)
+            if label:
+                content[0:1] = [
+                    {"t": "Span", "c": [["", ["statement-label"], []],
+                                           [{"t": "Strong", "c": [{"t": "Str", "c": label[0]}]}]]},
+                    *([{"t": "Str", "c": first[label.end():]}] if first[label.end():] else []),
+                ]
         if kind in {"RawBlock", "RawInline"}:
             # Figure alignment is handled by article.css, not raw TeX in HTML.
             if content[0] in {"latex", "tex"} and content[1].strip() == r"\centering":

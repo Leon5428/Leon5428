@@ -12,10 +12,12 @@
 \section*{群的定义和例子}
 
 定义：设$S$为一个非空集合，我们将映射：
+
 \begin{align*}
 \circ :& S\times S\rightarrow S\\
 &(a,b)\mapsto a\circ b
 \end{align*}
+
 称为集合$S$上的二元运算，比如整数集上的加法。
 
 定义：给定一个非空集合$G$及其上的一个二元运算$\circ$，我们说$G$对于$\circ$构成一个群，若：
@@ -26,6 +28,7 @@
 \end{enumerate}
 
 特别地，如果一个群$G$满足$\forall a,b\in G,a\circ b=b\circ a$，我们称这样的群为Abel群，也叫做交换群，对于这一类群，我们经常把$a\circ b$写作$a+b$，把$e$写成0，把$a^{-1}$写成$-a$，对于其他的那些普通的群，我们有如下的记号：
+
 \begin{align*}
 a^n&=a\circ a\circ a\circ \cdots \circ a\\
 a^0&=e\\
@@ -35,6 +38,7 @@ a^{-n}&=(a^{-1})^n
 定义：若群$G$中含有有限多个元素，则称其为有限群，群$G$元素的个数称为$G$的阶，记为$|G|$。
 
 定义：给定群$(G,\cdot)$，若：
+
 \begin{align*}
 \forall a\in G\;\; s.t.\;(\forall b\in G\;\; \exists j\in Z\;\; s.t.\;\;b=a^j)
 \end{align*}
@@ -51,18 +55,23 @@ a^{-n}&=(a^{-1})^n
 证明：群$\langle a \rangle$的阶$|\langle a \rangle|$是使得$a^{|\langle a \rangle|}=1$成立的最小正整数。
 
 不妨我们令$\langle a \rangle$中有$n$个元素，观察下面的$n+1$个元素：
+
 \begin{align*}
 1,a,a^2,a^3,a^4,...,a^n
 \end{align*}
+
 在这$n+1$个元素中至少有两个元素$a^i,a^j$是相等的（不妨令$0\leqslant i<j\leqslant n$），那么就会有：
+
 \begin{align*}
 a^i=a^j\Rightarrow 1=a^{j-i}
 \end{align*}
 
 也就是说，至少存在一个整数$j-i$，使得$a^{j-i}=1$，我们记满足这一条件的最小整数为$m$，显然$m\leqslant n$，那下面$m$个元素中将不可能有重复的元素：
+
 \begin{align*}
 1,a,a^2,a^3,a^4,...,a^{m-1}
 \end{align*}
+
 否则就会违背$m$是满足这一条件的最小整数的假设，但是又因为$a^m=1$，所以对于任意的$k$满足$m\leqslant k\leqslant n$，都能做带余除法使得$k=qn+r(0\leqslant r<m)$，使得$a^k=a^r$，这就会使得$\langle a \rangle$中最多有$m$个元素，也就是$n\leqslant m$，所以$m,n$只好相等，故$|\langle a \rangle|$就是使得$a^{|\langle a \rangle|}=1$成立的最小正整数。
 
 那这个时候肯定就会有人要问了，$\langle a \rangle$中一共就有$n$个元素，你非得考虑$n+1$个吗？你考虑$n+1$个也就算了，你非得从1开始考虑吗？我能不能从$a^2$开始考虑呢？我能不能考虑$n+2$甚至更多些元素呢？当然是可以的，但是没有必要，为什么呢？因为1肯定在群$\langle a \rangle$里面，这是肯定的，作为一个群它必然有单位元，所以肯定有1，你可以写为e，甚至写为$a^0$，那既然确认有单位元了，为啥不干脆直接从1开始，然后向后数$a$的数次方呢？当你数到$a^{n-1}$时，这里面有没有重复的元素，你是不敢确定的，因为它就应该有$n$个元素，但是当你数到$a^n$时，肯定会有重复元素了，其实就是鸽巢原理对吧。
@@ -78,6 +87,7 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 \item 传递性：若$(s,t)\in R,\;(t,u)\in R$，则$(s,u)\in R$
 \end{enumerate}
 取$s\in S$，我们记$s$的等价类为：
+
 \begin{align*}
 [s]={t\in S:\;(s,t)\in R}
 \end{align*}
@@ -85,12 +95,15 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 如果两个等价类不相等，那么两个等价类交集为空集，并且所有不同的等价类构成了集合S的一个划分。
 
 定义：给定群$H<G$及以上的等价关系$R_H$，我们用：
+
 \begin{align*}
 	aH=\{ah:h\in H\}
 \end{align*}
+
 来表示元素$a$所在的等价类，并且称这些等价类为$G$关于$H$的陪集。
 
 显然，给定群$H<G$，我们有：
+
 \begin{align*}
 	\forall a\in G,|aH|=|H|
 \end{align*}
@@ -110,11 +123,11 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 定理：令$\langle a \rangle$为阶为$m$的循环群，我们有：
 \begin{enumerate}
 	\item 循环群的子群皆为循环群
-	\item $|\langle a^k \rangle|=\frac{m}{gcd(k,m)}$
+	\item $|\langle a^k \rangle|=\frac{m}{\gcd(k,m)}$
 	\item 若$d|m$，则群$\langle a \rangle$有且仅有一个指标为$d$的子群
 	\item 若$f|m$，则群$\langle a \rangle$有且仅有一个阶为$f$的子群
 	\item 若$f|m$，则群$\langle a \rangle$包含$\phi(f)$个阶为$f$的子群
-	\item 群$\langle a \rangle$包含$\phi(m)$个生成元，它们是元素$a^r$，其中$gcd(r,m)=1$。
+	\item 群$\langle a \rangle$包含$\phi(m)$个生成元，它们是元素$a^r$，其中$\gcd(r,m)=1$。
 \end{enumerate}
 
 我们接下来一个一个证明，证明1：
@@ -122,6 +135,7 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 我们不妨记循环群的子群为$H$，若$H$是平凡子群，那么它显然是一个循环群，因为其只含有一个元素，就是单位元。若它不是平凡子群，则里面必定存在不是单位元的元素，并且这个元素可以写成$a^k$的形式，所以一定存在正整数$m$使得$a^m\in H$，之所以能这样是因为若$a^{-m}\in H$，那么必定有$(a^{-m})^{-1}\in H$，所以我们考虑所有满足$a^m\in H$的正整数$m$，这些正整数中一定有一个最小的，我们记为$d$。便有$a^d\in H$
 
 一方面，由于$H$是一个子群，所以$a^d$的所有整数次幂都在$H$中，也就是说$\langle a^d\rangle\subseteq H$，另一方面，我们任取$h=a^k\in H$，并且做带余除法$k=qd+r$，其中$0\leqslant r <d$，所以就会有：
+
 \begin{align*}
 	a^r=h\times (a^d)^{-q}
 \end{align*}
@@ -132,32 +146,36 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 
 证明2：
 
-思路一：因为循环群中元素的阶等于该元素作为生成元产生的循环群的阶，所以欲求$|\langle a^k\rangle|$，也就是求元素$a^k$的阶，也就是寻找到一个最小的正整数$n$，使得$(a^k)^n=e$，由于元素$a$的阶是$m$，所以显然有$m|kn$，记$d=gcd(m,k),m=dm_1,k=dk_1$，所以$m|kn$就可以写为$m_1|k_1n$，由于$m_1,k_1$已经互素了，所以$m_1|n$，故最小的正整数$n$就是$m_1$，也就是$\frac{m}{gcd(k,m)}$。
+思路一：因为循环群中元素的阶等于该元素作为生成元产生的循环群的阶，所以欲求$|\langle a^k\rangle|$，也就是求元素$a^k$的阶，也就是寻找到一个最小的正整数$n$，使得$(a^k)^n=e$，由于元素$a$的阶是$m$，所以显然有$m|kn$，记$d=\gcd(m,k),m=dm_1,k=dk_1$，所以$m|kn$就可以写为$m_1|k_1n$，由于$m_1,k_1$已经互素了，所以$m_1|n$，故最小的正整数$n$就是$m_1$，也就是$\frac{m}{\gcd(k,m)}$。
 
-思路二：思路一是从求解的角度来证明的，接下来我们从纯证明的角度来试试，记$d=gcd(m,k),m=dm_1,k=dk_1$，所以$(a^k)^{m_1}=(a^m)^{k_1}=e$，所以说$a^k$的阶一定小于等于$m_1$，我们现在假设一个正整数$t$，满足$(a^k)^t=e$，也就是有$a^{kt}=e$，所以$m|kt$，$m_1|k_1t$，所以说$m_1|t$，又因为$a^k$的阶一定小于等于$m_1$，所以阶只能是$m_1$，也就是$\frac{m}{gcd(k,m)}$。
+思路二：思路一是从求解的角度来证明的，接下来我们从纯证明的角度来试试，记$d=\gcd(m,k),m=dm_1,k=dk_1$，所以$(a^k)^{m_1}=(a^m)^{k_1}=e$，所以说$a^k$的阶一定小于等于$m_1$，我们现在假设一个正整数$t$，满足$(a^k)^t=e$，也就是有$a^{kt}=e$，所以$m|kt$，$m_1|k_1t$，所以说$m_1|t$，又因为$a^k$的阶一定小于等于$m_1$，所以阶只能是$m_1$，也就是$\frac{m}{\gcd(k,m)}$。
 
-思路三：前两个思路都是把生成元产生的循环群的阶转化为循环群中元素的阶，也可以不做这个转化，直接看生成元产生的循环群：记$d=gcd(m,k),m=dm_1,k=dk_1$，我们考虑如下$m_1$个元素：
+思路三：前两个思路都是把生成元产生的循环群的阶转化为循环群中元素的阶，也可以不做这个转化，直接看生成元产生的循环群：记$d=\gcd(m,k),m=dm_1,k=dk_1$，我们考虑如下$m_1$个元素：
+
 \begin{align*}
 e, a^k, a^(2k), ..., a^((m₁-1)k)
 \end{align*}
 
 这$m_1$个元素是两两不相等的，反证法即可说明这一点，考虑第$m_1$个元素：
+
 \begin{align*}
 a^{m_1k}=a^{mk_1}=(a^m)^{k_1}=e
 \end{align*}
 
-那么第$m_1+1,m_1+2$等元素都会是之前已经出现过的了，所以生成元产生的循环群只有$m_1$个元素，也就是$\frac{m}{gcd(k,m)}$。
+那么第$m_1+1,m_1+2$等元素都会是之前已经出现过的了，所以生成元产生的循环群只有$m_1$个元素，也就是$\frac{m}{\gcd(k,m)}$。
 
 证明3：
 
-先证明存在性：考虑子群$H=\langle a^d\rangle$，其元素数量为$\frac{m}{gcd(d,m)}=m/d$，所以其指标$[G/H]=\frac{|G|}{|H|}=\frac{m}{m/d}=d$，所以存在这样的子群。
+先证明存在性：考虑子群$H=\langle a^d\rangle$，其元素数量为$\frac{m}{\gcd(d,m)}=m/d$，所以其指标$[G/H]=\frac{|G|}{|H|}=\frac{m}{m/d}=d$，所以存在这样的子群。
 
 再证唯一性：假设$H$是$G$的任意一个指数为$d$的子群，由于循环群的子群仍然是循环群，所以存在一个整数$k$，使得$H=\langle a^k\rangle$，由于：
+
 \begin{align*}
-	|\langle a^k \rangle|=\frac{m}{gcd(k,m)}=\frac{m}{d}
+	|\langle a^k \rangle|=\frac{m}{\gcd(k,m)}=\frac{m}{d}
 \end{align*}
 
-所以$gcd(k,m)=d$，故$k=qd$，那么就有$\langle a^k\rangle\subseteq \langle a^d\rangle$，另外，由裴蜀定理，有$d=xk+ym$，所以：
+所以$\gcd(k,m)=d$，故$k=qd$，那么就有$\langle a^k\rangle\subseteq \langle a^d\rangle$，另外，由裴蜀定理，有$d=xk+ym$，所以：
+
 \begin{align*}
 	a^d=a^{xk+ym}=(a^k)^x\times (a^m)^y=(a^k)^x
 \end{align*}
@@ -171,11 +189,12 @@ a^{m_1k}=a^{mk_1}=(a^m)^{k_1}=e
 证明5：
 
 我们令$b=a^{m/f}$，考虑子群$H=\langle b\rangle$，对于$G$中所有阶为$f$的元素，其作为生成元生成的循环群阶都应该是$f$，但是阶为$f$的子群有且只有一个，故这些元素全在子群$H$中，也就是全部形如$b^k$，由于：
+
 \begin{align*}
-ord(b^k)=\frac{f}{gcd(k,f)}
+\operatorname{ord}(b^k)=\frac{f}{\gcd(k,f)}
 \end{align*}
 
-要想使$ord(b^k)=f$，那么必须$gcd(k,f)=1$，也就是说，$G$中所有阶为$f$的元素，写成形如$b^k$的形式之后，必须有$gcd(k,f)=1$，这样的元素数量其实就是小于$f$并且与$f$互素的数的数量，也就是$\phi(f)$个。
+要想使$\operatorname{ord}(b^k)=f$，那么必须$\gcd(k,f)=1$，也就是说，$G$中所有阶为$f$的元素，写成形如$b^k$的形式之后，必须有$\gcd(k,f)=1$，这样的元素数量其实就是小于$f$并且与$f$互素的数的数量，也就是$\phi(f)$个。
 
 有了证明5之后，证明6是显然的。
 \end{document}
