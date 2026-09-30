@@ -54,6 +54,16 @@
           "order": 1,
           "file": "00-introduction.tex",
           "title": "导言"
+        },
+        {
+          "order": 2,
+          "file": "01-logic-and-proofs.tex",
+          "title": "逻辑和证明"
+        },
+        {
+          "order": 3,
+          "file": "02-sets-and-functions.tex",
+          "title": "集合与函数"
         }
       ]
     },
