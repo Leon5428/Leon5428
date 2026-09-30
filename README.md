@@ -2,7 +2,7 @@
 
 # ✨ Leon 的个人空间
 
-<img src="./WebCode/assets/images/banner.png" width="100%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
+<img src="./WebCode/assets/images/banner.png" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
   <img src="./WebCode/assets/images/contributions.svg" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
@@ -18,15 +18,13 @@
 
 ## 👋 Hello
 
-<img align="right" src="./WebCode/assets/images/avatar.jpg" width="125" alt="Leon 的山湖少年头像" />
+大家好，我是 **Leon**，目前就读于山东大学网络空间安全学院密码科学与技术专业，同时辅修数学学院金融数学专业，热爱数学，励志成为一名密码行业从业者！
 
-你好，我是 **Leon**，一名对密码学充满热情的学生。
+但是我并不是一个有天赋的人，理解力也不是很好，只能一遍遍重复来学习各种各样的数学知识，这也是这个仓库存在的意义：不仅仅是为了展示我的成果，更是为了见证我过去走过的路。
 
-我正在数学、密码学与计算机科学之间寻找联系：从一个定义出发，推敲它的条件，追问证明中的每一步，再试着把这些理解写成别人也能读懂的笔记。
-
-- 📖 **正在学习**：群、环、域、离散数学，以及密码学背后的数学基础。
-- 🔐 **关注方向**：门限密码、秘密共享与隐私计算。
-- 🏗 **正在搭建**：[LeonBlog](https://github.com/Leon5428/Leon5428)，一个以 LaTeX 为内容源的个人知识网站。
+- 📖 **正在学习**：有限域、隐私计算、密码分析学。
+- 🔐 **关注方向**：全同态加密、分组密码。
+- 🏗 **正在搭建**：[LeonBlog](https://leon.wiki)，一个以 LaTeX 为内容源的个人知识网站。
 - ✍ **喜欢做的事**：把学过的知识再讲给自己听，也把卡住过的地方写下来。
 - 💬 **欢迎交流**：另一种证明思路、笔记勘误，或一个值得继续追问的问题。
 
@@ -34,13 +32,12 @@
 
 ## 🧰 Toolbox
 
-**正在使用和学习的工具。** 从写下一行公式，到把笔记变成一个可以访问的网站。
+**正在使用和学习的工具。** 
 
 <p align="center">
-  <img src="./WebCode/assets/images/toolbox.svg" width="100%" alt="LaTeX · Python · HTML · CSS · Git · GitHub · Linux · Nginx" />
+  <img src="./WebCode/assets/images/toolbox.svg" width="100%" alt="第一行：LaTeX、Python、Git、Linux；第二行：TeXstudio、VS Code、GitHub、Ubuntu" />
 </p>
 
-<p align="center"><code>LaTeX</code> → <code>Python + Pandoc</code> → <code>HTML + MathJax</code> → <code>Nginx</code></p>
 
 ## 🚀 Action
 
