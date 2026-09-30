@@ -1,66 +1,159 @@
 <div align="center">
 
-<img src="https://github.com/Leon5428/Leon5428/raw/HEAD/WebCode/assets/images/avatar.jpg" width="128" height="128" alt="Leon：山湖前背着背包的少年" />
+# ✨ Leon 的个人空间
 
-# 你好，我是 Leon
+<img src="./WebCode/assets/images/banner.svg" width="100%" alt="Hello, I'm Leon. Mathematics / Cryptography / Code. Per Aspera Ad Astra." />
 
 **把知识学明白，也把它讲明白。**
 
-Mathematics · Cryptography · Building & Learning
+[📐 Math](https://github.com/Leon5428/Leon5428/tree/HEAD/Math) · [🔐 Crypto](https://github.com/Leon5428/Leon5428/tree/HEAD/Crypto) · [🧩 Project](https://github.com/Leon5428/Leon5428/tree/HEAD/Project) · [🔬 Research](https://github.com/Leon5428/Leon5428/tree/HEAD/Research) · [🛠 Tool](https://github.com/Leon5428/Leon5428/tree/HEAD/Tool) · [✍ Diary](https://github.com/Leon5428/Leon5428/tree/HEAD/Diary)
 
-*Per Aspera Ad Astra.*
-
-循此苦旅，以达天际。
-
-[数学笔记](https://github.com/Leon5428/Leon5428/tree/HEAD/Math) · [密码学笔记](https://github.com/Leon5428/Leon5428/tree/HEAD/Crypto) · [LaTeX 教程](https://github.com/Leon5428/Leon5428/tree/HEAD/Tool/T01-Latex)
+*Keep learning, keep exploring.*
 
 </div>
 
----
+## 👋 Hello
 
-我是一名对密码学充满热情的学生，正在学习数学、密码学与计算机科学。
+<img align="right" src="./WebCode/assets/images/avatar.jpg" width="125" alt="Leon 的山湖少年头像" />
 
-读到一个定理时，我常常会停下来问：这个条件为什么不能去掉？证明中的这一步真的成立吗？如果换一个角度，能不能解释得更清楚？这些问题，慢慢变成了这里的笔记。
+你好，我是 **Leon**，一名对密码学充满热情的学生。
 
-我希望记录的不只有最后的结论，还有走到结论之前的疑问、尝试，以及后来才想明白的地方。如果这些文字能帮另一个正在学习的人少卡住一会儿，它们就多了一份意义。
+我正在数学、密码学与计算机科学之间寻找联系：从一个定义出发，推敲它的条件，追问证明中的每一步，再试着把这些理解写成别人也能读懂的笔记。
 
-## 我正在探索
+- 📖 **正在学习**：群、环、域、离散数学，以及密码学背后的数学基础。
+- 🔐 **关注方向**：门限密码、秘密共享与隐私计算。
+- 🏗 **正在搭建**：[LeonBlog](https://github.com/Leon5428/Leon5428)，一个以 LaTeX 为内容源的个人知识网站。
+- ✍ **喜欢做的事**：把学过的知识再讲给自己听，也把卡住过的地方写下来。
+- 💬 **欢迎交流**：另一种证明思路、笔记勘误，或一个值得继续追问的问题。
 
-| 方向 | 我关心的问题 |
+> 我希望记录的不只有结论，还有走到结论之前的疑问、尝试，以及后来才想明白的地方。
+
+## 🧰 Toolbox
+
+**正在使用和学习的工具。** 从写下一行公式，到把笔记变成一个可以访问的网站。
+
+<p align="center">
+  <img src="./WebCode/assets/images/toolbox.svg" width="100%" alt="LaTeX · Python · HTML · CSS · Git · GitHub · Linux · Nginx" />
+</p>
+
+<p align="center"><code>LaTeX</code> → <code>Python + Pandoc</code> → <code>HTML + MathJax</code> → <code>Nginx</code></p>
+
+## 🚀 Action
+
+<p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
+
+<!-- Dynamic cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
+<p align="center">
+  <a href="https://github.com/Leon5428?tab=overview">
+    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Leon5428&amp;theme=github_dark" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+  </a>
+</p>
+<p align="center">
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Leon5428&amp;theme=github_dark" width="48%" alt="Leon5428 的 GitHub 公开统计" />
+  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Leon5428&amp;theme=github_dark" width="48%" alt="Leon5428 的公开仓库语言分布" />
+</p>
+
+<details>
+<summary>📊 关于这些统计</summary>
+
+卡片展示 GitHub 公开活动，语言分布反映仓库构成。很多学习发生在提交之前：阅读、演算、推翻一个思路，再重新开始。
+
+统计图片由 [GitHub Profile Summary Cards](https://github.com/vn7n24fzkq/github-profile-summary-cards) 提供；若暂时无法加载，可以直接查看我的 [GitHub 活动](https://github.com/Leon5428?tab=overview)。
+
+</details>
+
+## 🌌 My Knowledge Universe
+
+这里按学科整理知识，也给项目、研究和生活留出位置。
+
+<table>
+<tr>
+<td width="33%" valign="top">
+<h3>📐 Math</h3>
+<p>从公理、定义到结构与证明。记录推导，也记录那些“为什么”。</p>
+<a href="https://github.com/Leon5428/Leon5428/tree/HEAD/Math">阅读数学笔记 →</a>
+</td>
+<td width="33%" valign="top">
+<h3>🔐 Crypto</h3>
+<p>探索安全背后的数学。从秘密共享出发，学习密码学与隐私计算。</p>
+<a href="https://github.com/Leon5428/Leon5428/tree/HEAD/Crypto">阅读密码学笔记 →</a>
+</td>
+<td width="33%" valign="top">
+<h3>🧩 Project</h3>
+<p>把想法变成可以运行的东西。目前在持续搭建和完善 LeonBlog。</p>
+<a href="https://github.com/Leon5428/Leon5428/blob/HEAD/WebCode/BUILD.md">了解网站构建 →</a>
+</td>
+</tr>
+<tr>
+<td valign="top">
+<h3>🔬 Research</h3>
+<p>为更深入的问题留一块地方。方向还在探索，内容逐步积累。</p>
+<a href="https://github.com/Leon5428/Leon5428/tree/HEAD/Research">研究记录 →</a>
+</td>
+<td valign="top">
+<h3>🛠 Tool</h3>
+<p>工欲善其事，必先利其器。从 LaTeX 开始整理自己的学习工具箱。</p>
+<a href="https://github.com/Leon5428/Leon5428/tree/HEAD/Tool">工具与教程 →</a>
+</td>
+<td valign="top">
+<h3>✍ Diary</h3>
+<p>公式与代码之外，记录日常、阅读，以及成长中的一些想法。</p>
+<a href="https://github.com/Leon5428/Leon5428/tree/HEAD/Diary">日常片段 →</a>
+</td>
+</tr>
+</table>
+
+## 📌 Featured Notes
+
+| 笔记 | 从这里开始 |
 | :--- | :--- |
-| **数学基础** | 从群、环、域到多项式，理解定义如何连接成结构，条件如何支撑证明。 |
-| **密码学与隐私计算** | 理解秘密共享与门限密码，继续学习公钥密码学、密码分析和安全多方计算。 |
-| **工具与实践** | 用 LaTeX 整理数学，用 Python 构建网站，让学到的东西成为可以阅读、运行和继续维护的成果。 |
+| [有限域及其应用](https://github.com/Leon5428/Leon5428/tree/HEAD/Math/M11-FiniteFieldsAndTheirApplications) | 群、环、域与多项式：定义、证明和理解过程。 |
+| [逻辑和证明](https://github.com/Leon5428/Leon5428/blob/HEAD/Math/M04-DiscreteMathematics/01-logic-and-proofs.tex) | 命题、量词与推理：把“为什么成立”说清楚。 |
+| [集合与函数](https://github.com/Leon5428/Leon5428/blob/HEAD/Math/M04-DiscreteMathematics/02-sets-and-functions.tex) | 集合、映射与基数：从有限走向无限。 |
+| [门限密码](https://github.com/Leon5428/Leon5428/blob/HEAD/Crypto/C04-PrivacyCalculation/01-ThresholdCryptography.tex) | 为什么不能简单地把密钥切成几份？ |
+| [LaTeX 安装与配置](https://github.com/Leon5428/Leon5428/blob/HEAD/Tool/T01-Latex/00-installation-and-configuration.tex) | 给刚开始使用 LaTeX 的同学的一份入门说明。 |
 
-## LeonBlog · 一份持续生长的学习笔记
+## 🏗 Behind LeonBlog
 
-这个仓库也是 **LeonBlog** 的源码所在。我在这里按学科整理知识，写下推导、解释和学习中的思考，也逐步搭建承载这些内容的网站。
+我希望做一个能长期维护的知识网站：文章按学科组织，公式清楚，源码可以追溯，笔记能够随着理解一起成长。
 
-我希望一篇笔记既能把关键步骤交代清楚，也能给初学者留下一条跟得上的路。内容还在逐步补全；随着理解加深，我也会回头修改早先的解释。
+这个仓库既是我的个人主页，也是网站的源码所在。`.tex` 保存文章，`meta.json` 组织目录，`build.py` 将它们变成静态页面。
 
-网站使用 `.tex` 作为文章源文件，通过 Python 和 Pandoc 生成静态 HTML，再由 MathJax 渲染公式。文章、元数据和网站代码分开维护，生成页面不进入版本控制。
+<details>
+<summary>🔎 展开看看网站的结构</summary>
 
-> 学习与追问 → 写下笔记 → 分享与交流 → 回头修订 → 更深入的理解
+```text
+LeonBlog/
+├── Math/        数学笔记
+├── Crypto/      密码学笔记
+├── Project/     项目记录
+├── Research/    研究记录
+├── Tool/        工具与教程
+├── Diary/       日常与思考
+├── WebCode/     模板、样式与静态资源
+└── build.py     静态网站构建入口
+```
 
-可以从这里开始：
+生成的 `Output/` 不提交到仓库。构建与预览方法见 [BUILD.md](https://github.com/Leon5428/Leon5428/blob/HEAD/WebCode/BUILD.md)。
 
-- **[有限域及其应用](https://github.com/Leon5428/Leon5428/tree/HEAD/Math/M11-FiniteFieldsAndTheirApplications)** — 群、环、域与多项式的学习笔记，包含证明思路和理解过程。
-- **[门限密码](https://github.com/Leon5428/Leon5428/blob/HEAD/Crypto/C04-PrivacyCalculation/01-ThresholdCryptography.tex)** — 从“为什么不能简单地把密钥切成几份”开始理解秘密共享。
-- **[LaTeX 安装与配置](https://github.com/Leon5428/Leon5428/blob/HEAD/Tool/T01-Latex/00-installation-and-configuration.tex)** — 为刚开始使用 LaTeX 的同学整理的入门说明。
-- **[网站构建说明](https://github.com/Leon5428/Leon5428/blob/HEAD/WebCode/BUILD.md)** — 了解这些笔记如何变成一个静态网站。
+</details>
 
-## 关于学习，也关于交流
+## 🤝 Let's Connect
 
-我喜欢把学过的知识再讲给自己听。能复述一个结论之后，还想试着解释它为什么成立；写完一段证明之后，也愿意留着疑问，过一阵再回来看看。
+如果某段证明让你产生了不同的想法，或者有一步还可以解释得更清楚，欢迎留下来一起讨论。
 
-这里的笔记会有疏漏，也会持续修订。如果你发现了错误、有另一种证明思路，或觉得某一步还可以讲得更清楚，欢迎通过 [Issues](https://github.com/Leon5428/Leon5428/issues) 或 Pull Request 交流。
+**[提出问题 / 笔记勘误](https://github.com/Leon5428/Leon5428/issues) · [参与修订](https://github.com/Leon5428/Leon5428/pulls) · [浏览我的仓库](https://github.com/Leon5428?tab=repositories)**
 
 ---
 
 <div align="center">
 
+### ✦ Per Aspera Ad Astra ✦
+
+循此苦旅，以达天际。
+
 **道阻且长，行则将至。**
 
-*Keep learning, keep exploring.*
+<sub>Thanks for visiting. See you in the next proof, note, or commit.</sub>
 
 </div>
