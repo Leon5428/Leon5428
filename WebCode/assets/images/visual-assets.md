@@ -40,3 +40,10 @@ Use case: illustration-story. Asset type: square profile avatar for a personal a
 Generated with the built-in image_gen tool. The user supplied a retro animation screenshot as a style and composition reference. Used in the GitHub profile README; replaces banner.svg.
 
 Create a new original illustration for a GitHub profile README hero banner. Reference the user attached image's retro 1990s hand-drawn animation look and composition: a dark-haired young adult programmer seen from behind in three-quarter view, seated on the right at a desk, hands typing on a chunky pale gray keyboard, bulky vintage gray CRT computer on the left showing fine green terminal code. Dark muted charcoal and plum room, quiet late-night concentration, green screen glow, simple flat cel-shaded colors with strong hand-drawn black outlines and subtle analog film grain. Tight medium shot, screen and upper body fill the frame, horizontally wide approximately 16:9, no outer border. Character wears a light shirt, dark short hair, an ordinary desk chair. Match the restrained, slightly rough vintage animation still aesthetic rather than modern glossy digital art. No headings, no logos, no watermark, no slogans, no UI cards. Screen text just unobtrusive tiny code texture. This is a new illustration guided by the provided reference, not a webpage screenshot.
+
+
+### banner.png - student revision
+
+Edited with the built-in image_gen tool using the previous banner as the edit target.
+
+Prompt: Replace only the seated person with a youthful male university student about 20 years old: slim natural shoulders and neck, short slightly tousled black hair with visible textured strands, casual muted blue-gray hoodie instead of collared office clothing, no glasses or facial hair. Preserve the rear three-quarter view, natural typing hands, wide 16:9 composition, vintage cream CRT with green terminal glow, keyboard, desk, mug, notebook, plants, books and dark room. Preserve the dark palette, 1990s hand-drawn cel animation style, ink outlines and subtle film grain. A college student studying late, not a middle-aged office worker or child. No new text, logos or watermark.
