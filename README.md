@@ -49,6 +49,9 @@
   </a>
 </p>
 <p align="center">
+  <a href="https://github.com/Leon5428/LatticeCrypto">
+    <img src="./WebCode/assets/images/repository-latticecrypto.svg?v=bc132af3cd13" width="48%" alt="Leon5428/LatticeCrypto：项目简介、Star、Fork 与默认分支提交数量" />
+  </a>
   <a href="https://github.com/Leon5428/AgentArmor">
     <img src="./WebCode/assets/images/repository-agentarmor.svg?v=63d38c6a7a63" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
   </a>

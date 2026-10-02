@@ -25,6 +25,7 @@ COLORS = ("#161b22", "#003d29", "#006d32", "#26a641", "#39d353")
 REPOSITORIES = {
     "Leon5428/Leon5428": "repository.svg",
     "Leon5428/PQSecure": "repository-pqsecure.svg",
+    "Leon5428/LatticeCrypto": "repository-latticecrypto.svg",
     "Leon5428/AgentArmor": "repository-agentarmor.svg",
 }
 README = Path(__file__).resolve().parent.parent / "README.md"
