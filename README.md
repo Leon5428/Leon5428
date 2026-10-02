@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=d57c8603a759" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=96850101cf49" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
@@ -41,7 +41,7 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=392aea379b3d" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=e3c2172ec77b" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
@@ -57,12 +57,11 @@
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="./WebCode/assets/images/profile-overview.svg?v=01ec34209df7" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=0624427fbd75" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats.svg?v=5ff7234837ca" width="48%" alt="Leon5428 的 GitHub 公开统计" />
-  <img src="./WebCode/assets/images/profile-languages.svg?v=6eea70051c01" width="48%" alt="Leon5428 的公开仓库语言分布" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=43ce4fdcb4d3" width="100%" alt="Leon5428 的公开统计与仓库主要语言百分比" />
 </p>
 
 <details>
@@ -131,7 +130,7 @@
 
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=392aea379b3d" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=e3c2172ec77b" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 

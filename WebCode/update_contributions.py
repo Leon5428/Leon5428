@@ -286,10 +286,24 @@ def render_languages(repos: list[dict]) -> str:
                  f'stroke-dasharray="{length:.4f} {circumference-length:.4f}" stroke-dashoffset="{-offset:.4f}" transform="rotate(-90 350 152)"/>')
         offset += length
         body += f'<circle cx="32" cy="{87+i*30}" r="4" fill="{colors[i]}"/>'
-        body += text(45,92+i*30,f"{language} · {count}",13)
-    body += text(350,153,total,28,"#e6edf3","middle") + text(350,175,"repositories",11,"#8b949e","middle")
+        body += text(45,92+i*30,f"{language} · {count / total:.1%}",13)
+    body += text(350,153,"100%" if total else "—",28,"#e6edf3","middle") + text(350,175,"by repository",11,"#8b949e","middle")
     body += text(27,258,"Primary language per repository · excludes forks",11,"#8b949e")
     return card("Repository primary language distribution",body)
+
+
+def render_stats_row(stats: str, languages: str) -> str:
+    """One canvas keeps the two-card row aligned with the full-width overview."""
+    panels = []
+    for x, label, svg in ((0, "stats", stats), (500, "languages", languages)):
+        svg = svg.replace('<svg ', f'<svg x="{x}" y="0" ', 1)
+        svg = svg.replace('id="title"', f'id="{label}-title"')
+        svg = svg.replace('aria-labelledby="title"', f'aria-labelledby="{label}-title"')
+        panels.append(svg.strip())
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="980" height="280" '
+            'viewBox="0 0 980 280" role="img" aria-labelledby="row-title">'
+            '<title id="row-title">GitHub statistics and language percentages</title>'
+            + ''.join(panels) + '</svg>\n')
 
 
 def write_changed(path: Path, content: str) -> bool:
@@ -317,6 +331,9 @@ def main() -> None:
         search_total("issues", f"author:{USERNAME} is:pr"),
         search_total("issues", f"author:{USERNAME} is:issue"))
     images[OUTPUT.with_name("profile-languages.svg")] = render_languages(repos)
+    images[OUTPUT.with_name("profile-stats-row.svg")] = render_stats_row(
+        images[OUTPUT.with_name("profile-stats.svg")],
+        images[OUTPUT.with_name("profile-languages.svg")])
     readme = README.read_text(encoding="utf-8")
     for path, image in images.items():
         changed = write_changed(path, image)
