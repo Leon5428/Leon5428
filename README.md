@@ -41,17 +41,16 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=1d031a41f16f" width="100%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=1d031a41f16f" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
-</p>
-<p align="center">
+
   <a href="https://github.com/Leon5428/PQSecure">
-    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=e0b84514d2b5" width="100%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=e0b84514d2b5" width="48%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <p align="center">
   <a href="https://github.com/Leon5428/AgentArmor">
-    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=cda996ba8302" width="100%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=cda996ba8302" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <!-- Refresh all repository cards and the heatmap: python WebCode/update_contributions.py -->
@@ -130,7 +129,7 @@
 
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=1d031a41f16f" width="100%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=1d031a41f16f" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 
