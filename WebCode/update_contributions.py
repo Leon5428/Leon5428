@@ -10,7 +10,10 @@ import json
 from pathlib import Path
 import re
 import unicodedata
-from urllib.error import HTTPError
+import sys
+import time
+from http.client import IncompleteRead, RemoteDisconnected
+from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlsplit, urlencode
 from urllib.request import Request, urlopen
 
@@ -25,6 +28,31 @@ REPOSITORIES = {
     "Leon5428/AgentArmor": "repository-agentarmor.svg",
 }
 README = Path(__file__).resolve().parent.parent / "README.md"
+
+
+def download(request: Request) -> tuple[bytes, str]:
+    """Retry transient failures, including timeouts while reading the response body."""
+    for attempt in range(1, 4):
+        try:
+            with urlopen(request, timeout=60) as response:
+                return response.read(), response.headers.get("Link", "")
+        except HTTPError as exc:
+            if exc.code not in (408, 429, 500, 502, 503, 504):
+                raise
+            exc.close()
+            reason = f"HTTP {exc.code}"
+        except (URLError, TimeoutError, ConnectionError, IncompleteRead, RemoteDisconnected) as exc:
+            reason = str(exc)
+        if attempt == 3:
+            raise RuntimeError(
+                f"GitHub request failed after 3 attempts: {request.full_url}: {reason}. "
+                "Check server HTTPS connectivity; existing images have not been updated."
+            )
+        delay = attempt * 5
+        print(f"Request failed ({attempt}/3): {request.full_url}: {reason}; "
+              f"retrying in {delay}s", file=sys.stderr, flush=True)
+        time.sleep(delay)
+    raise RuntimeError("Unreachable download state")
 
 
 def description_lines(description: str) -> tuple[str, str]:
@@ -103,12 +131,12 @@ def render_repository(repo: dict, commits: int) -> str:
 def fetch_repository(repository: str) -> str:
     headers = {"User-Agent": "LeonBlog-profile", "Accept": "application/vnd.github+json"}
     api = f"https://api.github.com/repos/{repository}"
-    with urlopen(Request(api, headers=headers), timeout=30) as response:
-        repo = json.load(response)
+    payload, _ = download(Request(api, headers=headers))
+    repo = json.loads(payload)
     query = urlencode({"per_page": 1, "sha": repo["default_branch"]})
     try:
-        with urlopen(Request(f"{api}/commits?{query}", headers=headers), timeout=30) as response:
-            commits = commit_count(json.load(response), response.headers.get("Link", ""))
+        payload, link = download(Request(f"{api}/commits?{query}", headers=headers))
+        commits = commit_count(json.loads(payload), link)
     except HTTPError as exc:
         if exc.code != 409 or json.load(exc).get("message") != "Git Repository is empty.":
             raise
@@ -168,8 +196,8 @@ def render_calendar(html: str) -> str:
 def api_json(path: str):
     request = Request("https://api.github.com/" + path, headers={
         "User-Agent": "LeonBlog-profile", "Accept": "application/vnd.github+json"})
-    with urlopen(request, timeout=30) as response:
-        return json.load(response)
+    payload, _ = download(request)
+    return json.loads(payload)
 
 
 def search_total(kind: str, query: str) -> int:
@@ -331,9 +359,9 @@ def write_changed(path: Path, content: str) -> bool:
 
 def main() -> None:
     request = Request(SOURCE, headers={"User-Agent": "LeonBlog-profile-calendar"})
-    with urlopen(request, timeout=30) as response:
-        html = response.read().decode("utf-8")
-        svg = render_calendar(html)
+    payload, _ = download(request)
+    html = payload.decode("utf-8")
+    svg = render_calendar(html)
     # Finish network requests before modifying any local files.
     images = {OUTPUT: svg}
     for repository, filename in REPOSITORIES.items():
@@ -362,4 +390,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (RuntimeError, URLError, TimeoutError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        sys.exit(1)

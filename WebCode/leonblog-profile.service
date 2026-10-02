@@ -1,9 +1,0 @@
-[Unit]
-Description=Refresh LeonBlog GitHub profile cards
-
-[Service]
-Type=oneshot
-WorkingDirectory=%h/LeonBlog
-ExecStart=/usr/bin/python3 %h/LeonBlog/WebCode/refresh_profile.py
-Environment=PYTHONUNBUFFERED=1
-TimeoutStartSec=20min
