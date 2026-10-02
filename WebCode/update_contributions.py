@@ -3,6 +3,8 @@
 from datetime import date, timedelta
 from html import escape
 from html.parser import HTMLParser
+from collections import Counter
+import math
 import hashlib
 import json
 from pathlib import Path
@@ -70,7 +72,7 @@ def render_repository(repo: dict, commits: int) -> str:
     first_line, second_line = description_lines(description)
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="title desc">
   <title id="title">{name} repository</title>
-  <desc id="desc">{stars} stars, {forks} forks, {commits} commits on the default branch {branch}. Snapshot refreshed {date.today().isoformat()}.</desc>
+  <desc id="desc">{stars} stars, {forks} forks, {commits} commits on the default branch {branch}. Public repository snapshot.</desc>
   <rect x="1" y="1" width="478" height="278" rx="10" fill="#0d1117" stroke="#30363d"/>
   <g font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif">
     <path d="M27 20h13v16H27z M31 20v16 M34 24h3" fill="none" stroke="#8b949e" stroke-width="1.5"/>
@@ -91,7 +93,7 @@ def render_repository(repo: dict, commits: int) -> str:
     <path d="M27 225h426" stroke="#21262d"/>
     <circle cx="32" cy="250" r="4" fill="#79c0ff"/>
     <text x="45" y="254" font-size="12" fill="#b1bac4">{language}</text>
-    <text x="453" y="254" text-anchor="end" font-size="11" fill="#8b949e">{branch} · {date.today().isoformat()}</text>
+    <text x="453" y="254" text-anchor="end" font-size="11" fill="#8b949e">Default branch: {branch}</text>
   </g>
 </svg>
 '''
@@ -163,24 +165,168 @@ def render_calendar(html: str) -> str:
     return '\n'.join(lines) + '\n'
 
 
+def api_json(path: str):
+    request = Request("https://api.github.com/" + path, headers={
+        "User-Agent": "LeonBlog-profile", "Accept": "application/vnd.github+json"})
+    with urlopen(request, timeout=30) as response:
+        return json.load(response)
+
+
+def search_total(kind: str, query: str) -> int:
+    result = api_json(f"search/{kind}?" + urlencode({"q": query, "per_page": 1}))
+    if result.get("incomplete_results"):
+        raise ValueError(f"GitHub returned incomplete {kind} statistics; images unchanged")
+    return result["total_count"]
+
+
+def public_repositories() -> list[dict]:
+    repositories = []
+    page = 1
+    while True:
+        batch = api_json(f"users/{USERNAME}/repos?type=owner&per_page=100&page={page}")
+        repositories.extend(batch)
+        if len(batch) < 100:
+            return repositories
+        page += 1
+
+
+def daily_counts(html: str) -> dict[date, int]:
+    """Match tooltip counts to cell IDs, never estimate counts from color levels."""
+    calendar = ContributionCalendar()
+    calendar.feed(html)
+    cells = {}
+    for tag in re.findall(r'<td\b[^>]*>', html):
+        day = re.search(r'data-date="([^" ]+)"', tag)
+        identifier = re.search(r'\bid="([^" ]+)"', tag)
+        if day and identifier:
+            cells[identifier[1]] = date.fromisoformat(day[1])
+    counts = {}
+    for attrs, body in re.findall(r'<tool-tip\b([^>]*)>(.*?)</tool-tip>', html, re.S):
+        target = re.search(r'\bfor="([^" ]+)"', attrs)
+        if target and target[1] in cells:
+            match = re.match(r'\s*(No|[\d,]+) contributions? on ', body)
+            if not match:
+                raise ValueError("Unrecognized GitHub contribution tooltip")
+            counts[cells[target[1]]] = 0 if match[1] == "No" else int(match[1].replace(",", ""))
+    if set(counts) != set(calendar.days) or not 300 <= len(counts) <= 371:
+        raise ValueError("Incomplete daily contribution counts; images unchanged")
+    return dict(sorted(counts.items()))
+
+
+def text(x, y, value, size=15, color="#b1bac4", anchor="start") -> str:
+    return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{color}" '
+            f'text-anchor="{anchor}">{escape(str(value))}</text>')
+
+
+def card(title: str, body: str, width=480, height=280) -> str:
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" '
+            f'viewBox="0 0 {width} {height}" role="img" aria-labelledby="title">'
+            f'<title id="title">{escape(title)}</title>'
+            f'<rect x="1" y="1" width="{width-2}" height="{height-2}" rx="10" '
+            'fill="#0d1117" stroke="#30363d"/>'
+            '<g font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif">'
+            + body + '</g></svg>\n')
+
+
+def render_profile(user: dict, repos: list[dict], counts: dict[date, int]) -> str:
+    first, last = min(counts), max(counts)
+    monthly = Counter()
+    for day, count in counts.items():
+        monthly[day.strftime("%Y-%m")] += count
+    months = sorted(monthly)
+    ceiling = max(1, max(monthly.values()))
+    body = text(28, 46, user["login"] + (" · " + user["name"] if user.get("name") else ""), 26, "#58a6ff")
+    body += text(28, 96, f"{sum(counts.values()):,} contributions", 21, "#7ee787")
+    body += text(28, 130, f"{len(repos)} public repositories", 17)
+    body += text(28, 164, "Joined " + user["created_at"][:10], 17)
+    body += text(28, 244, f"{first} — {last}", 12, "#8b949e")
+    body += text(916, 40, "Contributions by month", 13, "#8b949e", "end")
+    points = [(390 + i * 526 / max(1, len(months)-1), 214 - monthly[m] / ceiling * 145) for i, m in enumerate(months)]
+    line = " ".join(f"{x:.1f},{y:.1f}" for x,y in points)
+    body += f'<polygon points="390,214 {line} 916,214" fill="#238636" opacity="0.35"/>'
+    body += f'<polyline points="{line}" fill="none" stroke="#3fb950" stroke-width="2.5"/>'
+    for fraction in (0, .5, 1):
+        y = 214 - 145*fraction
+        body += f'<path d="M390 {y}H916" stroke="#30363d" stroke-dasharray="3 5"/>'
+        body += text(934, y+4, f"{ceiling*fraction:g}", 10, "#8b949e", "end")
+    for i,m in enumerate(months):
+        if i % 2 == 0 or i == len(months)-1:
+            body += text(round(points[i][0]), 239, m[2:].replace("-", "/"), 11, "#8b949e", "middle")
+    return card("GitHub contribution overview", body, 960)
+
+
+def render_stats(repos: list[dict], commits: int, prs: int, issues: int) -> str:
+    owned = [r for r in repos if not r["fork"]]
+    rows = [("Stars · owned non-fork repos", sum(r["stargazers_count"] for r in owned)),
+            ("Authored commits · public index", commits),
+            ("Pull requests opened", prs), ("Issues opened", issues),
+            ("Public repositories", len(repos))]
+    body = text(27, 44, "Stats", 25, "#58a6ff")
+    for i,(label,value) in enumerate(rows):
+        y = 84 + 34*i
+        body += text(27,y,label,14) + text(450,y,f"{value:,}",20,"#7ee787","end")
+    body += text(27,258,"Public GitHub data · all-time indexed activity",11,"#8b949e")
+    return card("Public GitHub statistics", body)
+
+
+def render_languages(repos: list[dict]) -> str:
+    counts = Counter(r.get("language") or "Not detected" for r in repos if not r["fork"])
+    entries = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
+    if len(entries) > 5:
+        entries = entries[:4] + [("Other", sum(n for _,n in entries[4:]))]
+    colors = ["#58a6ff", "#3fb950", "#bc8cff", "#e3b341", "#f78166"]
+    total = sum(counts.values())
+    body = text(27,44,"Top Languages by Repo",24,"#58a6ff")
+    body += '<circle cx="350" cy="152" r="69" fill="none" stroke="#21262d" stroke-width="24"/>'
+    offset = 0.0
+    circumference = 2*math.pi*69
+    for i,(language,count) in enumerate(entries):
+        length = count/total*circumference
+        body += (f'<circle cx="350" cy="152" r="69" fill="none" stroke="{colors[i]}" stroke-width="24" '
+                 f'stroke-dasharray="{length:.4f} {circumference-length:.4f}" stroke-dashoffset="{-offset:.4f}" transform="rotate(-90 350 152)"/>')
+        offset += length
+        body += f'<circle cx="32" cy="{87+i*30}" r="4" fill="{colors[i]}"/>'
+        body += text(45,92+i*30,f"{language} · {count}",13)
+    body += text(350,153,total,28,"#e6edf3","middle") + text(350,175,"repositories",11,"#8b949e","middle")
+    body += text(27,258,"Primary language per repository · excludes forks",11,"#8b949e")
+    return card("Repository primary language distribution",body)
+
+
+def write_changed(path: Path, content: str) -> bool:
+    data = content.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "\r\n").encode("utf-8")
+    if path.exists() and path.read_bytes() == data:
+        return False
+    path.write_bytes(data)
+    return True
+
+
 def main() -> None:
     request = Request(SOURCE, headers={"User-Agent": "LeonBlog-profile-calendar"})
     with urlopen(request, timeout=30) as response:
-        svg = render_calendar(response.read().decode("utf-8"))
+        html = response.read().decode("utf-8")
+        svg = render_calendar(html)
     # Finish network requests before modifying any local files.
     images = {OUTPUT: svg}
     for repository, filename in REPOSITORIES.items():
         images[OUTPUT.with_name(filename)] = fetch_repository(repository)
+    user = api_json(f"users/{USERNAME}")
+    repos = public_repositories()
+    images[OUTPUT.with_name("profile-overview.svg")] = render_profile(user, repos, daily_counts(html))
+    images[OUTPUT.with_name("profile-stats.svg")] = render_stats(
+        repos, search_total("commits", f"author:{USERNAME}"),
+        search_total("issues", f"author:{USERNAME} is:pr"),
+        search_total("issues", f"author:{USERNAME} is:issue"))
+    images[OUTPUT.with_name("profile-languages.svg")] = render_languages(repos)
     readme = README.read_text(encoding="utf-8")
     for path, image in images.items():
-        path.write_text(image, encoding="utf-8", newline="\r\n")
+        changed = write_changed(path, image)
         # A content-based version changes the URL only when the image changes.
         version = hashlib.sha256(image.encode("utf-8")).hexdigest()[:12]
         source = f"./WebCode/assets/images/{path.name}"
         readme = re.sub(r'(src="' + re.escape(source) + r')(?:\?[^"\s]*)?"',
                         lambda match: f'{match[1]}?v={version}"', readme)
-        print(f"Updated {path}")
-    README.write_text(readme, encoding="utf-8", newline="\r\n")
+        print(f"{'Updated' if changed else 'Unchanged'} {path}")
+    write_changed(README, readme)
 
 
 if __name__ == "__main__":

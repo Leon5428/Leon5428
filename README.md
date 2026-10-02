@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=0f601181eb86" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=d57c8603a759" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
@@ -41,28 +41,28 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=89ff2cd3c4e4" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=392aea379b3d" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
-    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=5c9a0c46ffac" width="48%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=b3284be9ec28" width="48%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <p align="center">
   <a href="https://github.com/Leon5428/AgentArmor">
-    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=56ea622881fb" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=63d38c6a7a63" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <!-- Refresh all repository cards and the heatmap: python WebCode/update_contributions.py -->
-<!-- Dynamic cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
+<!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=Leon5428&amp;theme=github_dark" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=01ec34209df7" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=Leon5428&amp;theme=github_dark" width="48%" alt="Leon5428 的 GitHub 公开统计" />
-  <img src="https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=Leon5428&amp;theme=github_dark" width="48%" alt="Leon5428 的公开仓库语言分布" />
+  <img src="./WebCode/assets/images/profile-stats.svg?v=5ff7234837ca" width="48%" alt="Leon5428 的 GitHub 公开统计" />
+  <img src="./WebCode/assets/images/profile-languages.svg?v=6eea70051c01" width="48%" alt="Leon5428 的公开仓库语言分布" />
 </p>
 
 <details>
@@ -70,7 +70,9 @@
 
 卡片展示 GitHub 公开活动，语言分布反映仓库构成。很多学习发生在提交之前：阅读、演算、推翻一个思路，再重新开始。
 
-统计图片由 [GitHub Profile Summary Cards](https://github.com/vn7n24fzkq/github-profile-summary-cards) 提供；若暂时无法加载，可以直接查看我的 [GitHub 活动](https://github.com/Leon5428?tab=overview)。
+统计图片由本仓库脚本生成，运行 `python WebCode/update_contributions.py` 更新；内容相同的文件不会重复写入。
+
+贡献趋势来自 GitHub 公开日历，按月汇总，首尾月份可能不完整。Stars 汇总自有非 Fork 公开仓库；Commits 为 GitHub 公开搜索索引中归属于我的提交，PR 和 Issue 为我创建的公开记录，均非仅过去一年。语言图按非 Fork 公开仓库的主要语言计数，未识别的语言单独列出，并不代表熟练程度。公开搜索索引可能延迟更新；这些数值不等同于个人主页贡献总数。
 
 </details>
 
@@ -129,7 +131,7 @@
 
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=89ff2cd3c4e4" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=392aea379b3d" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="title desc">
   <title id="title">Leon5428/AgentArmor repository</title>
-  <desc id="desc">2 stars, 0 forks, 24 commits on the default branch main. Snapshot refreshed 2026-10-02.</desc>
+  <desc id="desc">2 stars, 0 forks, 24 commits on the default branch main. Public repository snapshot.</desc>
   <rect x="1" y="1" width="478" height="278" rx="10" fill="#0d1117" stroke="#30363d"/>
   <g font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif">
     <path d="M27 20h13v16H27z M31 20v16 M34 24h3" fill="none" stroke="#8b949e" stroke-width="1.5"/>
@@ -21,6 +21,6 @@
     <path d="M27 225h426" stroke="#21262d"/>
     <circle cx="32" cy="250" r="4" fill="#79c0ff"/>
     <text x="45" y="254" font-size="12" fill="#b1bac4">Python</text>
-    <text x="453" y="254" text-anchor="end" font-size="11" fill="#8b949e">main · 2026-10-02</text>
+    <text x="453" y="254" text-anchor="end" font-size="11" fill="#8b949e">Default branch: main</text>
   </g>
 </svg>
