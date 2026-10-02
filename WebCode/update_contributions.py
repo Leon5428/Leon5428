@@ -30,7 +30,7 @@ def description_lines(description: str) -> tuple[str, str]:
     lines, current, width = [], "", 0
     for char in " ".join(description.split()):
         size = 2 if unicodedata.east_asian_width(char) in "WF" else 1
-        if width + size > 84:
+        if width + size > 56:
             lines.append(current)
             current, width = "", 0
         current += char
@@ -61,34 +61,41 @@ def render_repository(repo: dict, commits: int) -> str:
     if any(type(value) is not int or value < 0 for value in (stars, forks, commits)):
         raise ValueError("Invalid repository statistics")
     name = escape(repo["full_name"])
+    owner, project = (escape(part) for part in repo["full_name"].split("/", 1))
     branch = escape(repo["default_branch"])
     language = escape(repo.get("language") or "Not detected")
     description = repo.get("description") or "No repository description provided."
-    first_line, second_line = description_lines(description)
     if repo["full_name"] == "Leon5428/Leon5428":
-        first_line = "LeonBlog · 数学、密码学与个人知识笔记"
-        second_line = "LaTeX notes · Python builds · A static home for learning"
-    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="800" height="224" viewBox="0 0 800 224" role="img" aria-labelledby="title desc">
+        description = "LeonBlog · 数学、密码学与个人知识笔记。用 LaTeX 记录，用静态网站分享。"
+    first_line, second_line = description_lines(description)
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="title desc">
   <title id="title">{name} repository</title>
   <desc id="desc">{stars} stars, {forks} forks, {commits} commits on the default branch {branch}. Snapshot refreshed {date.today().isoformat()}.</desc>
-  <rect x="1" y="1" width="798" height="222" rx="12" fill="#0d1117" stroke="#30363d"/>
-  <g font-family="Segoe UI, Arial, sans-serif">
-    <path d="M29 29h17v22H29z M33 29v22 M37 34h5" fill="none" stroke="#8b949e" stroke-width="1.5"/>
-    <text x="58" y="48" font-size="23" font-weight="600" fill="#79c0ff">{name}</text>
-    <rect x="694" y="27" width="75" height="25" rx="12" fill="none" stroke="#30363d"/>
-    <text x="731" y="44" text-anchor="middle" font-size="12" fill="#8b949e">Public</text>
-    <text x="29" y="84" font-size="16" fill="#c9d1d9">{first_line}</text>
-    <text x="29" y="109" font-size="13" fill="#8b949e">{second_line}</text>
-    <path d="M29 128h740" stroke="#21262d"/>
-    <text x="29" y="162" font-size="17" fill="#e3b341">★ {stars} Stars</text>
-    <text x="209" y="162" font-size="17" fill="#bc8cff">⑂ {forks} Forks</text>
-    <text x="389" y="162" font-size="17" fill="#7ee787">◷ {commits} Commits</text>
-    <circle cx="635" cy="156" r="5" fill="#79c0ff"/>
-    <text x="649" y="162" font-size="15" fill="#c9d1d9">{language}</text>
-    <text x="29" y="201" font-size="12" fill="#8b949e">Default branch: {branch} · Refreshed {date.today().isoformat()}</text>
+  <rect x="1" y="1" width="478" height="278" rx="10" fill="#0d1117" stroke="#30363d"/>
+  <g font-family="Segoe UI, Microsoft YaHei, Arial, sans-serif">
+    <path d="M27 20h13v16H27z M31 20v16 M34 24h3" fill="none" stroke="#8b949e" stroke-width="1.5"/>
+    <text x="49" y="33" font-size="13" fill="#8b949e">{owner}</text>
+    <rect x="392" y="18" width="60" height="23" rx="11" fill="none" stroke="#30363d"/>
+    <text x="422" y="34" text-anchor="middle" font-size="11" fill="#8b949e">Public</text>
+    <text x="27" y="69" font-size="25" font-weight="600" fill="#58a6ff">{project}</text>
+    <text x="27" y="100" font-size="14" fill="#b1bac4">{first_line}</text>
+    <text x="27" y="123" font-size="14" fill="#b1bac4">{second_line}</text>
+    <path d="M27 143h426" stroke="#21262d"/>
+    <path d="M169 161v46 M311 161v46" stroke="#21262d"/>
+    <text x="27" y="182" font-size="27" font-weight="600" fill="#e3b341">{stars}</text>
+    <text x="27" y="204" font-size="12" fill="#8b949e">Stars</text>
+    <text x="191" y="182" font-size="27" font-weight="600" fill="#bc8cff">{forks}</text>
+    <text x="191" y="204" font-size="12" fill="#8b949e">Forks</text>
+    <text x="333" y="182" font-size="27" font-weight="600" fill="#7ee787">{commits}</text>
+    <text x="333" y="204" font-size="12" fill="#8b949e">Commits</text>
+    <path d="M27 225h426" stroke="#21262d"/>
+    <circle cx="32" cy="250" r="4" fill="#79c0ff"/>
+    <text x="45" y="254" font-size="12" fill="#b1bac4">{language}</text>
+    <text x="453" y="254" text-anchor="end" font-size="11" fill="#8b949e">{branch} · {date.today().isoformat()}</text>
   </g>
 </svg>
 '''
+
 
 
 def fetch_repository(repository: str) -> str:
