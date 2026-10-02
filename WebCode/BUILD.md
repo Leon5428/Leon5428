@@ -206,3 +206,66 @@ PNG、JPEG、SVG 等浏览器格式，不能直接用 PDF 当图片。
 不要手改生成文件；应修改 `.tex`、元数据或模板后重新构建。
 
 备案入口保留在两个模板的页脚中；实际备案号尚未提供，当前显示“ICP备案”。
+
+
+## 服务器每天自动更新 GitHub 主页
+
+`WebCode/refresh_profile.py` 用于 Linux 服务器，依次执行：检查工作区、拉取更新、
+运行 `update_contributions.py`、暂存 README 和指定统计 SVG、有变化时提交并推送。
+只需要 Python 标准库，不运行网站构建，不强制推送，也不自动清理未提交文件。
+建议使用干净的仓库副本，避免和服务器上的手动修改混用。
+
+### 首次准备
+
+先将新增文件提交并推送，再在服务器拉取。以下假定仓库位于当前用户的 `~/LeonBlog`。
+实际路径不同时，修改 service 中的 WorkingDirectory 和 ExecStart。以仓库所属用户执行命令。
+
+```bash
+cd ~/LeonBlog
+git pull --ff-only
+git config --local user.name "Leon5428"
+git config --local user.email "13793425428@163.com"
+git remote -v
+git status --short
+```
+
+请将 `YOUR_VERIFIED_GITHUB_EMAIL` 替换成你在 GitHub 验证过的邮箱，或 GitHub 提供的 noreply 邮箱。
+服务器需要无需交互且可写入该仓库的 GitHub 凭据，例如可写 SSH deploy key 或配置好的 HTTPS 凭据管理器。
+不要把令牌写入脚本或仓库。定时任务不能依赖当前 SSH 会话中的临时 agent；只读 deploy key 无法推送。
+分支保护也需要允许该身份正常推送。脚本使用当前分支的上游配置，不修改 remote；没有上游时需先手动配置。
+
+先手动运行一次。注意：这一步会真实提交并推送生成的变更。
+
+```bash
+python3 WebCode/refresh_profile.py
+```
+
+### 安装每天凌晨 02:00 的定时任务
+
+```bash
+mkdir -p ~/.config/systemd/user
+cp WebCode/leonblog-profile.service WebCode/leonblog-profile.timer ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now leonblog-profile.timer
+sudo loginctl enable-linger "$USER"
+systemctl --user list-timers leonblog-profile.timer
+```
+
+使用 systemd 用户定时器，明确指定 `Asia/Shanghai`，不依赖服务器默认时区。
+`enable-linger` 让退出 SSH 后仍可运行；`Persistent=true` 会在服务器恢复后补跑错过的任务。
+配置说明见 [systemd.timer](https://manpages.ubuntu.com/manpages/noble/man5/systemd.timer.5.html)。
+仓库文件保持 UTF-8、CRLF；Python 脚本通过解释器执行，无需 shell 脚本或 chmod。
+
+以下命令分别用于查看日志、手动触发一次任务、停用定时任务；按需选择执行：
+
+```bash
+journalctl --user -u leonblog-profile.service -n 100 --no-pager
+systemctl --user start leonblog-profile.service
+systemctl --user disable --now leonblog-profile.timer
+```
+
+工作区有修改、存在未推送提交、远程分支分叉或请求失败时，任务报错并保留现场。
+如果生成或提交失败，先查看 `git status` 并处理遗留修改。如果提交成功但推送失败，
+修复网络或权限后，检查该提交再手动 `git push`。远程同时有新提交时需手动解决分叉，不要强制推送。
+解决后可手动启动 service 重试。任务不会自动提交已有的人工改动。
+本地电脑以后开始编辑前，也应先拉取服务器新增的统计提交。

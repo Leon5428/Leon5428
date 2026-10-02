@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh LeonBlog profile daily at 02:00 Beijing time
+
+[Timer]
+OnCalendar=*-*-* 02:00:00 Asia/Shanghai
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
