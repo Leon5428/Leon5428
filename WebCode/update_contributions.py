@@ -269,14 +269,29 @@ def render_stats(repos: list[dict], commits: int, prs: int, issues: int) -> str:
     return card("Public GitHub statistics", body)
 
 
-def render_languages(repos: list[dict]) -> str:
-    counts = Counter(r.get("language") or "Not detected" for r in repos if not r["fork"])
+def fetch_language_bytes(repos: list[dict]) -> dict[str, int]:
+    """Sum GitHub language bytes across owned public non-fork repositories."""
+    totals: Counter[str] = Counter()
+    for repo in repos:
+        if repo["fork"]:
+            continue
+        languages = api_json(f"repos/{repo['full_name']}/languages")
+        if not isinstance(languages, dict) or any(
+            not isinstance(name, str) or type(size) is not int or size < 0
+            for name, size in languages.items()
+        ):
+            raise ValueError(f"Invalid language bytes for {repo['full_name']}")
+        totals.update(languages)
+    return {name: size for name, size in totals.items() if size > 0}
+
+
+def render_languages(counts: dict[str, int]) -> str:
     entries = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
     if len(entries) > 5:
         entries = entries[:4] + [("Other", sum(n for _,n in entries[4:]))]
     colors = ["#58a6ff", "#3fb950", "#bc8cff", "#e3b341", "#f78166"]
     total = sum(counts.values())
-    body = text(27,44,"Top Languages by Repo",24,"#58a6ff")
+    body = text(27,44,"Top Languages",24,"#58a6ff")
     body += '<circle cx="350" cy="152" r="69" fill="none" stroke="#21262d" stroke-width="24"/>'
     offset = 0.0
     circumference = 2*math.pi*69
@@ -287,9 +302,9 @@ def render_languages(repos: list[dict]) -> str:
         offset += length
         body += f'<circle cx="32" cy="{87+i*30}" r="4" fill="{colors[i]}"/>'
         body += text(45,92+i*30,f"{language} · {count / total:.1%}",13)
-    body += text(350,153,"100%" if total else "—",28,"#e6edf3","middle") + text(350,175,"by repository",11,"#8b949e","middle")
+    body += text(350,153,"100%" if total else "—",28,"#e6edf3","middle") + text(350,175,"by code bytes",11,"#8b949e","middle")
     body += text(27,258,"Primary language per repository · excludes forks",11,"#8b949e")
-    return card("Repository primary language distribution",body)
+    return card("Language distribution by total code bytes",body)
 
 
 def render_stats_row(stats: str, languages: str) -> str:
@@ -330,7 +345,7 @@ def main() -> None:
         repos, search_total("commits", f"author:{USERNAME}"),
         search_total("issues", f"author:{USERNAME} is:pr"),
         search_total("issues", f"author:{USERNAME} is:issue"))
-    images[OUTPUT.with_name("profile-languages.svg")] = render_languages(repos)
+    images[OUTPUT.with_name("profile-languages.svg")] = render_languages(fetch_language_bytes(repos))
     images[OUTPUT.with_name("profile-stats-row.svg")] = render_stats_row(
         images[OUTPUT.with_name("profile-stats.svg")],
         images[OUTPUT.with_name("profile-languages.svg")])

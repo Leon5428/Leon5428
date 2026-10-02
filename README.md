@@ -41,7 +41,7 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=e3c2172ec77b" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=65d22ee4cc50" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
@@ -57,11 +57,11 @@
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="./WebCode/assets/images/profile-overview.svg?v=0624427fbd75" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=22d26acf91f8" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats-row.svg?v=43ce4fdcb4d3" width="100%" alt="Leon5428 的公开统计与仓库主要语言百分比" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=e03ac1ab935a" width="100%" alt="Leon5428 的公开统计与仓库主要语言百分比" />
 </p>
 
 <details>
@@ -130,7 +130,7 @@
 
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=e3c2172ec77b" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=65d22ee4cc50" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 
