@@ -349,9 +349,32 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
             raise BuildError(f"{chapter.source}: unsupported link: {target[0]}")
     body = run_pandoc(pandoc, ["-f", "json", "-t", "html5", "--mathjax", "--wrap=none"],
                       json.dumps(document, ensure_ascii=False), chapter.source)
-    toc = "\n".join(f'<a href="#{identifier}"' + (' class="toc-subitem"' if level > 2 else '')
-                    + f'>{escape(title)}</a>' for level, identifier, title in headings)
+    toc = render_toc(headings)
     return body, toc, has_math
+
+
+
+def render_toc(headings: list[tuple[int, str, str]]) -> str:
+    """Number actual heading levels without duplicating numbers in authored titles."""
+    parts = []
+    stack: list[list[int]] = []
+    for level, identifier, title in headings:
+        while stack and stack[-1][0] > level:
+            stack.pop()
+        if stack and stack[-1][0] == level:
+            stack[-1][1] += 1
+        else:
+            stack.append([level, 1])
+        number = ".".join(str(item[1]) for item in stack)
+        depth = len(stack) - 1
+        number += "." if depth == 0 else ""
+        label = re.sub(r"^\d+(?:\.\d+)*[.、．]?\s+", "", title)
+        current = ' aria-current="location"' if not parts else ''
+        parts.append(
+            f'<a class="toc-item toc-depth-{depth}" href="#{identifier}"{current}>'
+            f'<span class="toc-number">{number}</span>'
+            f'<span>{escape(label)}</span></a>')
+    return "\n".join(parts)
 
 
 def render(template: str, values: dict[str, str]) -> str:
@@ -375,18 +398,20 @@ def main_navigation(categories: list[Category], page: str, active: Category | No
 
 def sidebar(category: Category, page: str, current: Chapter | None = None) -> str:
     parts = []
-    for subject in category.subjects:
+    for index, subject in enumerate(category.subjects, 1):
+        badge = f'<span class="subject-number" aria-hidden="true">{index}</span>'
+        label = f'{badge}<span class="subject-title">{escape(subject.title)}</span>'
         if len(subject.chapters) == 1:
             chapter = subject.chapters[0]
             state = ' aria-current="page"' if chapter is current else ''
             parts.append(f'<a class="subject-link" href="{relative_url(page, chapter.output)}"{state}>'
-                         f'{escape(subject.title)}</a>')
+                         f'{label}</a>')
             continue
         selected = any(chapter is current for chapter in subject.chapters)
         state = ' current-subject' if selected else ''
         parts.append(f'<details class="subject-group{state}" name="subjects"'
                      + (' open' if selected else '') + '>')
-        parts.append(f'<summary class="subject-heading"><span>{escape(subject.title)}</span></summary>')
+        parts.append(f'<summary class="subject-heading">{label}</summary>')
         parts.append('<ol class="chapter-list">')
         for chapter in subject.chapters:
             state = ' aria-current="page"' if chapter is current else ''
@@ -425,6 +450,7 @@ def page_values(categories: list[Category], category: Category, page: str, title
     return {"page_title": escape(f"{title} | LeonBlog"), "title": escape(title),
             "home_url": relative_url(page, "index.html"),
             "stylesheet_url": relative_url(page, "css/article.css"),
+            "article_script_url": relative_url(page, "assets/article-nav.js"),
             "base_stylesheet_url": relative_url(page, "css/base.css"),
             "favicon_url": relative_url(page, "assets/icons/favicon.svg"),
             "main_navigation": main_navigation(categories, page, category),

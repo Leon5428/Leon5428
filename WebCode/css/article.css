@@ -26,18 +26,19 @@
 
 /* Reading layout. Shared colors, type, navigation and footer live in base.css. */
 .article-layout {
+    --selected: #f2f6fa;
     display: grid;
-    grid-template-columns: 218px minmax(0, 1fr) 184px;
+    grid-template-columns: 230px minmax(0, 1fr) 230px;
     align-items: start;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1360px;
     min-height: calc(100vh - 220px);
     margin: 0 auto;
-    padding: 48px 28px 80px;
+    padding: 40px 28px 88px;
 }
 
-.article-layout.no-toc { grid-template-columns: 218px minmax(0, 1fr); }
-.article-layout.no-toc .article-content { max-width: 920px; }
+.article-layout.no-toc { grid-template-columns: 230px minmax(0, 1fr); }
+.article-layout.no-toc .article-content { max-width: 860px; }
 
 .series-sidebar,
 .toc-sidebar {
@@ -50,7 +51,7 @@
     scrollbar-color: #d5dfe7 transparent;
 }
 
-.series-sidebar { padding-right: 20px; }
+.series-sidebar { padding-right: 20px; border-right: 1px solid var(--line); }
 .toc-sidebar { padding: 6px 0 0 20px; border-left: 1px solid var(--line); }
 .toc-sidebar[hidden] { display: none; }
 
@@ -73,8 +74,8 @@
 .series-toggle { display: none; }
 /* Keep a collapsed mobile drawer operable after resizing to desktop. */
 .series-panel:not([open]) > .series-toggle { display: flex; padding: 10px 12px; }
-.content-tree { margin: 0; }
-.subject-group { margin: 0 0 4px; }
+.content-tree { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+.subject-group { margin: 0; }
 
 .subject-heading,
 .subject-link {
@@ -82,23 +83,47 @@
     align-items: center;
     gap: 10px;
     min-height: 44px;
-    margin: 0 0 4px;
-    padding: 10px 12px;
+    margin: 0;
+    padding: 9px 8px;
     border-radius: 5px;
-    color: var(--muted);
-    font-size: 14px;
+    color: #46576a;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 400;
     line-height: 1.65;
     text-decoration: none;
     overflow-wrap: anywhere;
     transition: color 160ms ease, background-color 160ms ease;
 }
 
-.subject-heading > span:first-child { flex: 1; }
+.subject-title { flex: 1; min-width: 0; }
+.subject-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 26px;
+    height: 26px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+}
+.current-subject > .subject-heading,
+.subject-link[aria-current="page"] { background: var(--selected); color: var(--accent); }
+.current-subject > .subject-heading .subject-number,
+.subject-link[aria-current="page"] .subject-number {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
 .subject-heading::after { color: var(--muted); }
-.current-subject > .subject-heading { color: var(--text); font-weight: 700; }
+.current-subject > .subject-heading { color: var(--accent); font-weight: 600; }
 .chapter-list {
-    margin: 2px 0 14px 12px;
-    padding: 0 0 0 10px;
+    margin: 4px 0 8px 21px;
+    padding: 0 0 0 13px;
     border-left: 1px solid var(--line);
     list-style: none;
 }
@@ -107,12 +132,13 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
-    min-height: 42px;
-    margin: 3px 0;
-    padding: 9px 10px;
+    min-height: 36px;
+    margin: 2px 0;
+    padding: 7px 10px;
     border-radius: 4px;
     color: var(--muted);
-    font-size: 14px;
+    font-family: var(--serif);
+    font-size: 15px;
     line-height: 1.7;
     text-decoration: none;
     overflow-wrap: anywhere;
@@ -123,30 +149,29 @@
 .subject-link:hover,
 .chapter-link:hover { background: var(--surface); color: var(--text); }
 
-.chapter-link[aria-current="page"],
-.subject-link[aria-current="page"] {
+.chapter-link[aria-current="page"] {
     background: var(--selected);
     color: var(--accent);
-    font-weight: 700;
-    box-shadow: inset 2px 0 var(--accent);
+    font-weight: 600;
+    box-shadow: none;
 }
 
 /* A restrained measure and generous leading keep long Chinese notes readable. */
-.article-content { min-width: 0; padding: 0 44px; overflow-wrap: anywhere; }
+.article-content { min-width: 0; padding: 0 46px; overflow-wrap: anywhere; }
 .article-content:focus { outline: none; }
-.article-header { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.article-header { margin-bottom: 32px; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
 .article-meta { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 13px; line-height: 1.8; }
 .article-meta a { color: inherit; text-decoration: none; }
 .article-meta a:hover { color: var(--accent); }
 .meta-divider { color: #b1beca; }
-.article-header h1 { margin: 16px 0 0; font-size: clamp(32px, 3.4vw, 44px); font-weight: 600; line-height: 1.4; letter-spacing: -0.025em; }
+.article-header h1 { margin: 18px 0 0; font-size: clamp(36px, 3.6vw, 48px); font-weight: 700; line-height: 1.3; letter-spacing: 0; color: var(--text); }
 .article-content .article-subtitle { margin: 10px 0 0; color: var(--muted); font-size: 16px; }
-.article-body { font-family: "Leon TeX", var(--serif); font-size: 18px; line-height: 1.85; }
+.article-body { color: #344354; font-family: "Leon TeX", var(--serif); font-size: 18px; line-height: 1.85; }
 .article-body > :first-child { margin-top: 0; }
 .article-body > :last-child { margin-bottom: 0; }
-.article-body h2 { margin: 36px 0 16px; font-size: 27px; font-weight: 600; line-height: 1.5; }
-.article-body h3 { margin: 28px 0 12px; font-size: 22px; font-weight: 600; line-height: 1.6; }
-.article-body h4 { margin: 24px 0 12px; font-size: 19px; line-height: 1.6; }
+.article-body h2 { margin: 36px 0 16px; font-size: 26px; color: var(--text); font-weight: 700; line-height: 1.5; }
+.article-body h3 { margin: 28px 0 12px; font-size: 21px; color: var(--text); font-weight: 700; line-height: 1.6; }
+.article-body h4 { margin: 24px 0 12px; font-size: 19px; color: var(--text); font-weight: 700; line-height: 1.6; }
 .article-body :is(h2, h3, h4, h5, h6, section), #article { scroll-margin-top: 28px; }
 .article-body p { margin: 0 0 12px; text-indent: 2em; }
 .article-body .statement-label { color: var(--text); }
@@ -178,10 +203,10 @@
 .article-body figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; text-align: center; }
 .article-body blockquote,
 .article-body .note-box {
-    margin: 28px 0;
-    padding: 18px 22px;
+    margin: 24px 0;
+    padding: 14px 20px;
     border-left: 2px solid #a9becf;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 3px 3px 0;
     background: var(--surface);
     color: #506477;
 }
@@ -245,11 +270,57 @@
     line-height: 1.8;
 }
 
-.toc-heading { display: flex; }
-.toc-list { display: flex; flex-direction: column; gap: 3px; margin-top: 16px; }
-.toc-list a { padding: 7px 0; color: var(--muted); font-size: 12px; line-height: 1.8; text-decoration: none; overflow-wrap: anywhere; transition: color 160ms ease; }
-.toc-list a:hover, .toc-list a[aria-current="location"] { color: var(--accent); }
-.toc-list .toc-subitem { padding-left: 12px; }
+.toc-heading { display: flex; font-size: 19px; font-weight: 700; }
+.toc-heading::after { display: none; }
+.toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 14px 0 0 6px;
+    padding-left: 10px;
+    border-left: 1px solid var(--line);
+}
+.toc-list a {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    color: #46576a;
+    font-family: var(--serif);
+    font-size: 13px;
+    line-height: 1.7;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: color 160ms ease, background-color 160ms ease;
+}
+.toc-number { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.toc-list .toc-depth-0 { margin-top: 8px; }
+.toc-list .toc-depth-0:first-child { margin-top: 0; }
+.toc-list :is(.toc-depth-1, .toc-depth-2, .toc-depth-3, .toc-depth-4) {
+    padding-left: 24px;
+    color: var(--muted);
+    font-size: 14px;
+}
+.toc-list :is(.toc-depth-2, .toc-depth-3, .toc-depth-4) { padding-left: 36px; }
+.toc-list a:hover { color: var(--accent); background: var(--surface); }
+.toc-list a[aria-current="location"] {
+    background: var(--selected);
+    color: var(--accent);
+    font-weight: 600;
+}
+.toc-list a[aria-current="location"]::before {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px #fff;
+}
 
 .article-pagination { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 54px; padding-top: 26px; border-top: 1px solid var(--line); }
 .pagination-card { display: block; padding: 18px 20px; border: 1px solid var(--line); border-radius: 6px; color: var(--text); text-decoration: none; transition: border-color 160ms ease, background-color 160ms ease; }
@@ -266,14 +337,13 @@
     .article-content { grid-column: 2; grid-row: 2; padding: 0 24px; }
     .no-toc .article-content { grid-row: 1; }
     .toc-sidebar { grid-column: 2; grid-row: 1; position: static; max-height: none; margin: 0 24px 30px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
-    .toc-list { flex-direction: row; flex-wrap: wrap; gap: 0 20px; margin-top: 10px; }
-    .toc-list a { padding: 5px 0; font-size: 13px; }
-    .toc-list .toc-subitem { padding-left: 10px; }
+    .toc-list { margin-top: 10px; }
+    .toc-list a { font-size: 14px; }
 }
 
 @media (max-width: 760px) {
     .article-layout, .article-layout.no-toc { display: flex; flex-direction: column; gap: 14px; padding: 24px 20px 48px; }
-    .series-sidebar { width: 100%; position: static; max-height: none; padding: 0; overflow: visible; }
+    .series-sidebar { width: 100%; position: static; max-height: none; padding: 0; border-right: 0; overflow: visible; }
     .series-panel { padding: 12px 16px; border: 1px solid var(--line); border-radius: 5px; }
     .series-toggle { display: flex; }
     .series-panel[open] > .series-toggle { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
