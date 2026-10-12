@@ -153,6 +153,11 @@
           "order": 2,
           "file": "01-chapter2.tex",
           "title": "环与域"
+        },
+        {
+          "order": 3,
+          "file": "02-chapter3.tex",
+          "title": "域扩张与有限域"
         }
       ]
     }
