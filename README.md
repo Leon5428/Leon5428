@@ -54,6 +54,14 @@
     <img src="./WebCode/assets/images/repository-agentarmor.svg?v=63d38c6a7a63" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
+<p align="center">
+  <a href="https://github.com/Leon5428/ThisIsOpenSource">
+    <img src="./WebCode/assets/images/repository-thisisopensource.svg?v=4a088ce9bacf" width="48%" alt="Leon5428/ThisIsOpenSource：项目简介与仓库统计" />
+  </a>
+  <a href="https://github.com/Leon5428/finite-fields-book">
+    <img src="./WebCode/assets/images/repository-finite-fields-book.svg?v=9347363cc66b" width="48%" alt="finite-fields-book：学习用 Fork，非原创项目；截至 2026-10-12 尚未贡献，不计入代码语言占比" />
+  </a>
+</p>
 <!-- Refresh all repository cards and the heatmap: python WebCode/update_contributions.py -->
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
@@ -62,7 +70,7 @@
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats-row.svg?v=b5a16ab6637a" width="100%" alt="Leon5428 的公开统计与仓库主要语言百分比" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=b5a16ab6637a" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
 </p>
 
 <details>
@@ -72,7 +80,7 @@
 
 统计图片由本仓库脚本生成，运行 `python WebCode/update_contributions.py` 更新；内容相同的文件不会重复写入。
 
-贡献趋势来自 GitHub 公开日历，按月汇总，首尾月份可能不完整。Stars 汇总自有非 Fork 公开仓库；Commits 为 GitHub 公开搜索索引中归属于我的提交，PR 和 Issue 为我创建的公开记录，均非仅过去一年。语言图按非 Fork 公开仓库的主要语言计数，未识别的语言单独列出，并不代表熟练程度。公开搜索索引可能延迟更新；这些数值不等同于个人主页贡献总数。
+贡献趋势来自 GitHub 公开日历，按月汇总，首尾月份可能不完整。Stars 汇总自有非 Fork 公开仓库；Commits 为 GitHub 公开搜索索引中归属于我的提交，PR 和 Issue 为我创建的公开记录，均非仅过去一年。语言图按所有自有非 Fork 公开仓库的语言代码字节数计算占比；所有 Fork（包括 finite-fields-book）整体排除，不将上游代码计入个人代码占比。Fork 卡片明确标注来源，不展示继承的提交数作为个人贡献。语言占比不代表熟练程度。公开搜索索引可能延迟更新；这些数值不等同于个人主页贡献总数。
 
 </details>
 

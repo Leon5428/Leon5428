@@ -27,6 +27,8 @@ REPOSITORIES = {
     "Leon5428/PQSecure": "repository-pqsecure.svg",
     "Leon5428/LatticeCrypto": "repository-latticecrypto.svg",
     "Leon5428/AgentArmor": "repository-agentarmor.svg",
+    "Leon5428/ThisIsOpenSource": "repository-thisisopensource.svg",
+    "Leon5428/finite-fields-book": "repository-finite-fields-book.svg",
 }
 README = Path(__file__).resolve().parent.parent / "README.md"
 
@@ -129,11 +131,36 @@ def render_repository(repo: dict, commits: int) -> str:
 
 
 
+def render_fork(repo: dict) -> str:
+    """Credit upstream work without presenting inherited commits as personal work."""
+    parent = repo.get("parent", {}).get("full_name")
+    if not parent:
+        raise ValueError(f"Missing fork parent for {repo['full_name']}")
+    body = text(27, 33, repo["owner"]["login"], 13, "#8b949e")
+    body += '<rect x="387" y="18" width="66" height="24" rx="12" fill="#271e38" stroke="#bc8cff"/>'
+    body += text(420, 35, "FORK", 12, "#d2a8ff", "middle")
+    body += text(27, 69, repo["name"], 25, "#58a6ff")
+    first, second = description_lines("Forked from " + parent)
+    body += f'<text x="27" y="100" font-size="13" fill="#b1bac4">{first}</text>'
+    body += f'<text x="27" y="120" font-size="13" fill="#b1bac4">{second}</text>'
+    body += '<path d="M27 139h426" stroke="#21262d"/>'
+    body += text(27, 168, "上游作品 · 学习用 Fork，非原创项目", 16, "#d2a8ff")
+    if repo["full_name"] == "Leon5428/finite-fields-book":
+        # User-supplied historical status, not an inferred or permanently live count.
+        body += text(27, 195, "截至 2026-10-12：我尚未对该项目作出贡献", 14)
+        body += text(27, 215, "个人声明；上游历史提交不作为我的贡献展示", 12, "#8b949e")
+    body += '<path d="M27 231h426" stroke="#21262d"/>'
+    body += text(27, 256, "不计入个人代码语言占比", 12, "#8b949e")
+    return card(repo["full_name"] + " — Fork of " + parent, body)
+
+
 def fetch_repository(repository: str) -> str:
     headers = {"User-Agent": "LeonBlog-profile", "Accept": "application/vnd.github+json"}
     api = f"https://api.github.com/repos/{repository}"
     payload, _ = download(Request(api, headers=headers))
     repo = json.loads(payload)
+    if repo.get("fork"):
+        return render_fork(repo)
     query = urlencode({"per_page": 1, "sha": repo["default_branch"]})
     try:
         payload, link = download(Request(f"{api}/commits?{query}", headers=headers))
@@ -332,7 +359,7 @@ def render_languages(counts: dict[str, int]) -> str:
         body += f'<circle cx="32" cy="{87+i*30}" r="4" fill="{colors[i]}"/>'
         body += text(45,92+i*30,f"{language} · {count / total:.1%}",13)
     body += text(350,153,"100%" if total else "—",28,"#e6edf3","middle") + text(350,175,"by code bytes",11,"#8b949e","middle")
-    body += text(27,258,"Primary language per repository · excludes forks",11,"#8b949e")
+    body += text(27,258,"Code bytes across public repositories · excludes forks",11,"#8b949e")
     return card("Language distribution by total code bytes",body)
 
 
