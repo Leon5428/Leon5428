@@ -19,6 +19,42 @@
 \item 若$char(F)=0$，则$F$包含的素域同构于$Q$
 \end{enumerate}
 
+我们首先来证明第一条，考虑下面这个环同态：
+
+\begin{align*}
+\varphi:Z\mapsto F,\;\;\; n\mapsto n\cdot 1_F
+\end{align*}
+
+其中$1_F$指的是域$F$中的乘法单位元。由于$char(F)=p$，也就是说$p$是使$p\cdot 1_F=0$的最小正整数，因此：
+
+\begin{align*}
+ker\varphi=pZ
+\end{align*}
+
+那么由同态基本定理，就会有：
+
+\begin{align*}
+im\varphi \cong Z/pZ=F_p
+\end{align*}
+
+由于$p$是素数，那么$F_p$显然是一个域，由环同构得$im\varphi$也是一个域，所以其是$F$的一个子域，另外，$F$的任意子域肯定会包含乘法单位元$1_F$，那肯定会包含每个$n\cdot 1_F$，故包含$im\varphi$，所以$im\varphi$不会再有真子域了，因为$im\varphi$的子域肯定会是$F$的子域，但是$F$的所有子域都会包含$im\varphi$，所以$im\varphi$就是一个素域，同构于$F_p$
+
+下面我们来证明第二条，我们依然考虑刚才的环同态$\varphi$，由于$char(F)=0$，所以只能有$ker\varphi=\{0\}$，所以对于任意的非零整数$b$，都会有$b\cdot 1_F\neq 0$，于是可以定义：
+
+\begin{align*}
+\psi:Q\mapsto F,\;\;\; \frac{a}{b}\mapsto (a\cdot 1_F)(b\cdot 1_F)^{-1}
+\end{align*}
+
+这个映射是良定义的，任意两个相同的原像都会映射到相同的像，另外，易得该映射能够保持加法乘法，并且：
+
+\begin{align*}
+\psi(\frac{a}{b})=0\Lightarrow a\cdot1_F=0\Lightarrow a=0
+\end{align*}
+
+由于只有0会被映射到0，所以当有$\psi(x)=\psi(y)$的时候，我们就能推出$\psi(x-y)=\psi(x)-psi(y)=0$，也就是会有$x=y$，因此$\psi$是单射，其象是$F$中一个同构于$Q$的子域。
+
+最后，$F$的任意子域都包含整数倍的$a\cdot 1_F$，也包含非零元素$b\cdot 1_F$的逆元，因此包含$im \psi$，所以其就是$F$的素域，同构于$Q$。
+
 定义：给定域$K<F$以及$M\subset F$，我们定义域$K(M)$为$F$中所有同时包含$K$和$M$的子域的交，并称之为由域$K$添加$M$中元素所得到的扩域
 
 \begin{enumerate}
