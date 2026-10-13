@@ -123,5 +123,289 @@ g\in (h),h\in (g)
 
 \section*{域扩张}
 
+定义：一个域$K$上的向量空间$V$是一个非空集合，其中的元素称之为向量，并对以下两种运算封闭：
+
+\begin{enumerate}
+\item 加法：对于任意的$u,v\in V,u+v\in V$
+\item 对于任意的$u\in V$和$k\in K,ku\in V$
+\end{enumerate}
+
+另外$(V,+)$构成一个$Abel$群，且数乘满足如下性质：
+
+\begin{enumerate}
+\item $1u=u,\forall u\in V$
+\item 结合律：$k_1(k_2u)=(k_1k_2)u$
+\item 线性性：$k(u+v)=ku+kv$
+\item 分配律：$(k_1+k_2)u=k_1u+k_2u$
+\end{enumerate}
+
+练习：给定域$L$的一个子域$K$，可以验证$L$是$K$上的向量空间。(这是很容易验证的，加法与数乘以及数乘的性质，都根据域的性质能推出来)
+
+定义：给定域$K\leqslant L$，若$L$作为$K$上的向量空间的维数$dim_KL$是有限的，我们就称$L$是$K$的有限扩张，也称$L$在$K$上的次数为$dim_KL$，记为$[L:K]$
+
+定理(链式法则)：假定$K\leqslant L$和$L\leqslant M$均为有限扩张，则$[M:K]=[M:L][L:K]$
+
+在证明这个定理之前，我们需要补充一些前置知识：
+
+给定向量$v_1,...,v_n$，用域$K$中的元素作系数，得到：
+
+\begin{align*}
+c_1v_1+\cdots+c_nv_n,\;\;\; c_i\in K
+\end{align*}
+
+这就是向量$v_1,...,v_n$的线性组合。
+
+基是一组向量$v_1,...,v_n$，满足下面两个条件：
+
+\begin{enumerate}
+\item 张成整个空间：空间中的每个向量都能写成它们的线性组合。
+\item 线性无关：如果$c_1v_1+\cdots+c_nv_n=0$，那么必然有$c_1=\cdots=c_n=0$
+\end{enumerate}
+
+这两个条件合起来就是说向量空间中的每个向量都能使用这组基来表示，而且表示方式是唯一的，而维数其实就是一组基中向量的个数，这是不难理解的，我们在很久之前的线性代数课程里已经学过了。
+
+那如何证明这个定理呢？记$[M:L]=m,[L:K]=n$，我们取$L$在$K$上的一组基：
+
+\begin{align*}
+a_1,a_2,...,a_n
+\end{align*}
+
+再取$M$在$L$上的一组基
+
+\begin{align*}
+b_1,...,b_m
+\end{align*}
+
+我们只需要证明这$mn$个元素$a_ib_j$构成$M$在$K$上的一组基。首先需要证明它们能表示$M$中的任意元素：
+
+任取$x\in M$，因为$b_1,b_2,...,b_m$是基，所以就可以写成：
+
+\begin{align*}
+x=\sum_{j=1}^m\lambda_jb_j
+\end{align*}
+
+每个$\lambda_j$又可以用$a_1,...,a_n$表示：
+
+\begin{align*}
+\lambda_j=\sum_{i=1}^nc_{ij}a_i
+\end{align*}
+
+代入便得：
+
+\begin{align*}
+x=\sum_{j=1}^m\sum_{i=1}^nc_{ij}a_ib_j
+\end{align*}
+
+接下来我们需要证明这$mn$个向量在$K$上是线性无关的。
+
+我们把0用这$mn$个向量表示出来，不妨是：
+
+\begin{align*}
+\sum_{j=1}^m\sum_{i=1}^nc_{ij}a_ib_j=0
+\end{align*}
+
+按$b_j$分组：
+
+\begin{align*}
+\sum_{j=1}^m(\sum_{i=1}^nc_{ij}a_i)b_j=0
+\end{align*}
+
+括号中的系数属于$L$，因为$b_1,...,b_m$在$L$上线性无关，所以对于每个$j$，都有：
+
+\begin{align*}
+\sum_{i=1}^nc_{ij}a_i=0
+\end{align*}
+
+再由$a_1,a_2,...,a_n$在$K$上线性无关，得到所有的$c_{ij}=0$，因此$a_ib_j$确实构成一组基，共有$mn$个元素，故：
+
+\begin{align*}
+[M:K]=mn=[M:L][L:K]
+\end{align*}
+
+定理：域$K$的任一有限扩张都是代数扩张
+
+证明：设$L$是$K$的有限扩张，记$[L:K]=n$，任取$\theta\in L$，我们考虑下面$n+1$个元素：
+
+\begin{align*}
+1,\theta,\theta^2,...,\theta^n
+\end{align*}
+
+由于是$n$维的向量空间，所以这$n+1$向量是线性相关的，因此存在$a_0,a_1,...,a_n\in K$，不全为0，使得：
+
+\begin{align*}
+a_0+a_1\theta+\cdots+a_n\theta^n=0
+\end{align*}
+
+这正说明$\theta$满足一个系数在$K$上的非零多项式方程，所以$\theta$在$K$上是代数的。由于$\theta$是任取的，$L$中每个元素在$K$上都是代数的，因此$L$是$K$的代数扩张。
+
+定理：令$\theta\in F$是域$K$上次数为$n$的代数元，其在$K$上的极小多项式是$g$，我们有：
+
+\begin{enumerate}
+\item $K[\theta]=K(\theta)\cong K[x]/(g)$
+\item $[K(\theta):K]=n$，且$\{1,\theta,\theta^2,...,\theta^{n-1}\}$是$K(\theta)$在$K$上的一组基，故而$K(\theta)$中的任一元素均可以唯一表示成$a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}$，其中$a_i\in K,0\leqslant i\leqslant n-1$
+\item 任一元素$a\in K(\theta)$在$K$上均是代数的，且其在$K$上的次数整除$n$。
+\end{enumerate}
+
+我们首先来证明第一条，考虑下面的这个映射：
+
+\begin{align*}
+\varphi:K[x]\rightarrow K[\theta],\;\;\; f(x)\mapsto f(\theta)
+\end{align*}
+
+显然这是一个满射环同态，并且$ker\varphi=(g)$，由环同态基本定理就能得到：
+
+\begin{align*}
+K[\theta]\cong K[x]/(g)
+\end{align*}
+
+下面我们证明$K[\theta]$是域，任取非零元素$f(\theta)$，因为$f(\theta)\neq 0$，所以$g|nmid f$，又因为$g$不可约，所以只能$gcd(f,g)=1$，也就会存在$u,v\in K[x]$，使得：
+
+\begin{align*}
+uf+vg=1\Rightarrow u(\theta)f(\theta)=1
+\end{align*}
+
+所以$f(\theta)$的逆元$u(\theta)$也属于$K[\theta]$，因此$K[\theta]$是域。另外，不难看出，$K[\theta]$包含$K$和$\theta$，故也包含最小的这样的子域$K(\theta)$，另一方面，由于多项式值都会属于$K(\theta)$，所以$K[\theta]\subseteq K(\theta)$，所以就会有：
+
+\begin{align*}
+K[\theta]=K(\theta)\cong K[x]/(g)
+\end{align*}
+
+下面我们来证明第二条，因为第一条中已经证明了$K[\theta]=K(\theta)$，所以说$K(\theta)$中任意一个元素都可以写成$f(\theta)$的形式，我们只需要对$f$作带余除法$f=qg+r,r=0$或$deg(r)<n$，将$\theta$带入进去：
+
+\begin{align*}
+f(\theta)=r(\theta)=a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}
+\end{align*}
+
+所以这$n$个元素张成整个空间。下面我们来证明线性无关，若：
+
+\begin{align*}
+a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}=0
+\end{align*}
+
+且系数不全为0，那么就得到了一个次数小于$n$、以$\theta$为根的非零多项式，与极小多项式的次数为$n$是矛盾的。
+
+最后我们证明第三条，由第二条中的$[K(\theta):K]=n$，我们知道$K(\theta)$是$K$上的有限扩张，那它必然是代数扩张，所以任一元素$\alpha\in K(\theta)$在$K$上均是代数的，不妨我们设$\alpha$的极小多项式次数为$d$，使用第二条的结论，就会有：
+
+\begin{align*}
+[K(\alpha):K]=d
+\end{align*}
+
+又有：
+
+\begin{align*}
+K\subseteq K(\alpha)\subseteq K(\theta)
+\end{align*}
+
+其中$K(\theta)$在$K(\alpha)$上也是有限维的，因为$1,\theta,\ldots,\theta^{n-1}$用$K$中的系数已能张成它，用更大的域$K(\alpha)$中的系数肯定也能张成它，由链式法则：
+
+\begin{align*}
+n=[K(\theta):K]=[K(\theta):K(\alpha)][K(\alpha):K]=[K(\theta):K(\alpha)]d
+\end{align*}
+
+所以$d|n$，定理得证。
+
+定理：令$f\in K[x]$为域$K$上的不可约多项式，则存在$K$的一个以$f$的某个根为定义元的单扩张。
+
+证明：我们构造下面这个结构：
+
+\begin{align*}
+L=K[x]/(f)
+\end{align*}
+
+因为$f$在$K$上不可约，所以$L$是域。
+
+(我发现这个定理我真的证明不了。。。)
+
+定理：令$f\in K[x]$为域$K$上的不可约多项式，$\alpha$和$\beta$为$f$的两个根，则$K(\alpha)\cong K(\beta)$，且存在一个保持$K$中元素不动同时将$\alpha$映射到$\beta$的同构映射。
+
+
+证明：我们构造下面这个映射：
+
+\begin{align*}
+\sigma: K(\alpha)\rightarrow K(\beta),\;\;\; h(\alpha)\mapsto h(\beta),h\in K[x]
+\end{align*}
+
+之所以能构造出这样的映射，是因为$\alpha,\beta$都是代数元，前面的定理给出过$K(\alpha)=K[\alpha],K(\beta)=K[\beta]$，所以两边的元素都可以写成这样的多项式的值。
+
+因为同一个元素可能有不同的多项式表示，所以我们需要证明这个映射是良定义的，也就是说如果$h(\alpha)=q(\alpha)$，那么就会有$h(\beta)=q(\beta)$。
+
+由于$f$不可约并且$f(\alpha)=0$，将$f$除以其首项系数就得到$\alpha$的极小多项式，所以：
+
+\begin{align*}
+h(\alpha)-q(\alpha)=0\Rightarrow f(x)|(h(x)-q(x))
+\end{align*}
+
+于是$h(x)-q(x)=f(x)r(x)$，代入$\beta$即可得到：
+
+\begin{align*}
+h(\beta)-q(\beta)=f(\beta)r(\beta)=0
+\end{align*}
+
+所以该映射是良定义的，接下来我们需要证明同构，也就是证明该映射保持加法与乘法的同时还是个双射。它能够保持加法和乘法：
+
+\begin{align*}
+\sigma(h(\alpha)+q(\alpha))=(h+q)(\beta)=h(\beta)+q(\beta)\\
+\sigma(h(\alpha)q(\alpha))=(hq)(\beta)=h(\beta)q(\beta)
+\end{align*}
+
+它是一个满射，因为任意像都能找到原像，它也是一个单射，若$h(\beta)=q(\beta)$，同样利用$\beta$的极小多项式是$f$的首1化，就能得到$h(\alpha)=q(\alpha)$。
+
+最后，对于任意的$a\in K$，取常数多项式$h(x)=a$，就能得到$\sigma(a)=a$，取$h(x)=x$，就能得到$\sigma(\alpha)=\beta$，所以该映射就是保持$K$中元素不动同时将$\alpha$映射到$\beta$的同构映射。
+
+定义：令$f\in K[x]$为一非常数多项式，且$F$为$K$的扩域，若存在$a_1,...,a_n\in F$使得：
+
+\begin{align*}
+f=a(x-a_1)(x-a_2)\cdots(x-a_n)
+\end{align*}
+
+其中$a$为$f$的首项系数，则称$f$在$F$中分裂，更进一步地，若$f$在$F$中分裂并且$F=K(a_1,...,a_n)$，则称$F$为$f$的分裂域。
+
+定理：(分裂域的存在与唯一性)令$K$为一个域，$f$为$K[x]$中任一非常数的多项式，则：
+
+\begin{enumerate}
+\item 存在$f$的一个包含$K$的分裂域
+\item $f$的任意两个包含$K$的分裂域都是同构的，并且这个同构映射保持$K$中的元素不动，而把$f$的根映射到$f$的根。
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
