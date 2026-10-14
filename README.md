@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png?v=d79912922f8c" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=bf81a5c7833f" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=7ff956f98142" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
@@ -30,7 +30,7 @@
 **正在使用和学习的工具。** 
 
 <p align="center">
-  <img src="./WebCode/assets/images/toolbox.svg" width="100%" alt="第一行：LaTeX、Python、Git、Linux；第二行：TeXstudio、VS Code、GitHub、Ubuntu" />
+  <img src="./WebCode/assets/images/toolbox.svg?v=bc3536874f57" width="100%" alt="第一行：LaTeX、Python、Git、Linux；第二行：TeXstudio、VS Code、GitHub、Ubuntu" />
 </p>
 
 
@@ -39,38 +39,38 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=ed1c944f6cbf" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=729c56a7e4d5" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
-    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=802e454e5fc2" width="48%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-pqsecure.svg?v=8a4e2c793253" width="48%" alt="Leon5428/PQSecure：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <p align="center">
   <a href="https://github.com/Leon5428/LatticeCrypto">
-    <img src="./WebCode/assets/images/repository-latticecrypto.svg?v=bc132af3cd13" width="48%" alt="Leon5428/LatticeCrypto：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-latticecrypto.svg?v=487aeccce18b" width="48%" alt="Leon5428/LatticeCrypto：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
   <a href="https://github.com/Leon5428/AgentArmor">
-    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=63d38c6a7a63" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository-agentarmor.svg?v=0fdbfb427326" width="48%" alt="Leon5428/AgentArmor：项目简介、Star、Fork 与默认分支提交数量" />
   </a>
 </p>
 <p align="center">
   <a href="https://github.com/Leon5428/ThisIsOpenSource">
-    <img src="./WebCode/assets/images/repository-thisisopensource.svg?v=6255ad0e0792" width="48%" alt="Leon5428/ThisIsOpenSource：项目简介与仓库统计" />
+    <img src="./WebCode/assets/images/repository-thisisopensource.svg?v=078d24a9155d" width="48%" alt="Leon5428/ThisIsOpenSource：项目简介与仓库统计" />
   </a>
   <a href="https://github.com/Leon5428/finite-fields-book">
-    <img src="./WebCode/assets/images/repository-finite-fields-book.svg?v=9347363cc66b" width="48%" alt="finite-fields-book：学习用 Fork，非原创项目；截至 2026-10-12 尚未贡献，不计入代码语言占比" />
+    <img src="./WebCode/assets/images/repository-finite-fields-book.svg?v=7175d16cb84a" width="48%" alt="finite-fields-book：学习用 Fork，非原创项目；截至 2026-10-12 尚未贡献，不计入代码语言占比" />
   </a>
 </p>
 <!-- Refresh all repository cards and the heatmap: python WebCode/update_contributions.py -->
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="./WebCode/assets/images/profile-overview.svg?v=b27734c302d8" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=4b11a03af57d" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats-row.svg?v=a909fb08fe4f" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=d1fae973e2df" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
 </p>
 
 <details>

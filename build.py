@@ -473,6 +473,17 @@ def subject_card(category: Category, subject: Subject) -> str:
             '<span class="category-arrow" aria-hidden="true">→</span></a>')
 
 
+def render_readme(root: Path, pandoc: str) -> str:
+    """Render the canonical profile README, retaining its HTML cards and details."""
+    source = root / "README.md"
+    body = run_pandoc(pandoc, ["-f", "gfm", "-t", "html5", "--wrap=none", "--id-prefix=readme-"],
+                      read_text(source), source)
+    # WebCode/assets is copied to Output/assets. Preserve image cache versions.
+    body = re.sub(r'''((?:src|href)=["'])(?:\./)?WebCode/assets/''',
+                  r"\1assets/", body)
+    return body
+
+
 def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
              warnings: list[str], mathjax_url: str) -> int:
     article_template = read_text(root / "WebCode/templates/article.html")
@@ -554,7 +565,8 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                      + '<span class="category-arrow" aria-hidden="true">→</span></a>')
     write_page(stage, "index.html", render(home_template,
                {"main_navigation": main_navigation(categories, "index.html", None),
-                "category_cards": "\n".join(cards)}))
+                "category_cards": "\n".join(cards),
+                "readme_content": render_readme(root, pandoc)}))
     return count
 
 

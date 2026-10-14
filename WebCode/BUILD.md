@@ -130,8 +130,8 @@ Output/
 
 ### 页面外观与个人介绍
 
-- 首页个人介绍位于 `WebCode/templates/index.html` 的 `about-section`，可以直接修改简介、兴趣标签和链接。
-- GitHub 按钮指向 `Leon5428`；尚未提供公开邮箱，因此不生成 Email 按钮。Read More 在当前页展开网站介绍。
+- 首页 About Me 完整展示根目录 `README.md`，构建时使用 Pandoc 转为 HTML；修改 README 后运行 `python build.py` 即可同步。图片路径会从 `WebCode/assets/` 映射到输出的 `assets/`，保留版本参数与外部链接。
+- 自我介绍中的 GitHub 链接、统计卡片与折叠说明均来自 README；无需另行维护首页介绍文字。
 - 头像是 `WebCode/assets/images/avatar.jpg`，使用生成的背影插画，按圆形裁切显示。
 - 六个分类首页分别使用 `WebCode/assets/images/hero-math.jpg`、`hero-crypto.jpg`、
   `hero-project.jpg`、`hero-research.jpg`、`hero-tool.jpg`、`hero-diary.jpg`。

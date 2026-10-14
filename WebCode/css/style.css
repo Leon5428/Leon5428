@@ -111,3 +111,33 @@
     .about-card { padding: 22px 20px 18px; }
     .about-card h3 { font-size: 23px; }
 }
+
+/* README is the single source for the homepage introduction. */
+.readme-introduction { max-width: 980px; margin: 0 auto; color: var(--text); font-size: 16px; line-height: 1.9; overflow-wrap: anywhere; }
+.readme-introduction h2 { margin: 44px 0 18px; padding-bottom: 10px; border-bottom: 1px solid var(--line); font-size: 27px; line-height: 1.5; }
+.readme-introduction h3 { margin: 24px 0 12px; font-size: 21px; line-height: 1.5; }
+.readme-introduction p { margin: 14px 0; }
+.readme-introduction a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.readme-introduction img { display: inline-block; max-width: 100%; height: auto; vertical-align: top; border-radius: 6px; }
+.readme-introduction [align="center"] { text-align: center; }
+.readme-introduction p[align="center"]:has(img) { margin: 18px 0; line-height: 0; }
+.readme-introduction p[align="center"]:has(img) a { text-decoration: none; }
+.readme-introduction ul { padding-left: 1.5em; }
+.readme-introduction li + li { margin-top: 6px; }
+.readme-introduction blockquote { margin: 20px 0; padding: 1px 20px; border-left: 2px solid #a9becf; background: var(--surface); color: var(--muted); }
+.readme-introduction details { margin: 22px 0; padding: 14px 18px; border: 1px solid var(--line); border-radius: 6px; }
+.readme-introduction summary { cursor: pointer; font-weight: 600; }
+.readme-introduction pre { overflow-x: auto; padding: 18px; background: var(--surface); border-radius: 5px; font-size: 13px; line-height: 1.7; }
+.readme-introduction code { font-family: Consolas, monospace; font-size: .88em; }
+.readme-introduction table { width: 100%; margin: 20px 0; border-collapse: collapse; table-layout: fixed; font-size: 14px; }
+.readme-introduction :is(th, td) { padding: 16px; border: 1px solid var(--line); vertical-align: top; }
+.readme-introduction th { background: var(--surface); text-align: left; }
+.readme-introduction td h3 { margin-top: 0; }
+.readme-introduction hr { margin: 36px 0; border: 0; border-top: 1px solid var(--line); }
+@media (max-width: 600px) {
+    .readme-introduction { font-size: 15px; }
+    .readme-introduction h2 { font-size: 24px; }
+    .readme-introduction img[width="48%"], .readme-introduction img[width="50%"] { width: 100%; margin-bottom: 12px; }
+    .readme-introduction table:has(td[width="33%"]) :is(tbody, tr, td) { display: block; width: 100%; }
+    .readme-introduction :is(th, td) { padding: 10px; }
+}

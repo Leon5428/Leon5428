@@ -377,6 +377,32 @@ def render_stats_row(stats: str, languages: str) -> str:
             + ''.join(panels) + '</svg>\n')
 
 
+def theme_svg(svg: str) -> str:
+    """Transparent cards with foreground colors following the host color scheme."""
+    if 'id="profile-theme"' in svg:
+        return svg
+    palette = {
+        "#8b949e": "#596979", "#b1bac4": "#344354",
+        "#e6edf3": "#182738", "#58a6ff": "#245f91",
+        "#79c0ff": "#326b9e", "#7ee787": "#27733c",
+        "#e3b341": "#936514", "#bc8cff": "#7c4bb2",
+        "#d2a8ff": "#7c4bb2", "#30363d": "#d1dae3",
+        "#21262d": "#e7ecf1", "#161b22": "#ebedf0",
+        "#271e38": "#f3ecfa",
+    }
+    svg = svg.replace('fill="#0d1117"', 'fill="none"')
+    used = {dark: light for dark, light in palette.items() if dark in svg}
+    for dark, light in used.items():
+        for attribute in ("fill", "stroke"):
+            svg = svg.replace(f'{attribute}="{dark}"',
+                              f'{attribute}="var(--c-{dark[1:]}, {light})"')
+    light_css = ";".join(f"--c-{dark[1:]}:{light}" for dark, light in used.items())
+    dark_css = ";".join(f"--c-{dark[1:]}:{dark}" for dark in used)
+    style = ('<style id="profile-theme">:root{' + light_css + '}'
+             '@media (prefers-color-scheme:dark){:root{' + dark_css + '}}</style>')
+    return re.sub(r"(<svg\b[^>]*>)", lambda match: match[1] + style, svg, count=1)
+
+
 def write_changed(path: Path, content: str) -> bool:
     data = content.replace("\r\n", "\n").replace("\r", "\n").replace("\n", "\r\n").encode("utf-8")
     if path.exists() and path.read_bytes() == data:
@@ -407,6 +433,7 @@ def main() -> None:
         images[OUTPUT.with_name("profile-languages.svg")])
     readme = README.read_text(encoding="utf-8")
     for path, image in images.items():
+        image = theme_svg(image)
         changed = write_changed(path, image)
         # A content-based version changes the URL only when the image changes.
         version = hashlib.sha256(image.encode("utf-8")).hexdigest()[:12]
