@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png?v=d79912922f8c" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=280244748eeb" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=bf81a5c7833f" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
@@ -39,7 +39,7 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=47cbc60c4898" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=ed1c944f6cbf" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
@@ -66,11 +66,11 @@
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="./WebCode/assets/images/profile-overview.svg?v=9e051d2587b2" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=b27734c302d8" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats-row.svg?v=f1ece1e354e4" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=a909fb08fe4f" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
 </p>
 
 <details>
@@ -130,18 +130,7 @@
 | 笔记 | 从这里开始 |
 | :--- | :--- |
 | [有限域及其应用](https://github.com/Leon5428/Leon5428/tree/HEAD/Math/M11-FiniteFieldsAndTheirApplications) | 群、环、域与多项式：定义、证明和理解过程。 |
-| [逻辑和证明](https://github.com/Leon5428/Leon5428/blob/HEAD/Math/M04-DiscreteMathematics/01-logic-and-proofs.tex) | 命题、量词与推理：把“为什么成立”说清楚。 |
-| [集合与函数](https://github.com/Leon5428/Leon5428/blob/HEAD/Math/M04-DiscreteMathematics/02-sets-and-functions.tex) | 集合、映射与基数：从有限走向无限。 |
-| [门限密码](https://github.com/Leon5428/Leon5428/blob/HEAD/Crypto/C04-PrivacyCalculation/01-ThresholdCryptography.tex) | 为什么不能简单地把密钥切成几份？ |
 | [LaTeX 安装与配置](https://github.com/Leon5428/Leon5428/blob/HEAD/Tool/T01-Latex/00-installation-and-configuration.tex) | 给刚开始使用 LaTeX 的同学的一份入门说明。 |
-
-## 🏗 Behind LeonBlog
-
-<p align="center">
-  <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=47cbc60c4898" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
-  </a>
-</p>
 
 <!-- Refresh both local cards: python WebCode/update_contributions.py -->
 
