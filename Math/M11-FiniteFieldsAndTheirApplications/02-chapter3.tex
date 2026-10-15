@@ -634,59 +634,199 @@ q^n=|E|=|K|^m=q^m
 
 \section*{不可约多项式的根}
 
+引理：令$f\in F_q[x]$是$F_q$上的一个不可约多项式，且$\alpha$是$f$在$F_q$的某个扩域中的一个根，那么对于多项式$h\in F_q[x]$，我们有$h(\alpha)=0$成立当且仅当$f|h$
 
+证明：若$f|h$，那么$h(\alpha)=0$是显然的，如果$h(\alpha=0)$，我们假设$f\nmid h$，因为$f$不可约，所以$f$和$h$的最大公因式只能是1，由于多项式的贝祖等式，会存在$u(x),v(x)\in F_q[x]$，使得：
 
+\begin{align*}
+u(x)f(x)+v(x)h(x)=1
+\end{align*}
 
+代入$\alpha$，就会得到：
 
+\begin{align*}
+u(\alpha)f(\alpha)+v(\alpha)h(\alpha)=1
+\end{align*}
 
+这样就会推出0=1，矛盾，所以$f|h$，综上引理得证。
 
+引理：令$f\in F_q[x]$是$F_q$上次数为$m$的不可约多项式，那么$f(x)|x^{q^n}-x$当且仅当$m|n$。
 
+证明：在某个扩域中取$f$的一个根$\alpha$，令$E=F_q(\alpha)$，因为$f$是次数为$m$的不可约多项式，所以：
 
+\begin{align*}
+[E:F_q]=m,\;\;\; |E|=q^m
+\end{align*}
 
+若$m|n$，写作$n=mk$，因为$E$有$q^m$个元素，也就是：
 
+\begin{align*}
+\alpha^{q^m}=\alpha
+\end{align*}
 
+反复使用这个等式，会得到：
 
+\begin{align*}
+\alpha^{q^n}=\alpha^{q^{mk}}=\alpha
+\end{align*}
 
+所以$\alpha$是$x^{q^n}-x$的根，由上一个引理就能得到$f|x^{q^n}-x$。
 
+若$f|x^{q^n}-x$，使用整数带余除法，得到$n=km+r,0\leqslant r<m$，又因为$\alpha$是$f$的一个根，所以它也是$x^{q^n}-x$的根，所以：
 
+\begin{align*}
+\alpha^{q^n}=\alpha
+\end{align*}
 
+我们使用$\alpha^{q^m}=\alpha$反复化简：
 
+\begin{align*}
+\alpha^{q^n}=(\alpha^{q^{km}})^{q^r}=\alpha^{q^r}
+\end{align*}
 
+因此：
 
+\begin{align*}
+\alpha^{q^r}=\alpha
+\end{align*}
 
+假设$r>0$，任意$b\in E=F_q[\alpha]$都能写成：
 
+\begin{align*}
+b=\sum_{i}c_ia^i,\;\;\; c_i\in F_q
+\end{align*}
 
+之所以能够这么写是因为之前证明过$F_q(\alpha)=F_q[\alpha]$，所以$b$作为$F_q(\alpha)$中的元素肯定能写成这种形式，又因为$c_i^{q^r}=c_i$，所以：
 
+\begin{align*}
+b^{q^r}=\sum_ic_i^{q^r}(\alpha^{q^r})^i=\sum_ic_i\alpha^i=b
+\end{align*}
 
+这说明$E$中全部$q^m$个元素都是多项式$x^{q^r}-x$的根，但是它的次数只有$q^r$，不应该有这么多根，所以只能$r=0$，也就是$m|n$。
 
+定理：令$f$是$F_q[x]$中次数为$m$的不可约多项式，那么$f$在$F_{q^m}$中有一个根$\alpha$，并且$f$的所有根都是单根，且由以下$m$个不同的元素给出：
 
+\begin{align*}
+\alpha,\alpha^q,\alpha^{q^2},\cdots,\alpha^{q^{m-1}}
+\end{align*}
 
+证明：由上一个引理，因为$m|m$，所以：
 
+\begin{align*}
+f(x)|x^{q^m}-x
+\end{align*}
 
+而
 
+\begin{align*}
+x^{q^m}-x=\prod_{a\in E}(x-a)
+\end{align*}
 
+右边是互不相同的一次因子的乘积，因此它的因子$f$也在$E$中完全分裂，并且没有重根，取其中一个根，记作$\alpha$。不妨，我们令$f(x)$为：
 
+\begin{align*}
+f(\alpha)=\sum_{i=0}^mc_ix^i,\;\; c_i\in F_q
+\end{align*}
 
+因为$c_i^q=c_i$，利用特征为$p$时的幂运算公式：
 
+\begin{align*}
+f(\alpha^q)=\sum_ic_i\alpha^{iq}=(\sum_ic_i\alpha^i)^q=f(\alpha)^q=0
+\end{align*}
 
+因此，若$\alpha$是根的话，则$\alpha^q$也是根，反复使用的话便知道所列的$m$个元素其实都是根，下面我们证明这$m$个元素互不相同：假设存在$0\leqslant i<j<m$，使得：
 
+\begin{align*}
+\alpha^{q^i}=\alpha^{q^j}
+\end{align*}
 
+即：
 
+\begin{align*}
+\alpha^{q^i}=(\alpha^{q^{j-i}})^{q^i}
+\end{align*}
 
+但是在域中取$q^i$次幂是单射，所以$\alpha=\alpha^{q^{j-i}}$，根据前面两个引理：
 
+\begin{align*}
+f|x^{q^{j-i}}-x\Rightarrow m|(j-i)
+\end{align*}
 
+但$0<j-i<m$，矛盾，所以这$m$个根互不相同，定理得证。
 
+推论：令$f$是$F_q[x]$中次数为$m$的不可约多项式，则$f$在$F_q$上的分裂域为$F_{q^m}$。
 
+证明：令：
 
+\begin{align*}
+L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
+\end{align*}
 
+这是由全部根生成的域，所以是$f$的分裂域，所有这些根都是$\alpha$的幂，因此$L=F_q(\alpha)$，又因为$f$不可约，次数为$m$，且$f(\alpha)=0$，所以$[F_q(\alpha):F_q]=m$，于是$|L|=q^m$，而$L\subseteq E$，且$|E|=q^m$，故$L=E$，推论得证。
 
+推论：在$F_q[x]$中，任何两个次数相同的不可约多项式的分裂域都是同构的。
 
+证明：我们在上一个推论中，得到了$f$在$F_q$上的分裂域为$F_{q^m}$，而我们之前已经证明过分裂域的唯一性定理，也就是同一个多项式在同一个基础域上的任意两个分裂域都是同构的，上一个推论证明了$F_{q^m}$是$f$在$F_q$上的一个分裂域，因此，若$E$是$f$在$F_q$上的另一个分裂域，由唯一性定理它们就是同构的，定理得证。
 
+定义：令$F_{q^m}>F_q$，对于$\alpha \in F_{q^m}$，我们称元素：
 
+\begin{align*}
+\alpha,\alpha^q,...,\alpha^{q^{m-1}}
+\end{align*}
 
+为$\alpha$关于$F_q$的共轭元。
 
+推论：元素$\alpha\in F_{q^m}$关于$F_q$的共轭元都是不同的，当且仅当$\alpha$在$F_q$上的最小多项式的次数为$m$，否则，该最小多项式的次数$d$是$m$的一个真因子，并且$\alpha$关于$F_q$的共轭元为：
 
+\begin{align*}
+\alpha,\alpha^q,...,\alpha^{q^{d-1}}
+\end{align*}
 
+其中每个共轭元重复出现$m/d$次。
+
+证明：设$\alpha$在$F_q$上的极小多项式为$g$，次数为$d$，因为$\alpha\in F_{q^m}$，所以
+
+\begin{align*}
+\alpha^{q^m}=\alpha
+\end{align*}
+
+因此$g|x^{q^m}-x$，由之前的引理，就会有$d|m$。根据之前关于不可约多项式根的定理，$g$的全部根，也就是$\alpha$关于$F_q$的共轭元，恰好是互不相同的，而且会有
+
+\begin{align*}
+\alpha^{q^d}=\alpha
+\end{align*}
+
+两边取$q^i$次幂，得到：
+
+\begin{align*}
+\alpha^{q^{d+i}}=\alpha^{q^i}
+\end{align*}
+
+所以幂序列每隔$d$项重复一次，由于$d|m$，所以前$m$项恰好分成$m/d$组，因此每个共轭元在这$m$项中出现$m/d$次。于是这$m$项互不相同就当且仅当$m/d=1$，也就是$m=d$，推论得证。
+
+定理：元素$\alpha\in F_{q^m}*$关于$F_q$的共轭元在$F_{q^m}*$中具有相同的阶。
+
+证明：设$\alpha$的乘法阶为$t$，任取$\alpha$关于$F_q$的一个共轭元$\beta$，它具有下面的形式：
+
+\begin{align*}
+\beta=\alpha^{q^i}
+\end{align*}
+
+一方面，
+
+\begin{align*}
+\beta^t=(\alpha^{q^i})^t=(\alpha^t)^{q^i}=1
+\end{align*}
+
+另一方面，若某个正整数$k$满足$\beta^k=1$，那么：
+
+\begin{align*}
+(\alpha^k)^{q^i}=1
+\end{align*}
+
+由于取$q_i$次幂是单射，所以$\alpha^k=1$，也就会有$t\leqslant k$，因此，使$\beta^k=1$的最小正整数也恰好是$t$，所以二者阶相等，定理得证。
+
+\section*{迹和范数}
 
 
 
