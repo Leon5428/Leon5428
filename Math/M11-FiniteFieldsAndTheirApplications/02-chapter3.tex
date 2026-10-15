@@ -828,38 +828,120 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 
 \section*{迹和范数}
 
+定义：如果映射$\sigma: F_{q^m}\Rightarrow F_{q^m}$满足以下条件：
 
+\begin{align*}
+\sigma(\alpha+\beta)&=\sigma(\alpha)+\sigma(\beta)\;\;\; \forall \alpha,\beta\in F_{q^m}\\
+\sigma(\alpha\beta)&=\sigma(\alpha)\sigma(\beta)\;\;\; \forall \alpha,\beta\in F_{q^m}\\
+\sigma(a)&=a\;\;\; \forall a\in F_q
+\end{align*}
 
+则称$\sigma$为$F_{q^m}$在$F_q$上的自同构。
 
+定理：对于$0\leqslant j\leqslant m-1$，我们定义映射：
 
+\begin{align*}
+\sigma_j(\alpha)=\alpha^{q^j}\;\;\; \forall \alpha\in F_{q^m}
+\end{align*}
 
+那么域$F_{q^m}$在$F_q$上所有不同的自同构正好是映射$\sigma_0,\sigma_1,...,\sigma_{m-1}$
 
+证明：首先我们来证明每个$\sigma_j$都是这样的自同构：因为域的特征是$p$，且$q$是$p$的幂，所以：
 
+\begin{align*}
+(a+b)^{q^j}=a^{q^j}+b^{q^j}
+\end{align*}
 
+因此
 
+\begin{align*}
+\sigma_j(a+b)=\sigma_j(a)+\sigma_j(b),\;\;\; \sigma_j(ab)=\sigma_j(a)\sigma_j(b)
+\end{align*}
 
+若有$\sigma_j(a)=\sigma_j(b)$，那么$(a-b)^{q^j}=0$，所以$a=b$，因此$\sigma_j$是单射，由于$E$是有限集合，故它也是满射，所以是自同构，另外，对于任意的$c\in F_q$，由$c^q=c$反复得到：
 
+\begin{align*}
+\sigma_j(c)=c^{q^j}=c
+\end{align*}
 
+所以它保持$F_q$中的元素不动。接下来我们证明这些自同构互不相同，取$E$的一个本原元$\theta$，之前已经证明过$E=F_q(\theta)$，因此$\theta$在$F_q$上的极小多项式$g$的次数为$[E:F_q]=m$，根据共轭元定理：
 
+\begin{align*}
+\theta,\theta^q,...,\theta^{q^{m-1}}
+\end{align*}
 
+互不相同，也就是这些映射在元素$\theta$上的取值互不相同，所以这些映射互不相同。最后我们证明不存在其他这样的自同构：设$\tau$是任意一个保持$F_q$不动的自同构，因为$g(\theta)=0$，且$\tau$保持$g$的系数不动，所以：
 
+\begin{align*}
+g(\tau(\theta))=\tau(g(\theta))=0
+\end{align*}
 
+所以$\tau(\theta)$必须是$g$的一个根，而$g$的全部根正是:
 
+\begin{align*}
+\theta,\theta^q,...,\theta^{q^{m-1}}
+\end{align*}
 
+所以存在$0\leqslant j<m$，使得：
 
+\begin{align*}
+\tau(\theta)=\theta^{q^j}=\sigma_j(\theta)
+\end{align*}
 
+又因为$E=F_q(\theta)=F_q[\theta]$，所以任意的$a\in E$都能写成：
 
+\begin{align*}
+a=\sum_ic_i\theta^i,\;\;\; c_i\in F_q
+\end{align*}
 
+于是
 
+\begin{align*}
+\tau(a)=\sum_ic_i\tau(\theta)^i=\sum_ic_i\sigma_j(\theta)^i=\sigma_j(a)
+\end{align*}
 
+所以$\tau=\sigma_j$，定理得证。
 
+定义：给定域$F=F_{q^m}$和$K=F_q$，元素$\alpha\in F$在$K$上的迹定义为：
 
+\begin{align*}
+Tr_{F/K}(\alpha)=\alpha+\alpha^q+\cdots+\alpha^{q^{m-1}}
+\end{align*}
 
+如果$K$是$F$的素子域，则称$Tr_{F/K}(\alpha)$为$\alpha$的绝对迹，并简写为$Tr_F(\alpha)$。
 
+定义：给定域$F=F_{q^m},K=F_q$和元素$\alpha\in F$，令$f\in K[x]$是元素$\alpha$在$K$上的极小多项式，可知其次数$d=deg(f)|m$，我们称$g(x)=f(x)^{m/d}\in K[x]$为$\alpha$在$K$上的特征多项式。可以验证：
 
+\begin{align*}
+f&=(x-\alpha)(x-\alpha^q)\cdots(x-\alpha^{q^{d-1}})\\
+g&=(x-\alpha)(x-\alpha^q)\cdots(x-\alpha^{q^{m-1}})\\
+&=f^{\frac{m}{d}}\\
+&=x^m+a_{m-1}x^{m-1}+\cdots+a_1x+a_0
+\end{align*}
 
+因此$Tr_{F/K}=-a_{m-1}$
 
+注释：假设$F_q[\alpha]=F_{q^m}$，令$f\in K[x]$是元素$\alpha$在$K$上的极小多项式，可知其次数为$m$，令：
 
+\begin{align*}
+f=x^m+a_{m-1}x^{m-1}+\cdots+a_1x+a_0
+\end{align*}
+
+那么$1,\alpha,...,\alpha^{m-1}$是$F_{q^m}/F_q$的一组基，且：
+
+\begin{align*}
+\alpha\cdots(1,\alpha,...,\alpha^{m-1})=(\alpha,\alpha^2,...,\alpha^{m-1},\alpha^m)\\
+=(1,\alpha,...,\alpha^{m-1})\begin{pmatrix}
+0&0&\cdots&0-a_0\\
+1&0&\cdots&0-a_1\\
+0&1&\cdots&0-a_2\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&0-a_{m-2}\\
+0&0&\cdots&1-a_{m-1}\\
+\end{pmatrix}
+\end{align*}
+
+从而可知$Tr_{F/K}(\alpha)=trace(A)$。
 
 
 
