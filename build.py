@@ -476,8 +476,20 @@ def subject_card(category: Category, subject: Subject) -> str:
 def render_readme(root: Path, pandoc: str) -> str:
     """Render the canonical profile README, retaining its HTML cards and details."""
     source = root / "README.md"
+    def card_row(match: re.Match[str]) -> str:
+        content = match[1]
+        links = re.findall(r'<a\b[^>]*>\s*<img\b[^>]*>\s*</a>', content)
+        remainder = re.sub(r'<a\b[^>]*>\s*<img\b[^>]*>\s*</a>', '', content)
+        if len(links) != 2 or remainder.strip() or not all('width="48%"' in link for link in links):
+            return match[0]
+        # Keep the HTML block intact across Pandoc versions; CSS owns column widths.
+        return '<div class="readme-card-row">' + ''.join(
+            re.sub(r'\s+', ' ', link) for link in links) + '</div>'
+
+    markdown = re.sub(r'<p align="center">(.*?)</p>', card_row,
+                      read_text(source), flags=re.DOTALL)
     body = run_pandoc(pandoc, ["-f", "gfm", "-t", "html5", "--wrap=none", "--id-prefix=readme-"],
-                      read_text(source), source)
+                      markdown, source)
     # WebCode/assets is copied to Output/assets. Preserve image cache versions.
     body = re.sub(r'''((?:src|href)=["'])(?:\./)?WebCode/assets/''',
                   r"\1assets/", body)
@@ -488,6 +500,11 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
              warnings: list[str], mathjax_url: str) -> int:
     article_template = read_text(root / "WebCode/templates/article.html")
     home_template = read_text(root / "WebCode/templates/index.html")
+    # Content-derived URLs prevent stale homepage styles after deployment.
+    import hashlib
+    for stylesheet in ("base.css", "style.css"):
+        version = hashlib.sha256((root / "WebCode/css" / stylesheet).read_bytes()).hexdigest()[:12]
+        home_template = home_template.replace(f'css/{stylesheet}"', f'css/{stylesheet}?v={version}"')
     category_template = read_text(root / "WebCode/templates/category.html")
     for name in ("css", "assets"):
         source = root / "WebCode" / name

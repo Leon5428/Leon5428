@@ -122,6 +122,12 @@
 .readme-introduction [align="center"] { text-align: center; }
 .readme-introduction p[align="center"]:has(img) { margin: 18px 0; line-height: 0; }
 .readme-introduction p[align="center"]:has(img) a { text-decoration: none; }
+.readme-introduction .readme-card-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 18px 0; }
+.readme-introduction .readme-card-row > a { display: block; min-width: 0; line-height: 0; text-decoration: none; }
+.readme-introduction .readme-card-row > a > img { display: block; width: 100%; margin: 0; }
+@media (max-width: 600px) {
+    .readme-introduction .readme-card-row { grid-template-columns: minmax(0, 1fr); }
+}
 .readme-introduction ul { padding-left: 1.5em; }
 .readme-introduction li + li { margin-top: 6px; }
 .readme-introduction blockquote { margin: 20px 0; padding: 1px 20px; border-left: 2px solid #a9becf; background: var(--surface); color: var(--muted); }
