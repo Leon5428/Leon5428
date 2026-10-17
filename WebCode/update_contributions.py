@@ -341,6 +341,24 @@ def fetch_language_bytes(repos: list[dict]) -> dict[str, int]:
     return {name: size for name, size in totals.items() if size > 0}
 
 
+def language_segment(start: float, fraction: float, color: str) -> str:
+    """Draw a filled annular sector, avoiding dashed-circle seam artifacts."""
+    if fraction <= 0:
+        return ""
+
+    def point(radius: float, turn: float) -> str:
+        angle = 2 * math.pi * turn - math.pi / 2
+        return f"{350 + radius * math.cos(angle):.6f} {152 + radius * math.sin(angle):.6f}"
+
+    # Split at the midpoint so a 100% share also forms a complete ring.
+    middle, end = start + fraction / 2, start + fraction
+    path = (f"M {point(81, start)} A 81 81 0 0 1 {point(81, middle)} "
+            f"A 81 81 0 0 1 {point(81, end)} L {point(57, end)} "
+            f"A 57 57 0 0 0 {point(57, middle)} "
+            f"A 57 57 0 0 0 {point(57, start)} Z")
+    return f'<path d="{path}" fill="{color}"/>'
+
+
 def render_languages(counts: dict[str, int]) -> str:
     entries = sorted(counts.items(), key=lambda item: (-item[1], item[0]))
     if len(entries) > 5:
@@ -350,12 +368,10 @@ def render_languages(counts: dict[str, int]) -> str:
     body = text(27,44,"Top Languages",24,"#58a6ff")
     body += '<circle cx="350" cy="152" r="69" fill="none" stroke="#21262d" stroke-width="24"/>'
     offset = 0.0
-    circumference = 2*math.pi*69
     for i,(language,count) in enumerate(entries):
-        length = count/total*circumference
-        body += (f'<circle cx="350" cy="152" r="69" fill="none" stroke="{colors[i]}" stroke-width="24" '
-                 f'stroke-dasharray="{length:.4f} {circumference-length:.4f}" stroke-dashoffset="{-offset:.4f}" transform="rotate(-90 350 152)"/>')
-        offset += length
+        fraction = count / total
+        body += language_segment(offset, fraction, colors[i])
+        offset += fraction
         body += f'<circle cx="32" cy="{87+i*30}" r="4" fill="{colors[i]}"/>'
         body += text(45,92+i*30,f"{language} · {count / total:.1%}",13)
     body += text(350,153,"100%" if total else "—",28,"#e6edf3","middle") + text(350,175,"by code bytes",11,"#8b949e","middle")
