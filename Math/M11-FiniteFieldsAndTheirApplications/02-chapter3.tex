@@ -51,16 +51,16 @@ im\varphi \cong Z/pZ=F_p
 \psi(\frac{a}{b})=0\Rightarrow a\cdot1_F=0\Rightarrow a=0
 \end{align*}
 
-由于只有0会被映射到0，所以当有$\psi(x)=\psi(y)$的时候，我们就能推出$\psi(x-y)=\psi(x)-psi(y)=0$，也就是会有$x=y$，因此$\psi$是单射，其象是$F$中一个同构于$Q$的子域。
+由于只有0会被映射到0，所以当有$\psi(x)=\psi(y)$的时候，我们就能推出$\psi(x-y)=\psi(x)-\psi(y)=0$，也就是会有$x=y$，因此$\psi$是单射，其象是$F$中一个同构于$Q$的子域。
 
 最后，$F$的任意子域都包含整数倍的$a\cdot 1_F$，也包含非零元素$b\cdot 1_F$的逆元，因此包含$im \psi$，所以其就是$F$的素域，同构于$Q$。
 
 定义：给定域$K<F$以及$M\subset F$，我们定义域$K(M)$为$F$中所有同时包含$K$和$M$的子域的交，并称之为由域$K$添加$M$中元素所得到的扩域
 
 \begin{enumerate}
-\item 若$M=\{\theta_1,\cdots,\theta_n\}$，我们也记$K(M)=K(\theta_1,\cdots,\theta_n)$。
-\item 若$M=\{\theta\}$，则称$L=K(\theta)$为域$K$的单扩张，并称元素$\theta$为$L$在$K$上的一个定义元。
-\item 可以验证$K(M)$是$F$中最小的同时包含$K$和$M$的子域。
+\item 1)若$M=\{\theta_1,\cdots,\theta_n\}$，我们也记$K(M)=K(\theta_1,\cdots,\theta_n)$。
+\item 2)若$M=\{\theta\}$，则称$L=K(\theta)$为域$K$的单扩张，并称元素$\theta$为$L$在$K$上的一个定义元。
+\item 3)可以验证$K(M)$是$F$中最小的同时包含$K$和$M$的子域。
 \end{enumerate}
 
 那这个定义有什么作用呢？其实就是想表示，在子域$K$中加入$M$的元素后，为了仍然是一个域，最少需要得到一个多大的域。
@@ -114,9 +114,9 @@ g\in (h),h\in (g)
 定理：假定元素$\theta\in F$是域$K$上的代数元，我们有以下关于$\theta$的极小多项式$g$的性质：
 
 \begin{enumerate}
-\item $g$是$K[x]$中的不可约多项式
-\item 对于$f\in K[x]$，有$f(\theta)=0$当且仅当$g|f$
-\item $g$是$K[x]$中以$\theta$为根的次数最低的首1多项式
+\item 1)$g$是$K[x]$中的不可约多项式
+\item 2)对于$f\in K[x]$，有$f(\theta)=0$当且仅当$g|f$
+\item 3)$g$是$K[x]$中以$\theta$为根的次数最低的首1多项式
 \end{enumerate}
 
 这三条性质在我们证明上一个定理时都证明过了，这里不再重复。
@@ -126,17 +126,17 @@ g\in (h),h\in (g)
 定义：一个域$K$上的向量空间$V$是一个非空集合，其中的元素称之为向量，并对以下两种运算封闭：
 
 \begin{enumerate}
-\item 加法：对于任意的$u,v\in V,u+v\in V$
-\item 对于任意的$u\in V$和$k\in K,ku\in V$
+\item 1)加法：对于任意的$u,v\in V,u+v\in V$
+\item 2)对于任意的$u\in V$和$k\in K,ku\in V$
 \end{enumerate}
 
 另外$(V,+)$构成一个$Abel$群，且数乘满足如下性质：
 
 \begin{enumerate}
-\item $1u=u,\forall u\in V$
-\item 结合律：$k_1(k_2u)=(k_1k_2)u$
-\item 线性性：$k(u+v)=ku+kv$
-\item 分配律：$(k_1+k_2)u=k_1u+k_2u$
+\item 1)$1u=u,\forall u\in V$
+\item 2)结合律：$k_1(k_2u)=(k_1k_2)u$
+\item 3)线性性：$k(u+v)=ku+kv$
+\item 4)分配律：$(k_1+k_2)u=k_1u+k_2u$
 \end{enumerate}
 
 练习：给定域$L$的一个子域$K$，可以验证$L$是$K$上的向量空间。(这是很容易验证的，加法与数乘以及数乘的性质，都根据域的性质能推出来)
@@ -158,8 +158,8 @@ c_1v_1+\cdots+c_nv_n,\;\;\; c_i\in K
 基是一组向量$v_1,...,v_n$，满足下面两个条件：
 
 \begin{enumerate}
-\item 张成整个空间：空间中的每个向量都能写成它们的线性组合。
-\item 线性无关：如果$c_1v_1+\cdots+c_nv_n=0$，那么必然有$c_1=\cdots=c_n=0$
+\item 1)张成整个空间：空间中的每个向量都能写成它们的线性组合。
+\item 2)线性无关：如果$c_1v_1+\cdots+c_nv_n=0$，那么必然有$c_1=\cdots=c_n=0$
 \end{enumerate}
 
 这两个条件合起来就是说向量空间中的每个向量都能使用这组基来表示，而且表示方式是唯一的，而维数其实就是一组基中向量的个数，这是不难理解的，我们在很久之前的线性代数课程里已经学过了。
@@ -241,9 +241,9 @@ a_0+a_1\theta+\cdots+a_n\theta^n=0
 定理：令$\theta\in F$是域$K$上次数为$n$的代数元，其在$K$上的极小多项式是$g$，我们有：
 
 \begin{enumerate}
-\item $K[\theta]=K(\theta)\cong K[x]/(g)$
-\item $[K(\theta):K]=n$，且$\{1,\theta,\theta^2,...,\theta^{n-1}\}$是$K(\theta)$在$K$上的一组基，故而$K(\theta)$中的任一元素均可以唯一表示成$a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}$，其中$a_i\in K,0\leqslant i\leqslant n-1$
-\item 任一元素$a\in K(\theta)$在$K$上均是代数的，且其在$K$上的次数整除$n$。
+\item 1)$K[\theta]=K(\theta)\cong K[x]/(g)$
+\item 2)$[K(\theta):K]=n$，且$\{1,\theta,\theta^2,...,\theta^{n-1}\}$是$K(\theta)$在$K$上的一组基，故而$K(\theta)$中的任一元素均可以唯一表示成$a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}$，其中$a_i\in K,0\leqslant i\leqslant n-1$
+\item 3)任一元素$a\in K(\theta)$在$K$上均是代数的，且其在$K$上的次数整除$n$。
 \end{enumerate}
 
 我们首先来证明第一条，考虑下面的这个映射：
@@ -385,7 +385,7 @@ a_1v_1+\cdots+a_mv_m,\;\;\; a_i\in K
 
 引理：令$F$为大小为$q$的有限域，那么$\forall a\in F,\; a^q=a$。
 
-这个引理也不难证明，如果$a$是0，那么$a^q=a=0$，若$a\neq 0$，若$a$不是0，则$a$属于一个乘法群$F\ \{0\}$，不妨把$F$中所有非零元素记为$b_1,...,b_{q-1}$，因为乘以$a$是一一对应的，所以：
+这个引理也不难证明，如果$a$是0，那么$a^q=a=0$，若$a\neq 0$，若$a$不是0，则$a$属于一个乘法群$F/\{0\}$，不妨把$F$中所有非零元素记为$b_1,...,b_{q-1}$，因为乘以$a$是一一对应的，所以：
 
 \begin{align*}
 ab_1,...,ab_{q-1}
