@@ -4,20 +4,32 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{theorem}{定理}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+\newtheorem*{proposition}{命题}
 \begin{document}
 \section*{子域和扩域}
 
-定义：给定域$F$，若$F$的子集$K$在$F$的运算下也构成一个域，则我们称$K$为$F$的子域，也称$F$为$K$的扩域。
+\begin{definition}
+给定域$F$，若$F$的子集$K$在$F$的运算下也构成一个域，则我们称$K$为$F$的子域，也称$F$为$K$的扩域。
+\end{definition}
 
 不难发现，域$F$是其本身的一个子域，我们称之为平凡子域，其余与$F$不同的子域我们称为真子域。
 
-定义：若域$F$中没有真子域，则称$F$为素域。
+\begin{definition}
+若域$F$中没有真子域，则称$F$为素域。
+\end{definition}
 
-定理：给定域$F$，我们有：
+\begin{theorem}
+给定域$F$，我们有：
 \begin{enumerate}
 \item 若$char(F)=p,p$为某一素数，则$F$包含的素域同构于$F_p$
 \item 若$char(F)=0$，则$F$包含的素域同构于$Q$
 \end{enumerate}
+\end{theorem}
 
 我们首先来证明第一条，考虑下面这个环同态：
 
@@ -55,31 +67,37 @@ im\varphi \cong Z/pZ=F_p
 
 最后，$F$的任意子域都包含整数倍的$a\cdot 1_F$，也包含非零元素$b\cdot 1_F$的逆元，因此包含$im \psi$，所以其就是$F$的素域，同构于$Q$。
 
-定义：给定域$K<F$以及$M\subset F$，我们定义域$K(M)$为$F$中所有同时包含$K$和$M$的子域的交，并称之为由域$K$添加$M$中元素所得到的扩域
+\begin{definition}
+给定域$K<F$以及$M\subset F$，我们定义域$K(M)$为$F$中所有同时包含$K$和$M$的子域的交，并称之为由域$K$添加$M$中元素所得到的扩域
 
 \begin{enumerate}
 \item 1)若$M=\{\theta_1,\cdots,\theta_n\}$，我们也记$K(M)=K(\theta_1,\cdots,\theta_n)$。
 \item 2)若$M=\{\theta\}$，则称$L=K(\theta)$为域$K$的单扩张，并称元素$\theta$为$L$在$K$上的一个定义元。
 \item 3)可以验证$K(M)$是$F$中最小的同时包含$K$和$M$的子域。
 \end{enumerate}
+\end{definition}
 
 那这个定义有什么作用呢？其实就是想表示，在子域$K$中加入$M$的元素后，为了仍然是一个域，最少需要得到一个多大的域。
 
-定义：给定域$K<F$以及$\theta\in F$，若$\theta$满足代数方程：
+\begin{definition}
+给定域$K<F$以及$\theta\in F$，若$\theta$满足代数方程：
 
 \begin{align*}
 a_n\theta^n+a_{n-1}\theta^{n-1}+\cdots+a_1\theta+a_0=0
 \end{align*}
 
 其中$a_i\in K$并且不全为0，则称$\theta$在$K$上是代数的，如果不存在上面的代数方程，则称$\theta$在$K$上是超越的，如果$F$中的每一个元素在$K$上都是代数的，则称$F$是$K$的代数扩张，反之，若$F$中至少存在一个在$K$上超越的元素，则称$F$是$K$的超越扩张。
+\end{definition}
 
-定理：假定元素$\theta\in F$是$K$上的代数元，令：
+\begin{theorem}
+假定元素$\theta\in F$是$K$上的代数元，令：
 
 \begin{align*}
 J=\{f\in K[x]:f(\theta)=0\}
 \end{align*}
 
 则存在唯一的首1多项式$g\in K[x]$使得$J=(g)$，并且多项式$g$在$K$上不可约。
+\end{theorem}
 
 如何证明这一定理呢？因为$\theta$是代数元，所以存在非零多项式$f$满足$f(\theta)=0$，所以$J$中有非零多项式，在这些多项式中，我们选一个次数最小的，再除以它的最高项系数，就能得到一个首1多项式$g$，并且仍然有$g(\theta)=0$，这是显然的，接下来我们证明$J=(g)$，任取$f\in J$，我们使用多项式带余除法：
 
@@ -109,21 +127,26 @@ g\in (h),h\in (g)
 
 那么就会有$g|h$并且$h|g$，所以这两个多项式次数必然是相等的，只相差一个常数倍，又因为都是首1多项式，所以常数就是1，也就是$g=h$，唯一性得证。
 
-定义：我们称$g$为元素$\theta$在$K$上的极小多项式，也将$g$的次数称为元素$\theta$在$K$上的次数。
+\begin{definition}
+我们称$g$为元素$\theta$在$K$上的极小多项式，也将$g$的次数称为元素$\theta$在$K$上的次数。
+\end{definition}
 
-定理：假定元素$\theta\in F$是域$K$上的代数元，我们有以下关于$\theta$的极小多项式$g$的性质：
+\begin{theorem}
+假定元素$\theta\in F$是域$K$上的代数元，我们有以下关于$\theta$的极小多项式$g$的性质：
 
 \begin{enumerate}
 \item 1)$g$是$K[x]$中的不可约多项式
 \item 2)对于$f\in K[x]$，有$f(\theta)=0$当且仅当$g|f$
 \item 3)$g$是$K[x]$中以$\theta$为根的次数最低的首1多项式
 \end{enumerate}
+\end{theorem}
 
 这三条性质在我们证明上一个定理时都证明过了，这里不再重复。
 
 \section*{域扩张}
 
-定义：一个域$K$上的向量空间$V$是一个非空集合，其中的元素称之为向量，并对以下两种运算封闭：
+\begin{definition}
+一个域$K$上的向量空间$V$是一个非空集合，其中的元素称之为向量，并对以下两种运算封闭：
 
 \begin{enumerate}
 \item 1)加法：对于任意的$u,v\in V,u+v\in V$
@@ -138,12 +161,17 @@ g\in (h),h\in (g)
 \item 3)线性性：$k(u+v)=ku+kv$
 \item 4)分配律：$(k_1+k_2)u=k_1u+k_2u$
 \end{enumerate}
+\end{definition}
 
 练习：给定域$L$的一个子域$K$，可以验证$L$是$K$上的向量空间。(这是很容易验证的，加法与数乘以及数乘的性质，都根据域的性质能推出来)
 
-定义：给定域$K\leqslant L$，若$L$作为$K$上的向量空间的维数$dim_KL$是有限的，我们就称$L$是$K$的有限扩张，也称$L$在$K$上的次数为$dim_KL$，记为$[L:K]$
+\begin{definition}
+给定域$K\leqslant L$，若$L$作为$K$上的向量空间的维数$dim_KL$是有限的，我们就称$L$是$K$的有限扩张，也称$L$在$K$上的次数为$dim_KL$，记为$[L:K]$
+\end{definition}
 
-定理(链式法则)：假定$K\leqslant L$和$L\leqslant M$均为有限扩张，则$[M:K]=[M:L][L:K]$
+\begin{theorem}[链式法则]
+假定$K\leqslant L$和$L\leqslant M$均为有限扩张，则$[M:K]=[M:L][L:K]$
+\end{theorem}
 
 在证明这个定理之前，我们需要补充一些前置知识：
 
@@ -222,7 +250,9 @@ x=\sum_{j=1}^m\sum_{i=1}^nc_{ij}a_ib_j
 [M:K]=mn=[M:L][L:K]
 \end{align*}
 
-定理：域$K$的任一有限扩张都是代数扩张
+\begin{theorem}
+域$K$的任一有限扩张都是代数扩张
+\end{theorem}
 
 证明：设$L$是$K$的有限扩张，记$[L:K]=n$，任取$\theta\in L$，我们考虑下面$n+1$个元素：
 
@@ -238,13 +268,15 @@ a_0+a_1\theta+\cdots+a_n\theta^n=0
 
 这正说明$\theta$满足一个系数在$K$上的非零多项式方程，所以$\theta$在$K$上是代数的。由于$\theta$是任取的，$L$中每个元素在$K$上都是代数的，因此$L$是$K$的代数扩张。
 
-定理：令$\theta\in F$是域$K$上次数为$n$的代数元，其在$K$上的极小多项式是$g$，我们有：
+\begin{theorem}
+令$\theta\in F$是域$K$上次数为$n$的代数元，其在$K$上的极小多项式是$g$，我们有：
 
 \begin{enumerate}
 \item 1)$K[\theta]=K(\theta)\cong K[x]/(g)$
 \item 2)$[K(\theta):K]=n$，且$\{1,\theta,\theta^2,...,\theta^{n-1}\}$是$K(\theta)$在$K$上的一组基，故而$K(\theta)$中的任一元素均可以唯一表示成$a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}$，其中$a_i\in K,0\leqslant i\leqslant n-1$
 \item 3)任一元素$a\in K(\theta)$在$K$上均是代数的，且其在$K$上的次数整除$n$。
 \end{enumerate}
+\end{theorem}
 
 我们首先来证明第一条，考虑下面的这个映射：
 
@@ -304,7 +336,9 @@ n=[K(\theta):K]=[K(\theta):K(\alpha)][K(\alpha):K]=[K(\theta):K(\alpha)]d
 
 所以$d|n$，定理得证。
 
-定理：令$f\in K[x]$为域$K$上的不可约多项式，则存在$K$的一个以$f$的某个根为定义元的单扩张。
+\begin{theorem}
+令$f\in K[x]$为域$K$上的不可约多项式，则存在$K$的一个以$f$的某个根为定义元的单扩张。
+\end{theorem}
 
 证明：我们构造下面这个结构：
 
@@ -316,7 +350,9 @@ L=K[x]/(f)
 
 (我发现这个定理我真的证明不了。。。)
 
-定理：令$f\in K[x]$为域$K$上的不可约多项式，$\alpha$和$\beta$为$f$的两个根，则$K(\alpha)\cong K(\beta)$，且存在一个保持$K$中元素不动同时将$\alpha$映射到$\beta$的同构映射。
+\begin{theorem}
+令$f\in K[x]$为域$K$上的不可约多项式，$\alpha$和$\beta$为$f$的两个根，则$K(\alpha)\cong K(\beta)$，且存在一个保持$K$中元素不动同时将$\alpha$映射到$\beta$的同构映射。
+\end{theorem}
 
 
 证明：我们构造下面这个映射：
@@ -352,24 +388,30 @@ h(\beta)-q(\beta)=f(\beta)r(\beta)=0
 
 最后，对于任意的$a\in K$，取常数多项式$h(x)=a$，就能得到$\sigma(a)=a$，取$h(x)=x$，就能得到$\sigma(\alpha)=\beta$，所以该映射就是保持$K$中元素不动同时将$\alpha$映射到$\beta$的同构映射。
 
-定义：令$f\in K[x]$为一非常数多项式，且$F$为$K$的扩域，若存在$a_1,...,a_n\in F$使得：
+\begin{definition}
+令$f\in K[x]$为一非常数多项式，且$F$为$K$的扩域，若存在$a_1,...,a_n\in F$使得：
 
 \begin{align*}
 f=a(x-a_1)(x-a_2)\cdots(x-a_n)
 \end{align*}
 
 其中$a$为$f$的首项系数，则称$f$在$F$中分裂，更进一步地，若$f$在$F$中分裂并且$F=K(a_1,...,a_n)$，则称$F$为$f$的分裂域。
+\end{definition}
 
-定理：(分裂域的存在与唯一性)令$K$为一个域，$f$为$K[x]$中任一非常数的多项式，则：
+\begin{theorem}[分裂域的存在与唯一性]
+令$K$为一个域，$f$为$K[x]$中任一非常数的多项式，则：
 
 \begin{enumerate}
 \item 1)存在$f$的一个包含$K$的分裂域
 \item 2)$f$的任意两个包含$K$的分裂域都是同构的，并且这个同构映射保持$K$中的元素不动，而把$f$的根映射到$f$的根。
 \end{enumerate}
+\end{theorem}
 
 \section*{有限域的性质}
 
-引理：假设有限域$F$中包含一个大小为$q$的子域$K$，我们有$|F|=q^m$，其中$m=[F:K]$。
+\begin{lemma}
+假设有限域$F$中包含一个大小为$q$的子域$K$，我们有$|F|=q^m$，其中$m=[F:K]$。
+\end{lemma}
 
 证明：我们把$F$看成$K$上的向量空间，因为$F$是有限集合，它的维数也是有限的，记为$m=[F:K]$，所以我们可以取一组基$v_1,v_2,...,v_m$，于是$F$中每个元素都可以唯一写成：
 
@@ -379,11 +421,15 @@ a_1v_1+\cdots+a_mv_m,\;\;\; a_i\in K
 
 因为$|K|=q$，每个系数$a_i$都有$q$种选择，所以这$m$个系数组合起来共有$q^m$种选择，由于每个元素在同一组基下的表示是唯一的，那么$F$中一共就有$q^m$个元素，也就是$|F|=q^m$
 
-定理：给定有限域$F$并假设$char(F)=p$，则有$|F|=p^n$，其中$n=[F:F_p]$。
+\begin{theorem}
+给定有限域$F$并假设$char(F)=p$，则有$|F|=p^n$，其中$n=[F:F_p]$。
+\end{theorem}
 
 我们之前提到过，当$char(F)=p$时，$F$的素域会同构于$F_p$，我们把这个素域记作$P$，直接使用刚才的引理，该定理就能得到证明。
 
-引理：令$F$为大小为$q$的有限域，那么$\forall a\in F,\; a^q=a$。
+\begin{lemma}
+令$F$为大小为$q$的有限域，那么$\forall a\in F,\; a^q=a$。
+\end{lemma}
 
 这个引理也不难证明，如果$a$是0，那么$a^q=a=0$，若$a\neq 0$，若$a$不是0，则$a$属于一个乘法群$F/\{0\}$，不妨把$F$中所有非零元素记为$b_1,...,b_{q-1}$，因为乘以$a$是一一对应的，所以：
 
@@ -399,11 +445,13 @@ ab_1,...,ab_{q-1}
 
 整理就可得$a^{q-1}=1$，命题得证。
 
-引理：令$F$为大小为$q$的有限域，且$K$为$F$的子域，则$K[x]$中多项式$x^q-x$在$F[x]$中有如下的分解：
+\begin{lemma}
+令$F$为大小为$q$的有限域，且$K$为$F$的子域，则$K[x]$中多项式$x^q-x$在$F[x]$中有如下的分解：
 
 \begin{align*}
 x^q-x=\prod_{a\in F_q}(x-a)
 \end{align*}
+\end{lemma}
 
 证明：令：
 
@@ -474,7 +522,9 @@ a_0+a_1\theta+\cdots+a_{n-1}\theta^{n-1}
 
 这里有$n$个系数，每个系数都有2种选择，所以这个域会有$2^n$个元素，这就是为什么我们构造的$g(x)$是一个二次多项式而不是更高次的。
 
-定理(有限域的存在与唯一性)：对于任意素数$p$和正整数$n$，存在一个大小为$p^n$的有限域，并且任意大小为$q=p^n$的有限域都和$x^q-x$在$F_p$上的分裂域同构。
+\begin{theorem}[有限域的存在与唯一性]
+对于任意素数$p$和正整数$n$，存在一个大小为$p^n$的有限域，并且任意大小为$q=p^n$的有限域都和$x^q-x$在$F_p$上的分裂域同构。
+\end{theorem}
 
 证明：记$q=p^n$，考虑这样一个多项式：
 
@@ -528,7 +578,9 @@ x^q-x=\prod_{a\in F}(x-a)
 
 所以说$x^q-x$在$F$中完全分裂，而且它的根就是$F$的全部元素，所以$F$就是$x^q-x$在$P$上的分裂域，而$P$与$F_p$是同构的，两者之间的同构映射可以扩展到分裂域之间的同构，就是把$F_p[x]$中的$x^q-x$映射成$P[x]$中的$x^q-x$，可以证明这两个分裂域是同构的。
 
-定理(子域判别法则)：令$F_q$为大小为$q=p^n$的有限域，那么$F_q$的任一子域的大小为$p^m$，其中$m|n$，反之，若$m|n$则存在唯一的大小为$p^m$的$F_q$的子域。
+\begin{theorem}[子域判别法则]
+令$F_q$为大小为$q=p^n$的有限域，那么$F_q$的任一子域的大小为$p^m$，其中$m|n$，反之，若$m|n$则存在唯一的大小为$p^m$的$F_q$的子域。
+\end{theorem}
 
 证明：若$K$是$F$的一个子域，那么显然，$K$和$F$的特征是相同的，都是$p$，并且包含同一个素域$P$，设：
 
@@ -566,7 +618,9 @@ x^{p^n}-x=\prod_{a\in F}(x-a)
 
 \section*{本原元}
 
-定理：对于每一个有限域$F_q$，其非零元素构成的乘法群$F_q*$是循环群。
+\begin{theorem}
+对于每一个有限域$F_q$，其非零元素构成的乘法群$F_q*$是循环群。
+\end{theorem}
 
 证明：记$N=q-1$，我们要证明的其实就是存在一个非零元素，它的幂能遍历全部$N$个非零元素。我们前面证明过一个$a^q=a$的引理，那么就会有$a^N=1$，所以元素$a$的阶肯定是能整除$N$(证明过程依旧是带余除法)。
 
@@ -590,9 +644,13 @@ x^{N/l_i}-1
 
 这就是$N$个不同的元素，恰好构成全部$F_q^{\times}$，因此它是循环群。
 
-定义：我们称循环群$F_q*$的生成元为域$F_q$的本原元。
+\begin{definition}
+我们称循环群$F_q*$的生成元为域$F_q$的本原元。
+\end{definition}
 
-推论：$F_q$包含$\phi(q-1)$个本原元。
+\begin{corollary}
+$F_q$包含$\phi(q-1)$个本原元。
+\end{corollary}
 
 证明：我们取一个生成元$b$，每个非零元素都可以唯一地写成$b^k$，其中$0\leqslant k<N$，我们下面证明$b^k$是生成元当且仅当$gcd(k,N)=1$。
 
@@ -610,7 +668,9 @@ b=b^{uk+vN}=(b^k)^u
 
 所以它的阶至多为$N/d<N$，不能生成整个群，所以本原元的个数，其实就是$0\leqslant k<N$中与$N$互素的个数，命题得证。
 
-定理：令$F_q$为一个有限域，$F_r$为其有限扩域，那么$F_r$是$F_q$的一个单代数扩张，且$F_r$的每一个本原元都可以作为$F_r/F_q$的定义元。
+\begin{theorem}
+令$F_q$为一个有限域，$F_r$为其有限扩域，那么$F_r$是$F_q$的一个单代数扩张，且$F_r$的每一个本原元都可以作为$F_r/F_q$的定义元。
+\end{theorem}
 
 证明：任取$F_r$的一个本原元$\alpha$，按照本原元的定义，它的幂遍历全部非零元素：
 
@@ -620,7 +680,9 @@ F_r^{\times }=\{1,\alpha,\alpha^2,...,\alpha^{r-2}\}
 
 而$F_q(\alpha)$是包含$F_q$和$\alpha$的子域，所以包含$\alpha$的所有幂，也包含0，因此它包含$F_r$的全部元素，即$F_r\subseteq F_q(\alpha)$，另一方面，由于$\alpha \in F_r$，且$F_q\subseteq F_r$，所以$F_q(\alpha)\subseteq F_r$，所以$F_q(\alpha)=F_r$，又因为有限扩张必为代数扩张，所以$\alpha$在$F_q$上是代数的，因此这是一个单代数扩张，且任意本原元都能作为定义元。
 
-推论：对于每个有限域$F_q$和每个正整数$n$，在$F_q[x]$中存在一个次数为$n$的不可约多项式。
+\begin{corollary}
+对于每个有限域$F_q$和每个正整数$n$，在$F_q[x]$中存在一个次数为$n$的不可约多项式。
+\end{corollary}
 
 证明：设$q=p^s$，由有限域的存在性，存在大小为$q^n=p^{sn}$的有限域$E$，由子域判别法则，$E$中存在一个大小为$p^s=q$的子域$K$，有限域的唯一性说明$K\cong F_q$，我们设$m=[E:K]$，会有：
 
@@ -634,7 +696,9 @@ q^n=|E|=|K|^m=q^m
 
 \section*{不可约多项式的根}
 
-引理：令$f\in F_q[x]$是$F_q$上的一个不可约多项式，且$\alpha$是$f$在$F_q$的某个扩域中的一个根，那么对于多项式$h\in F_q[x]$，我们有$h(\alpha)=0$成立当且仅当$f|h$
+\begin{lemma}
+令$f\in F_q[x]$是$F_q$上的一个不可约多项式，且$\alpha$是$f$在$F_q$的某个扩域中的一个根，那么对于多项式$h\in F_q[x]$，我们有$h(\alpha)=0$成立当且仅当$f|h$
+\end{lemma}
 
 证明：若$f|h$，那么$h(\alpha)=0$是显然的，如果$h(\alpha=0)$，我们假设$f\nmid h$，因为$f$不可约，所以$f$和$h$的最大公因式只能是1，由于多项式的贝祖等式，会存在$u(x),v(x)\in F_q[x]$，使得：
 
@@ -650,7 +714,9 @@ u(\alpha)f(\alpha)+v(\alpha)h(\alpha)=1
 
 这样就会推出0=1，矛盾，所以$f|h$，综上引理得证。
 
-引理：令$f\in F_q[x]$是$F_q$上次数为$m$的不可约多项式，那么$f(x)|x^{q^n}-x$当且仅当$m|n$。
+\begin{lemma}
+令$f\in F_q[x]$是$F_q$上次数为$m$的不可约多项式，那么$f(x)|x^{q^n}-x$当且仅当$m|n$。
+\end{lemma}
 
 证明：在某个扩域中取$f$的一个根$\alpha$，令$E=F_q(\alpha)$，因为$f$是次数为$m$的不可约多项式，所以：
 
@@ -704,11 +770,13 @@ b^{q^r}=\sum_ic_i^{q^r}(\alpha^{q^r})^i=\sum_ic_i\alpha^i=b
 
 这说明$E$中全部$q^m$个元素都是多项式$x^{q^r}-x$的根，但是它的次数只有$q^r$，不应该有这么多根，所以只能$r=0$，也就是$m|n$。
 
-定理：令$f$是$F_q[x]$中次数为$m$的不可约多项式，那么$f$在$F_{q^m}$中有一个根$\alpha$，并且$f$的所有根都是单根，且由以下$m$个不同的元素给出：
+\begin{theorem}
+令$f$是$F_q[x]$中次数为$m$的不可约多项式，那么$f$在$F_{q^m}$中有一个根$\alpha$，并且$f$的所有根都是单根，且由以下$m$个不同的元素给出：
 
 \begin{align*}
 \alpha,\alpha^q,\alpha^{q^2},\cdots,\alpha^{q^{m-1}}
 \end{align*}
+\end{theorem}
 
 证明：由上一个引理，因为$m|m$，所以：
 
@@ -754,7 +822,9 @@ f|x^{q^{j-i}}-x\Rightarrow m|(j-i)
 
 但$0<j-i<m$，矛盾，所以这$m$个根互不相同，定理得证。
 
-推论：令$f$是$F_q[x]$中次数为$m$的不可约多项式，则$f$在$F_q$上的分裂域为$F_{q^m}$。
+\begin{corollary}
+令$f$是$F_q[x]$中次数为$m$的不可约多项式，则$f$在$F_q$上的分裂域为$F_{q^m}$。
+\end{corollary}
 
 证明：令：
 
@@ -764,19 +834,24 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 
 这是由全部根生成的域，所以是$f$的分裂域，所有这些根都是$\alpha$的幂，因此$L=F_q(\alpha)$，又因为$f$不可约，次数为$m$，且$f(\alpha)=0$，所以$[F_q(\alpha):F_q]=m$，于是$|L|=q^m$，而$L\subseteq E$，且$|E|=q^m$，故$L=E$，推论得证。
 
-推论：在$F_q[x]$中，任何两个次数相同的不可约多项式的分裂域都是同构的。
+\begin{corollary}
+在$F_q[x]$中，任何两个次数相同的不可约多项式的分裂域都是同构的。
+\end{corollary}
 
 证明：我们在上一个推论中，得到了$f$在$F_q$上的分裂域为$F_{q^m}$，而我们之前已经证明过分裂域的唯一性定理，也就是同一个多项式在同一个基础域上的任意两个分裂域都是同构的，上一个推论证明了$F_{q^m}$是$f$在$F_q$上的一个分裂域，因此，若$E$是$f$在$F_q$上的另一个分裂域，由唯一性定理它们就是同构的，定理得证。
 
-定义：令$F_{q^m}>F_q$，对于$\alpha \in F_{q^m}$，我们称元素：
+\begin{definition}
+令$F_{q^m}>F_q$，对于$\alpha \in F_{q^m}$，我们称元素：
 
 \begin{align*}
 \alpha,\alpha^q,...,\alpha^{q^{m-1}}
 \end{align*}
 
 为$\alpha$关于$F_q$的共轭元。
+\end{definition}
 
-推论：元素$\alpha\in F_{q^m}$关于$F_q$的共轭元都是不同的，当且仅当$\alpha$在$F_q$上的最小多项式的次数为$m$，否则，该最小多项式的次数$d$是$m$的一个真因子，并且$\alpha$关于$F_q$的共轭元为：
+\begin{corollary}
+元素$\alpha\in F_{q^m}$关于$F_q$的共轭元都是不同的，当且仅当$\alpha$在$F_q$上的最小多项式的次数为$m$，否则，该最小多项式的次数$d$是$m$的一个真因子，并且$\alpha$关于$F_q$的共轭元为：
 
 \begin{align*}
 \alpha,\alpha^q,...,\alpha^{q^{d-1}}
@@ -785,6 +860,7 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 其中每个共轭元重复出现$m/d$次。
 
 证明：设$\alpha$在$F_q$上的极小多项式为$g$，次数为$d$，因为$\alpha\in F_{q^m}$，所以
+\end{corollary}
 
 \begin{align*}
 \alpha^{q^m}=\alpha
@@ -804,7 +880,9 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 
 所以幂序列每隔$d$项重复一次，由于$d|m$，所以前$m$项恰好分成$m/d$组，因此每个共轭元在这$m$项中出现$m/d$次。于是这$m$项互不相同就当且仅当$m/d=1$，也就是$m=d$，推论得证。
 
-定理：元素$\alpha\in F_{q^m}*$关于$F_q$的共轭元在$F_{q^m}*$中具有相同的阶。
+\begin{theorem}
+元素$\alpha\in F_{q^m}*$关于$F_q$的共轭元在$F_{q^m}*$中具有相同的阶。
+\end{theorem}
 
 证明：设$\alpha$的乘法阶为$t$，任取$\alpha$关于$F_q$的一个共轭元$\beta$，它具有下面的形式：
 
@@ -828,7 +906,8 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 
 \section*{迹和范数}
 
-定义：如果映射$\sigma: F_{q^m}\Rightarrow F_{q^m}$满足以下条件：
+\begin{definition}
+如果映射$\sigma: F_{q^m}\Rightarrow F_{q^m}$满足以下条件：
 
 \begin{align*}
 \sigma(\alpha+\beta)&=\sigma(\alpha)+\sigma(\beta)\;\;\; \forall \alpha,\beta\in F_{q^m}\\
@@ -837,14 +916,17 @@ L=F_q(\alpha,\alpha^q,...,\alpha^{q^{m-1}})
 \end{align*}
 
 则称$\sigma$为$F_{q^m}$在$F_q$上的自同构。
+\end{definition}
 
-定理：对于$0\leqslant j\leqslant m-1$，我们定义映射：
+\begin{theorem}
+对于$0\leqslant j\leqslant m-1$，我们定义映射：
 
 \begin{align*}
 \sigma_j(\alpha)=\alpha^{q^j}\;\;\; \forall \alpha\in F_{q^m}
 \end{align*}
 
 那么域$F_{q^m}$在$F_q$上所有不同的自同构正好是映射$\sigma_0,\sigma_1,...,\sigma_{m-1}$
+\end{theorem}
 
 证明：首先我们来证明每个$\sigma_j$都是这样的自同构：因为域的特征是$p$，且$q$是$p$的幂，所以：
 
@@ -902,15 +984,18 @@ a=\sum_ic_i\theta^i,\;\;\; c_i\in F_q
 
 所以$\tau=\sigma_j$，定理得证。
 
-定义：给定域$F=F_{q^m}$和$K=F_q$，元素$\alpha\in F$在$K$上的迹定义为：
+\begin{definition}
+给定域$F=F_{q^m}$和$K=F_q$，元素$\alpha\in F$在$K$上的迹定义为：
 
 \begin{align*}
 Tr_{F/K}(\alpha)=\alpha+\alpha^q+\cdots+\alpha^{q^{m-1}}
 \end{align*}
 
 如果$K$是$F$的素子域，则称$Tr_{F/K}(\alpha)$为$\alpha$的绝对迹，并简写为$Tr_F(\alpha)$。
+\end{definition}
 
-定义：给定域$F=F_{q^m},K=F_q$和元素$\alpha\in F$，令$f\in K[x]$是元素$\alpha$在$K$上的极小多项式，可知其次数$d=deg(f)|m$，我们称$g(x)=f(x)^{m/d}\in K[x]$为$\alpha$在$K$上的特征多项式。可以验证：
+\begin{definition}
+给定域$F=F_{q^m},K=F_q$和元素$\alpha\in F$，令$f\in K[x]$是元素$\alpha$在$K$上的极小多项式，可知其次数$d=deg(f)|m$，我们称$g(x)=f(x)^{m/d}\in K[x]$为$\alpha$在$K$上的特征多项式。可以验证：
 
 \begin{align*}
 f&=(x-\alpha)(x-\alpha^q)\cdots(x-\alpha^{q^{d-1}})\\
@@ -920,6 +1005,7 @@ g&=(x-\alpha)(x-\alpha^q)\cdots(x-\alpha^{q^{m-1}})\\
 \end{align*}
 
 因此$Tr_{F/K}=-a_{m-1}$
+\end{definition}
 
 注释：假设$F_q[\alpha]=F_{q^m}$，令$f\in K[x]$是元素$\alpha$在$K$上的极小多项式，可知其次数为$m$，令：
 

@@ -4,9 +4,16 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{theorem}{定理}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+\newtheorem*{proposition}{命题}
 \begin{document}
 \section*{环和域的定义}
 
+\begin{definition}
 环$(R,+,\cdot)$是一个集合$R$，并在其上定义满足如下性质的两类二元运算：
 \begin{enumerate}
 \item $(R,+)$是交换群
@@ -19,17 +26,28 @@ a\cdot(b+c)=ab+ac\\
 \end{align*}
 
 \end{enumerate}
+\end{definition}
 除了普通的环之外，我们还有很多特殊的环：
 
-定义(1)幺环：具有乘法单位元的环，即存在$\exists e\in R,ae=ea=a$
+\begin{definition}
+(1)幺环：具有乘法单位元的环，即存在$\exists e\in R,ae=ea=a$
+\end{definition}
 
-定义(2)交换环：运算$\cdot$是交换的，即$\forall a,b\in R, ab=ba$
+\begin{definition}
+(2)交换环：运算$\cdot$是交换的，即$\forall a,b\in R, ab=ba$
+\end{definition}
 
-定义(3)整环：具有非零单位元的交换环，且满足$ab=0\Rightarrow a=0$或者$b=0$
+\begin{definition}
+(3)整环：具有非零单位元的交换环，且满足$ab=0\Rightarrow a=0$或者$b=0$
+\end{definition}
 
-定义(4)域：交换环，且$R$中的非零元素在二元运算$\cdot$下构成群。
+\begin{definition}
+(4)域：交换环，且$R$中的非零元素在二元运算$\cdot$下构成群。
+\end{definition}
 
-定理：任一有限整环均为域
+\begin{theorem}
+任一有限整环均为域
+\end{theorem}
 
 由于有限整环已经是交换环了，我们只需要证明有限整环中的非零元素在二元运算$\cdot$下构成群。由于环的定义，那么二元运算$\cdot$满足结合律是显然的，由于整环的定义，那么二元运算$\cdot$是有单位元的，所以我们只需要证明，对于有限整环中任意的非零元素，都应该有逆元。
 
@@ -53,29 +71,38 @@ ar_1,ar_2,...,ar_n
 
 所以左边必定存在某个$ar_i=1$，1就是乘法单位元，之所以存在是因为这是整环，所以对于任意的非零元素$a$，我们都能找到其逆元$r_i$，综上可得任一有限整环均为域。
 
-定义：我们称环$R$的一个子集$S$为$R$的子环，如果$S$在$R$的两类二元运算下封闭，并且在这两类运算下构成环。
+\begin{definition}
+我们称环$R$的一个子集$S$为$R$的子环，如果$S$在$R$的两类二元运算下封闭，并且在这两类运算下构成环。
+\end{definition}
 
-定义：我们称环$R$的一个子集$J$为$R$的理想，如果$J$是$R$的子环，并且：
+\begin{definition}
+我们称环$R$的一个子集$J$为$R$的理想，如果$J$是$R$的子环，并且：
 
 \begin{align*}
 \forall a\in J,\forall r\in R,a\cdot r\in J
 \end{align*}
+\end{definition}
 
 另外，给定交换环$R$和它的元素$a$，容易验证最小的包含$a$的理想是$(a)=\{ra+na:r\in R,n\in Z\}$，进一步地，如果$R$包含单位元，那么$(a)=\{ra:r\in R\}$。
 
 我们很容易证明这是一个理想，卡定义即可，那如何证明这是最小的包含$a$的理想呢？这也不难理解，我们假设一个最小理想，证明二者相等即可。
 
-定义：给定环$R$和环$S$，我们称映射$\varphi:R\rightarrow S$为一个同态，如果对于$\forall a,b\in R$：
+\begin{definition}
+给定环$R$和环$S$，我们称映射$\varphi:R\rightarrow S$为一个同态，如果对于$\forall a,b\in R$：
 
 \begin{align*}
 \varphi(a+b)&=\varphi(a)+\varphi(b)\\
 \varphi(ab)&=\varphi(a)\varphi(b)
 \end{align*}
+\end{definition}
 
 同态映射$\varphi$的核$\ker\varphi$是环$R$的理想。
 
-定义：给定交换环$R$和它的一个理想$J$，如果$\exists a\in R$，$J=(a)$，则我们称$J$为主理想，也称$J$是由元素$a$生成的主理想。
+\begin{definition}
+给定交换环$R$和它的一个理想$J$，如果$\exists a\in R$，$J=(a)$，则我们称$J$为主理想，也称$J$是由元素$a$生成的主理想。
+\end{definition}
 
+\begin{definition}
 我们可以在陪集$(R,+)/(J,+)$上定义如下的运算，使其构成环：
 
 \begin{align*}
@@ -84,6 +111,7 @@ ar_1,ar_2,...,ar_n
 \end{align*}
 
 我们称如上定义的环为$R$模$J$的剩余类环(根据定义很容易证明这是一个环)。
+\end{definition}
 
 但是仅仅说明这些还不够，我们对二元运算的要求是任意两对相同的元素做运算得到的结果必须是相同的，不能出现两对相同的元素做运算得到不同结果的情况，对于我们定义的第一个运算，$(a+J)+(b+J):=(a+b)+J$，假设$a+J=a'+J,b+J=b'+J$，所以：
 
@@ -105,7 +133,8 @@ ar_1,ar_2,...,ar_n
 
 举个例子：集合$(n)$是由整数集合$Z$中由元素$n$生成的主理想环，即所有$n$的倍数，于是我们得到剩余类环$Z/(n)$。
 
-环同态基本定理：给定两个环$R$和$S$，以及环同态$\varphi:R\rightarrow S$，我们有核$\ker\varphi$是$R$的理想，且$S\cong R/\ker\varphi$。反之，给定$R$的任一理想$J$，映射：
+\begin{theorem}[环同态基本定理]
+给定两个环$R$和$S$，以及环同态$\varphi:R\rightarrow S$，我们有核$\ker\varphi$是$R$的理想，且$S\cong R/\ker\varphi$。反之，给定$R$的任一理想$J$，映射：
 
 \begin{align*}
 \Psi : & R\rightarrow R/J\\
@@ -113,6 +142,7 @@ ar_1,ar_2,...,ar_n
 \end{align*}
 
 是环同态，且其核$\ker\Psi=J$
+\end{theorem}
 
 核$\ker\varphi$是$R$的理想证明起来比较简单，这里就不写了，我们先来证明$S\cong R/\ker\varphi$，也就是构造一个$S$与$R/\ker\varphi$之间的双射。我们这样构造这个映射$\Phi$：
 
@@ -156,7 +186,9 @@ ar_1,ar_2,...,ar_n
 
 至于定理中的给定$R$的任一理想$J$，映射$\Psi$是环同态，且其核$\ker\Psi=J$，你也可以将其表述为，对于环中的任何一个理想$J$，都可以找到一个环同态，使其核恰好就是$J$，这个环同态也被叫做自然投影或者典范投影。
 
-定理：给定任一素数$p$，剩余类环$Z/(p)$构成一个大小为$p$的域。
+\begin{theorem}
+给定任一素数$p$，剩余类环$Z/(p)$构成一个大小为$p$的域。
+\end{theorem}
 
 这是不难证明的，因为剩余类环里面的元素其实就是模$p$的剩余类，这里面显然是有模加模乘有零元单位元并且满足各种条件的，所以这就是一个域。我们可以根据这个剩余类环来构造出特定的域来。
 
@@ -176,17 +208,21 @@ ab &:=\varphi(ab+(p))
 
 构成阶为$p$的有限域，但是我想在这里注意的是，剩余类环$Z/(p)$是一个域，$F_p$也是一个域，这两个域上的加法运算虽然都使用+来表示，但是这两个域上的加法运算是不一样的。
 
-定义：给定环$R$，若存在正整数$n$使得:
+\begin{definition}
+给定环$R$，若存在正整数$n$使得:
 
 \begin{align*}
 \forall r\in R, n\cdot r=0
 \end{align*}
 
 我们称使得上式成立的最小正整数为$R$的特征，记为$\operatorname{char}(R)$，如果不存在这样的正整数，则称$R$的特征为0。
+\end{definition}
 
 这是容易理解的，因为如果不存在这样的正整数，那么取$n=0$即可直接满足等式。特征为0的域有很多，比如$Q,R,C$。
 
-定理：令$R\neq\{0\}$为一整环，若$R$的特征为某一正整数$n$，则$n$必定为素数。
+\begin{theorem}
+令$R\neq\{0\}$为一整环，若$R$的特征为某一正整数$n$，则$n$必定为素数。
+\end{theorem}
 
 实际上，只要是对无零因子环，其特征存在就必定为素数。我们使用反证法就可以很好地证明这一点，我们假设$n$不是素数，存在$n_1<n,n_2<n$使得$n=n_1n_2$，那么环中肯定会存在一个非零元$a$使得$n_1a\neq 0,n_2a\neq 0$，但是：
 
@@ -269,7 +305,8 @@ a^{p^n}+(-b)^{p^n}=a^{p^n}+(-1)^{p^n}b^{p^n}=a^{p^n}+(-1)b^{p^n}=a^{p^n}-b^{p^n}
 
 \section*{域上多项式}
 
-定义：给定环$R$及自变量$x$，环$R$上的多项式可以写成：
+\begin{definition}
+给定环$R$及自变量$x$，环$R$上的多项式可以写成：
 
 \begin{align*}
 f(x)=a_0+a_1x+\cdots +a_nx^n=\sum_{i=0}^n a_ix^i
@@ -289,8 +326,10 @@ f(x)=\sum_{i=0}^n a_ix^i,\;\;g(x)=\sum_{j=0}^m b_jx^j
 \end{align*}
 
 我们称$R$上全体多项式在以上两类运算下构成的环为多项式环，并记成$R[x]$。
+\end{definition}
 
-定义：给定$R$上多项式$f(x)=\sum_{i=0}^na_ix^i,a_n\neq 0$，我们称：
+\begin{definition}
+给定$R$上多项式$f(x)=\sum_{i=0}^na_ix^i,a_n\neq 0$，我们称：
 \begin{enumerate}
 \item $a_n:$首项系数
 \item $a_0:$常数项
@@ -298,6 +337,7 @@ f(x)=\sum_{i=0}^n a_ix^i,\;\;g(x)=\sum_{j=0}^m b_jx^j
 \item $\deg(0)=-\infty$
 \item 首1多项式若$a_n=1$
 \end{enumerate}
+\end{definition}
 
 练习：给定环$R$和$f(x),g(x)\in R[x]$，我们有：
 
@@ -318,13 +358,15 @@ f(x)=\sum_{i=0}^n a_ix^i,\;\;g(x)=\sum_{j=0}^m b_jx^j
 
 记号：给定$f,g\in F[x]$，若存在$h\in F[x]$，使得$g=f\cdot h$成立，则称$f$整除$g$，记为$f|g$。
 
-定理：给定非零多项式$g\in F[x]$，我们有：
+\begin{theorem}
+给定非零多项式$g\in F[x]$，我们有：
 
 \begin{align*}
 \forall f\in F[x],\exists q,r\in F[x],s.t.f=qg+r
 \end{align*}
 
 其中$r=0$或者$\deg(r)<\deg(g)$
+\end{theorem}
 
 证明：不妨设$\deg(f)=m,\deg(g)=n$，我们先考虑$m\geqslant n$的情况，设它们的最高次项分别是$a_mx^m$与$b_nx^n$，最高次项系数都不是0，我们现在希望使用$g(x)$的某个倍数，把$f(x)$的最高次项给消掉，所以乘$(a_mb_n^{-1})x^{(m-n)}$，这样：
 
@@ -334,7 +376,9 @@ f(x)-(a_mb_n^{-1})x^{(m-n)}g(x)
 
 这样得到的新多项式次数一定会严格小于$m$，如果这个新多项式的次数还大于等于$n$的话，就可以重复上述步骤，因为每进行一次次数都会严格下降，所以这个过程一定会终止，并且最后要么最后的多项式次数为0，要么它的次数小于$n$。
 
-定理：多项式环$F(x)$是主理想环（主理想环是指每个理想都是主理想，也就是每一个理想都可以由一个元素生成）。
+\begin{theorem}
+多项式环$F(x)$是主理想环（主理想环是指每个理想都是主理想，也就是每一个理想都可以由一个元素生成）。
+\end{theorem}
 
 证明：任取多项式环$F(x)$的一个理想$J$，若它为零理想，零理想本身就是一个主理想，若它不是零理想，则其中至少存在一个非零多项式，我们选择一个次数最低的多项式，不妨记为$g(x)$，那显然的，有$(g(x))\subseteq J$，我们任取$J$中的一个多项式$f(x)$，使用带余除法得到：
 
@@ -344,7 +388,9 @@ f(x)=q(x)f(x)+r(x)
 
 不难得到$r(x)$是属于$J$，但是这样就与$g(x)$次数最低相矛盾了，故$r(x)$只能等于0，也就有$J\subseteq (g(x))$，所以$J=(g(x))$，定理得证。
 
-定理：对于$F[x]$中的任一非零理想$J$，我们均可以找到唯一的首1多项式$g(x)\in F[x]$，使得$J=(g(x))$。
+\begin{theorem}
+对于$F[x]$中的任一非零理想$J$，我们均可以找到唯一的首1多项式$g(x)\in F[x]$，使得$J=(g(x))$。
+\end{theorem}
 
 证明：不妨我们取$J$的两个生成元，分别记为$g(x),h(x)$，因为$g(x)\in (h(x))$，所以存在$a(x)$，使得$g(x)=a(x)h(x)$，同理存在$b(x)$，使得$h(x)=b(x)g(x)$，所以：
 
@@ -395,14 +441,18 @@ d=m_1f_1+m_2f_2=m_1ch_1+m_2ch_2=c(m_1h_1+m_2h_2)
 
 \section*{不可约多项式}
 
-定义：给定多项式$p\in F[x]$，若$p$不是常数，且满足以下性质：
+\begin{definition}
+给定多项式$p\in F[x]$，若$p$不是常数，且满足以下性质：
 \begin{align*}
 p=bc,\;\;b,c\in F[x]\Rightarrow b\in F\mbox{或}c\in F
 \end{align*}
 
 则称$p$在$F$上不可约(这里要注意区分$F$与$F[x]$)。不可约也可以理解成不可能写成两个次数至少都为1的多项式的乘积。
+\end{definition}
 
-定理：给定$f\in F[x]$，剩余类环$F[x]/(f)$构成一个域当且仅当$f$在$F$上不可约。
+\begin{theorem}
+给定$f\in F[x]$，剩余类环$F[x]/(f)$构成一个域当且仅当$f$在$F$上不可约。
+\end{theorem}
 
 证明：我们前面提到过$F[x]$是一个主理想环，也就是说每个理想都可以由一个元素来生成，那么$(f)$其实就是一个理想，所以$F[x]/(f)$是一个剩余类环(虽然定理中已经说明了但是还是解释一下)，若$f$在$F$上不可约，那么要证明这是一个域，就首先要证明这是一个交换环，我们任取$a(x),b(x)\in F[x]$，那么就会有：
 \begin{align*}
@@ -432,7 +482,9 @@ p=bc,\;\;b,c\in F[x]\Rightarrow b\in F\mbox{或}c\in F
 
 我们现在来解释一下前面提到过的，为什么$F[x]$是整环呢？它是交换环并且具有非零单位元这是显然的，那它有没有零因子呢？假设它有，那么两个非零多项式的乘积就会是0，我们考虑这两个多项式最高次项的相乘，由于最后的乘积是0，那么这两个多项式最高次项的系数的乘积就会是0，但是这怎么可能呢？系数是域$F$上的元素，域是没有零因子的，怎么可能出现两个非零元相乘得0的情况呢？所以$F[x]$上也不会有零因子，所以这是一个整环。
 
-推论：给定不可约多项式$p\in F[x]$，若$p|f_1f_2\cdots f_m,f_i\in F[x]$，那么存在$j,1\leqslant j\leqslant m$，使得$p|f_j$。(使用反证法即可证明，突破口在零因子)
+\begin{corollary}
+给定不可约多项式$p\in F[x]$，若$p|f_1f_2\cdots f_m,f_i\in F[x]$，那么存在$j,1\leqslant j\leqslant m$，使得$p|f_j$。(使用反证法即可证明，突破口在零因子)
+\end{corollary}
 
 练习：(域上多项式唯一分解定理)给定非常数多项式$f\in F[x]$，我们有以下分解式：
 \begin{align*}
@@ -452,9 +504,13 @@ f&=aq_1^{d_1}\cdots q_m^{d_m}
 
 \section*{多项式零点和拉格朗日插值公式}
 
-定义：如果$f(b)=0$，我们称元素$b\in F$是多项式$f\in F[x]$的根。
+\begin{definition}
+如果$f(b)=0$，我们称元素$b\in F$是多项式$f\in F[x]$的根。
+\end{definition}
 
-定理：$f(b)=0$当且仅当$(x-b)|f(x)$。
+\begin{theorem}
+$f(b)=0$当且仅当$(x-b)|f(x)$。
+\end{theorem}
 
 证明：若$(x-b)|f(x)$成立，那么$f(b)=0$是显然的；若$f(b)=0$成立，我们使用多项式带余除法，使用$x-b$除$f(x)$，那肯定会有：
 
@@ -466,15 +522,19 @@ f(x)=q(x)(x-b)+r(x)
 
 其实我最开始看到$f(b)=0$是毫无思路的...只能说多项式带余除法真的用途广泛对吧...
 
-定义：设$f(b)=0$，若$(x-b)^k|f(x)$，但$(x-b)^{k+1}\nmid f(x)$，我们称$k$是根$b$的重数，特别地，当$k=1$时，我们称其为单根，当$k\geqslant2$时，我们称其为重根。
+\begin{definition}
+设$f(b)=0$，若$(x-b)^k|f(x)$，但$(x-b)^{k+1}\nmid f(x)$，我们称$k$是根$b$的重数，特别地，当$k=1$时，我们称其为单根，当$k\geqslant2$时，我们称其为重根。
+\end{definition}
 
-定理：(度数紧箍咒)给定$f\in F[x],deg(f)>0$。如果$b_1,b_2,...,b_m$是$f$在$F$中的$m$个不同的根，其对应的重数分别是$k_1,k_2,...,k_m$，那么：
+\begin{theorem}[度数紧箍咒]
+给定$f\in F[x],deg(f)>0$。如果$b_1,b_2,...,b_m$是$f$在$F$中的$m$个不同的根，其对应的重数分别是$k_1,k_2,...,k_m$，那么：
 
 \begin{align*}
 (x_1-b_1)^{k_1}(x_2-b_2)^{k_2}\cdots(x_m-b_m)^{k_m}|f
 \end{align*}
 
 特别地，$k_1+k_2+\cdots+k_m\leqslant n$，从而$f$在$F$中至多有$n$个不同的根。
+\end{theorem}
 
 证明：因为$b_i\neq b_j$，所以这两个多项式$x_i-b_i$与$x_j-b_j$是互素的，那么就有：
 
@@ -502,11 +562,13 @@ deg(f)=deg(q)+k_1+k_2+\cdots+k_m
 
 所以$f$在$F$中至多有$n$个不同的根。
 
-定义：给定$f=a_0+a_1x+\cdots+a_nx^n$，其形式导数为：
+\begin{definition}
+给定$f=a_0+a_1x+\cdots+a_nx^n$，其形式导数为：
 
 \begin{align*}
 f'=a_1+2a_2x+\cdots+na_nx^{n-1}
 \end{align*}
+\end{definition}
 
 练习：元素$b\in F$是多项式$f$的一个重根当且仅当$f(b)=f'(b)=0$。
 
@@ -548,7 +610,9 @@ f'(b)=r'(b)=c=0
 
 若$f$是不可约多项式，使用反证法即可说明$f$在$F$中一定没有根，因为有根就会可约。若$f$在$F$中没有根，同样使用反证法，假设$f$是可约多项式即可推出矛盾，这里不再详细写了。
 
-定理：($Lagrange$插值公式)令$n\geqslant 0$，给定$n+1$个$F$中不同的元素$a_0,a_1,...,a_n$，以及$F$中任意$n+1$个元素$b_0,b_1,...,b_n$，我们可以找到唯一的次数不高于$n$的多项式$f\in F[x]$，满足$f(a_i)=b_i,0\leqslant i\leqslant n$。
+\begin{theorem}[$Lagrange$插值公式]
+令$n\geqslant 0$，给定$n+1$个$F$中不同的元素$a_0,a_1,...,a_n$，以及$F$中任意$n+1$个元素$b_0,b_1,...,b_n$，我们可以找到唯一的次数不高于$n$的多项式$f\in F[x]$，满足$f(a_i)=b_i,0\leqslant i\leqslant n$。
+\end{theorem}
 
 证明：先证明存在性：对于每一个$i=0,1,...,n$，我们构造下面的函数：
 

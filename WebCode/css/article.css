@@ -175,6 +175,24 @@
 .article-body :is(h2, h3, h4, h5, h6, section), #article { scroll-margin-top: 28px; }
 .article-body p { margin: 0 0 12px; text-indent: 2em; }
 .article-body .statement-label { color: var(--text); }
+.article-body .statement-card {
+    margin: 20px 0;
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: transparent;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: thin;
+}
+.article-body .statement-card > :first-child { margin-top: 0; }
+.article-body .statement-card > :last-child { margin-bottom: 0; }
+.article-body .statement-card > p:first-child { text-indent: 0; }
+.article-body .statement-card > p:first-child > strong:first-child { color: var(--text); }
+@media (max-width: 760px) {
+    .article-body .statement-card { padding: 14px 16px; }
+}
 .article-body p:has(> .statement-label:first-child) { margin-top: 20px; }
 .article-body li p:has(> .statement-label:first-child),
 .article-body p:has(> .statement-label:first-child):first-child { margin-top: 0; }

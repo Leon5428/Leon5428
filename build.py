@@ -34,6 +34,7 @@ TOKEN = re.compile(r"\{\{\s*([a-z_]+)\s*\}\}")
 # Presentation assets from the existing homepage, not a content discovery list.
 ICONS = {"Math": "pi", "Crypto": "lock-keyhole", "Research": "file-text",
          "Project": "cuboid", "Tool": "wrench", "Diary": "pencil-line"}
+STATEMENT_ENVIRONMENTS = {"definition", "theorem", "lemma", "corollary", "proposition"}
 
 
 class BuildError(Exception):
@@ -294,10 +295,38 @@ def copy_resource(subject: Subject, chapter: Chapter, url: str, stage: Path) -> 
     return relative_url(chapter.output, str(target)) + suffix
 
 
+def validate_statements(source: str, path: Path) -> set[str]:
+    """Check explicit statement boundaries and find unnumbered declarations."""
+    # Ignore comments and literal code when checking author-written boundaries.
+    literal = re.compile(
+        r"\\begin\{(verbatim\*?|Verbatim|lstlisting|minted)\}[\s\S]*?\\end\{\1\}"
+        r"|\\verb\*?([^\w\s]).*?\2|\\[%\\]|%[^\n]*")
+    source = literal.sub(lambda match: "\n" * match[0].count("\n")
+                         if not match[0] in {r"\%", r"\\"} else match[0], source)
+    stack: list[tuple[str, int]] = []
+    for match in re.finditer(r"(?<!\\)\\(begin|end)\{([a-z]+)\}", source):
+        action, environment = match.groups()
+        if environment not in STATEMENT_ENVIRONMENTS:
+            continue
+        line = source.count("\n", 0, match.start()) + 1
+        if action == "begin":
+            stack.append((environment, line))
+        elif not stack or stack[-1][0] != environment:
+            raise BuildError(f"{path}:{line}: unmatched \\end{{{environment}}}")
+        else:
+            stack.pop()
+    if stack:
+        environment, line = stack[-1]
+        raise BuildError(f"{path}:{line}: missing \\end{{{environment}}}")
+    return set(re.findall(r"\\newtheorem\*\{([a-z]+)\}", source))
+
+
 def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
             warnings: list[str]) -> tuple[str, str, bool]:
+    source = read_text(chapter.source)
+    unnumbered = validate_statements(source, chapter.source)
     document = json.loads(run_pandoc(pandoc, ["-f", "latex+raw_tex", "-t", "json"],
-                                     read_text(chapter.source), chapter.source))
+                                     source, chapter.source))
     if not document["blocks"]:
         warnings.append(f"{chapter.source}: no article body; generated an explicit placeholder")
         return '<p class="empty-article">本章内容尚在整理中。</p>', "", False
@@ -307,6 +336,18 @@ def convert(pandoc: str, chapter: Chapter, subject: Subject, stage: Path,
     for node in all_nodes:
         kind = node["t"]
         content: Any = node.get("c")
+        if kind == "Div" and STATEMENT_ENVIRONMENTS.intersection(content[0][1]):
+            classes, blocks = content[0][1], content[1]
+            classes.append("statement-card")
+            # Some Pandoc versions number even starred amsthm declarations.
+            # Strip only that generated counter; preserve titles and body markup.
+            if unnumbered.intersection(classes) and blocks and blocks[0]["t"] == "Para":
+                inlines = blocks[0]["c"]
+                if inlines and inlines[0]["t"] == "Strong":
+                    label = inlines[0]["c"]
+                    if (len(label) >= 3 and label[-2]["t"] == "Space"
+                            and label[-1]["t"] == "Str" and label[-1]["c"].isdigit()):
+                        del label[-2:]
         if kind == "Para" and content and content[0].get("t") == "Str":
             # Emphasize explicit academic labels, without guessing paragraph roles.
             first = content[0]["c"]

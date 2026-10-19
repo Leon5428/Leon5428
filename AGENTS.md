@@ -867,6 +867,14 @@ hero introduction while `description` continues to control homepage card text.
 
 Preserve the user's CRLF requirement for all edited and generated text files, encoded as UTF-8.
 
+Academic statement cards use explicit amsthm environments: `definition`, `theorem`,
+`lemma`, `corollary`, and `proposition`. Declare them with `\newtheorem*` and use
+`\theoremstyle{definition}` for upright body text. Optional bracketed titles are
+supported. The build adds the `statement-card` class to Pandoc's native Divs;
+article.css provides a transparent background and thin border. Keep proofs and
+commentary outside the statement's closing marker. Never infer card boundaries
+from plain Chinese labels. See WebCode/BUILD.md for authoring examples.
+
 Article-body Latin text uses locally bundled MathJax Main fonts from version 3.2.2,
 declared in article.css and stored in WebCode/assets/fonts/mathjax with the SIL OFL.
 Keep Chinese serif fallbacks and monospace code styles. Mathematical variables in

@@ -172,6 +172,35 @@ python build.py --mathjax-url assets/vendor/mathjax/es5/tex-svg.js
 脚本不会自行下载 MathJax；本地路径相对于 `Output`，会转换为各页的相对 URL。
 MathJax 扩展需要保留原分发目录结构。
 
+### 定义、定理等正文卡片
+
+使用 `amsthm` 的显式环境标记卡片边界。先在 `.tex` 导言区声明：
+
+```latex
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{theorem}{定理}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+\newtheorem*{proposition}{命题}
+```
+
+正文写法如下，环境内可以包含多段文字、公式和列表：
+
+```latex
+\begin{theorem}[定理名称]
+这里写完整的条件与结论。
+\end{theorem}
+
+证明：这里写证明过程。
+```
+
+构建器将这五种环境转为透明背景、细边框的正文卡片，标签由导言区声明生成。
+星号声明表示不编号；方括号名称可省略。证明和个人解释放在结束标记之后。
+脚本不会根据“定义：”等文字自动猜测卡片边界；缺少或错配结束标记时，
+会报告源文件、行号及相应环境。原有普通段落仍按原来的方式渲染。
+
 ### 正文英文与数学字体
 
 文章正文的英文、数字使用 `WebCode/assets/fonts/mathjax/` 中本地保存的

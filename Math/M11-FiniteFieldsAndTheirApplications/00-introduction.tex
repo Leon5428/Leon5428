@@ -4,6 +4,12 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\theoremstyle{definition}
+\newtheorem*{definition}{定义}
+\newtheorem*{theorem}{定理}
+\newtheorem*{lemma}{引理}
+\newtheorem*{corollary}{推论}
+\newtheorem*{proposition}{命题}
 \begin{document}
 有限域这门课是我在大三上学期的限选课，不得不说这门课有点难度，尤其是前面牵扯到了很多近世代数的内容，并且需要很多近世代数的内容作为必备的基础知识，再加上这门课主要讲有限域，和我之前自学的近世代数的内容有些差异（因为近世代数的内容中群环域基本是均分的），所以我单独开了一个小分类在这里，希望能重点整理一些有限域的内容。
 
@@ -11,7 +17,8 @@
 
 \section*{群的定义和例子}
 
-定义：设$S$为一个非空集合，我们将映射：
+\begin{definition}
+设$S$为一个非空集合，我们将映射：
 
 \begin{align*}
 \circ :& S\times S\rightarrow S\\
@@ -19,13 +26,16 @@
 \end{align*}
 
 称为集合$S$上的二元运算，其实就是拿集合中的两个元素兑换一个元素出来，比如整数集上的加法。
+\end{definition}
 
-定义：给定一个非空集合$G$及其上的一个二元运算$\circ$，我们说$G$对于$\circ$构成一个群，若：
+\begin{definition}
+给定一个非空集合$G$及其上的一个二元运算$\circ$，我们说$G$对于$\circ$构成一个群，若：
 \begin{enumerate}
 \item 1)结合律：$\forall a,b,c\in G,a\circ(b\circ c)=(a\circ b)\circ c$
 \item 2)单位元：$\exists e\in G \;\; s.t.\forall a\in G \;\; a\circ e=e\circ a$
 \item 3)逆元：$\forall a\in G,\exists b\in G \;\; s.t. a\circ b=b\circ a=e$ 我们称此元素$b$为元素$a$的逆元，记成$a^{-1}$。
 \end{enumerate}
+\end{definition}
 
 特别地，如果一个群$G$满足$\forall a,b\in G,a\circ b=b\circ a$，我们称这样的群为Abel群，也叫做交换群，对于这一类群，我们经常把$a\circ b$写作$a+b$，把$e$写成0，把$a^{-1}$写成$-a$，对于其他的那些普通的群，我们有如下的记号：
 
@@ -35,23 +45,33 @@ a^0&=e\\
 a^{-n}&=(a^{-1})^n
 \end{align*}
 
-定义：若群$G$中含有有限多个元素，则称其为有限群，群$G$元素的个数称为$G$的阶，记为$|G|$。
+\begin{definition}
+若群$G$中含有有限多个元素，则称其为有限群，群$G$元素的个数称为$G$的阶，记为$|G|$。
+\end{definition}
 
-定义：给定群$(G,\cdot)$，若：
+\begin{definition}
+给定群$(G,\cdot)$，若：
 
 \begin{align*}
 \forall a\in G\;\; s.t.\;(\forall b\in G\;\; \exists j\in Z\;\; s.t.\;\;b=a^j)
 \end{align*}
 
 则称群$G$为循环群，$a$为$G$的一个生成元，也记为$G = \langle a \rangle$。
+\end{definition}
 
-定义：给定群$(G,\cdot)$及其子集$H$，如果$H$自身在$G$的运算$\cdot$下构成了一个群，我们就称$H$为$G$的一个子群，记为$H\leqslant G$。
+\begin{definition}
+给定群$(G,\cdot)$及其子集$H$，如果$H$自身在$G$的运算$\cdot$下构成了一个群，我们就称$H$为$G$的一个子群，记为$H\leqslant G$。
+\end{definition}
 
 需要注意的是，有限群的子群一定是有限群，而无限群的子群可能是有限群，也可能是无限群。
 
-定义：若子群$\langle a \rangle$为有限群，则将群$\langle a \rangle$的阶$|\langle a \rangle|$也称为元素$a$的阶
+\begin{definition}
+若子群$\langle a \rangle$为有限群，则将群$\langle a \rangle$的阶$|\langle a \rangle|$也称为元素$a$的阶
+\end{definition}
 
-定义：给定群$G$的子集$S$，我们用$\langle S \rangle$表示由$S$中所有有限多个元素幂乘积形成的子群，另外，若$\langle S \rangle=G$，我们称$S$生成$G$。举例：1生成整数集$Z$。
+\begin{definition}
+给定群$G$的子集$S$，我们用$\langle S \rangle$表示由$S$中所有有限多个元素幂乘积形成的子群，另外，若$\langle S \rangle=G$，我们称$S$生成$G$。举例：1生成整数集$Z$。
+\end{definition}
 
 这个定义其实就是想找到包含$S$的最小子群，所以就不断利用已有元素的生成，使其达到圆满。
 
@@ -83,7 +103,8 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 
 \section*{等价关系和等价类}
 
-定义：我们称集合$S\times S$的一个子集$R$为等价关系，若：
+\begin{definition}
+我们称集合$S\times S$的一个子集$R$为等价关系，若：
 \begin{enumerate}
 \item 自反性：$\forall s\in S,\;(s,s)\in R$
 \item 对称性：若$(s,t)\in R$，则$(t,s)\in R$
@@ -94,16 +115,19 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 \begin{align*}
 [s]=\{t\in S:\;(s,t)\in R\}
 \end{align*}
+\end{definition}
 
 如果两个等价类不相等，那么两个等价类交集为空集，并且所有不同的等价类构成了集合S的一个划分。
 
-定义：给定群$H<G$及以上的等价关系$R_H$，我们用：
+\begin{definition}
+给定群$H<G$及以上的等价关系$R_H$，我们用：
 
 \begin{align*}
 	aH=\{ah:h\in H\}
 \end{align*}
 
 来表示元素$a$所在的等价类，并且称这些等价类为$G$关于$H$的陪集。
+\end{definition}
 
 显然，给定群$H<G$，我们有：
 
@@ -111,19 +135,23 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 	\forall a\in G,|aH|=|H|
 \end{align*}
 
-定义：给定群$H<G$，我们将$G$关于$H$的不同陪集的数目记为$|G/H|$，并称之为$H$在$G$中的指标。
+\begin{definition}
+给定群$H<G$，我们将$G$关于$H$的不同陪集的数目记为$|G/H|$，并称之为$H$在$G$中的指标。
+\end{definition}
 
-定理：
+\begin{theorem}
+
 \begin{enumerate}
 	\item (1)$|G|=|H||G/H|$
 	\item (2)作为(1)的特例，$\forall a\in G,|\langle a \rangle|$整除$|G|$
 \end{enumerate}
-
+\end{theorem}
 另外，十分显然的是，$G$关于$H$的所有不同陪集构成$G$的一个划分。
 
 \section*{循环群基本定理}
 
-定理：令$\langle a \rangle$为阶为$m$的循环群，我们有：
+\begin{theorem}
+令$\langle a \rangle$为阶为$m$的循环群，我们有：
 \begin{enumerate}
 	\item 1)循环群的子群皆为循环群
 	\item 2)$|\langle a^k \rangle|=\frac{m}{\gcd(k,m)}$
@@ -132,6 +160,7 @@ a^i=a^j\Rightarrow 1=a^{j-i}
 	\item 5)若$f|m$，则群$\langle a \rangle$包含$\phi(f)$个阶为$f$的元素
 	\item 6)群$\langle a \rangle$包含$\phi(m)$个生成元，它们是元素$a^r$，其中$\gcd(r,m)=1$。
 \end{enumerate}
+\end{theorem}
 
 我们接下来一个一个证明，证明1：
 
