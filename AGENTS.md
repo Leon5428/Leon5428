@@ -226,6 +226,11 @@ Use this single category-level format for all categories. Empty categories use a
 Generate subject and chapter navigation labels from the corresponding `title` fields, and sort by the corresponding `order` fields rather than filesystem enumeration, filename prefixes, or array position.
 The metadata order is independent of numbering in paths. Do not automatically make these numbers match. Diary subjects are the exception to normal display direction: larger month orders appear first.
 
+For chapters, `order: -1` means append after all normally ordered chapters within
+the same subject. This applies to the expanded sidebar and the shared chapter
+sequence (subject index and previous/next links). Other chapter orders remain
+ascending; duplicate chapter orders are still rejected.
+
 The `file` value must match the actual source filename, including its numeric prefix and `.tex` extension. When renaming a referenced source file, update its metadata entry as well.
 Display titles do not have to be literal translations of filenames: `00-introduction.tex` is displayed as `导言` in this example.
 Changing a display title should not rename the source file or change its path-based identity.

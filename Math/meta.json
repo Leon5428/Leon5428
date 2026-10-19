@@ -158,6 +158,11 @@
           "order": 3,
           "file": "02-chapter3.tex",
           "title": "域扩张与有限域"
+        },
+        {
+          "order": -1,
+          "file": "homework.tex",
+          "title": "有限域作业集合"
         }
       ]
     }

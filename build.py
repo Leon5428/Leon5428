@@ -187,7 +187,7 @@ def discover(root: Path, warnings: list[str]) -> list[Category]:
                 warnings.append(f"{category_meta}: {subject_prefix}chapters is empty; subject not included")
                 continue
             category.subjects.append(Subject(subject_dir, subject_title, subject_order,
-                                              sorted(chapters, key=lambda c: c.order)))
+                                              sorted(chapters, key=lambda c: (c.order == -1, c.order))))
         for subject_dir in sorted(path for path in directory.iterdir()
                                   if path.is_dir() and path.name != "icon"):
             if subject_dir.name.casefold() not in subject_directories and any(subject_dir.rglob("*.tex")):
