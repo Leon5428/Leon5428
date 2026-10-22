@@ -229,10 +229,26 @@ def api_json(path: str):
 
 
 def search_total(kind: str, query: str) -> int:
-    result = api_json(f"search/{kind}?" + urlencode({"q": query, "per_page": 1}))
-    if result.get("incomplete_results"):
-        raise ValueError(f"GitHub returned incomplete {kind} statistics; images unchanged")
-    return result["total_count"]
+    """Retry successful HTTP responses whose search results are incomplete."""
+    path = f"search/{kind}?" + urlencode({"q": query, "per_page": 1})
+    for attempt in range(1, 4):
+        result = api_json(path)
+        if (not isinstance(result, dict)
+                or type(result.get("incomplete_results")) is not bool
+                or type(result.get("total_count")) is not int
+                or result["total_count"] < 0):
+            raise ValueError(f"GitHub returned invalid search statistics for {query!r}; images unchanged")
+        if not result["incomplete_results"]:
+            return result["total_count"]
+        if attempt < 3:
+            delay = attempt * 5
+            print(f"GitHub search incomplete ({attempt}/3): {query}; "
+                  f"retrying in {delay}s", file=sys.stderr, flush=True)
+            time.sleep(delay)
+    raise RuntimeError(
+        f"GitHub search still incomplete after 3 attempts: {query}. "
+        "Existing images and README have not been updated; try again later."
+    )
 
 
 def public_repositories() -> list[dict]:
@@ -463,6 +479,6 @@ def main() -> None:
 if __name__ == "__main__":
     try:
         main()
-    except (RuntimeError, URLError, TimeoutError) as exc:
+    except (RuntimeError, ValueError, URLError, TimeoutError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
