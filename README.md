@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png?v=d79912922f8c" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=07df3f35e7be" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=97ce61566807" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->

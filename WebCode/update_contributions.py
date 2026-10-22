@@ -21,7 +21,9 @@ from urllib.request import Request, urlopen
 USERNAME = "Leon5428"
 SOURCE = f"https://github.com/users/{USERNAME}/contributions"
 OUTPUT = Path(__file__).resolve().parent / "assets/images/contributions.svg"
-COLORS = ("#161b22", "#003d29", "#006d32", "#26a641", "#39d353")
+# GitHub Primer's default light contribution scale; levels come from GitHub HTML.
+COLORS = ("#eff2f5", "#aceebb", "#4ac26b", "#2da44e", "#116329")
+DARK_CALENDAR_COLORS = ("#161b22", "#0e4429", "#006d32", "#26a641", "#39d353")
 REPOSITORIES = {
     "Leon5428/Leon5428": "repository.svg",
     "Leon5428/PQSecure": "repository-pqsecure.svg",
@@ -208,7 +210,7 @@ def render_calendar(html: str) -> str:
         f'viewBox="0 0 {width} {height}" role="img" aria-labelledby="title desc">',
         f'<title id="title">{USERNAME} GitHub contribution calendar</title>',
         f'<desc id="desc">Public GitHub contribution levels, {first} to {last}. '
-        'Darker squares indicate less activity; bright green indicates more activity.</desc>',
+        'Levels 0 to 4 indicate increasing activity; colors follow the light or dark theme.</desc>',
         f'<!-- Source: {SOURCE}. Refresh: python WebCode/update_contributions.py -->',
         f'<rect width="{width}" height="{height}" rx="8" fill="#0d1117"/>',
     ]
@@ -216,9 +218,17 @@ def render_calendar(html: str) -> str:
         offset = (day - start).days
         x, y = padding + (offset // 7) * step, padding + (offset % 7) * step
         lines.append(f'<rect x="{x}" y="{y}" width="{size}" height="{size}" '
-                     f'rx="2" fill="{COLORS[level]}"><title>{day}: level {level}/4</title></rect>')
+                     f'rx="2" class="contribution-level-{level}" fill="{COLORS[level]}"><title>{day}: level {level}/4</title></rect>')
     lines.append('</svg>')
-    return '\n'.join(lines) + '\n'
+    return theme_calendar('\n'.join(lines) + '\n')
+
+
+def theme_calendar(svg: str) -> str:
+    """Keep calendar colors separate from repository-card foreground colors."""
+    rules = ''.join(f'.contribution-level-{level}{{fill:{color}}}'
+                    for level, color in enumerate(DARK_CALENDAR_COLORS))
+    style = '<style id="calendar-theme">@media (prefers-color-scheme:dark){' + rules + '}</style>'
+    return re.sub(r'(<svg\b[^>]*>)', lambda match: match[1] + style, svg, count=1)
 
 
 def api_json(path: str):
