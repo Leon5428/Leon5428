@@ -2,7 +2,7 @@
 <img src="./WebCode/assets/images/banner.png?v=d79912922f8c" width="50%" alt="复古动画风插画：深夜坐在老式电脑前编程的青年，屏幕泛着绿色代码光" />
 
 <a href="https://github.com/Leon5428?tab=overview">
-  <img src="./WebCode/assets/images/contributions.svg?v=97ce61566807" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
+  <img src="./WebCode/assets/images/contributions.svg?v=8b9951bb5a2e" width="100%" alt="Leon5428 的 GitHub 贡献热力图，点击查看最新活动" />
 </a>
 
 <!-- Refresh the calendar before committing: python WebCode/update_contributions.py -->
@@ -39,7 +39,7 @@
 <p align="center"><b>写下一点，弄懂一点，再向前走一点。</b></p>
 <p align="center">
   <a href="https://github.com/Leon5428/Leon5428">
-    <img src="./WebCode/assets/images/repository.svg?v=c602d4751855" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
+    <img src="./WebCode/assets/images/repository.svg?v=f85ee6fada8f" width="48%" alt="Leon5428/Leon5428：仓库名称、Star、Fork 与默认分支提交数量" />
   </a>
 
   <a href="https://github.com/Leon5428/PQSecure">
@@ -56,7 +56,7 @@
 </p>
 <p align="center">
   <a href="https://github.com/Leon5428/ThisIsOpenSource">
-    <img src="./WebCode/assets/images/repository-thisisopensource.svg?v=4e2a391d8739" width="48%" alt="Leon5428/ThisIsOpenSource：项目简介与仓库统计" />
+    <img src="./WebCode/assets/images/repository-thisisopensource.svg?v=614555f110d4" width="48%" alt="Leon5428/ThisIsOpenSource：项目简介与仓库统计" />
   </a>
   <a href="https://github.com/Leon5428/finite-fields-book">
     <img src="./WebCode/assets/images/repository-finite-fields-book.svg?v=7175d16cb84a" width="48%" alt="finite-fields-book：学习用 Fork，非原创项目；截至 2026-10-12 尚未贡献，不计入代码语言占比" />
@@ -66,11 +66,11 @@
 <!-- Locally generated cards show Leon5428's public GitHub data. Language charts describe repositories, not proficiency. -->
 <p align="center">
   <a href="https://github.com/Leon5428?tab=overview">
-    <img src="./WebCode/assets/images/profile-overview.svg?v=1b3a149e96f5" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
+    <img src="./WebCode/assets/images/profile-overview.svg?v=0bccd141c2d6" width="100%" alt="Leon5428 的公开贡献概览；图片未加载时可点击查看 GitHub 主页" />
   </a>
 </p>
 <p align="center">
-  <img src="./WebCode/assets/images/profile-stats-row.svg?v=381baf0e04bf" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
+  <img src="./WebCode/assets/images/profile-stats-row.svg?v=7cbe52dd1270" width="100%" alt="Leon5428 的公开统计与代码语言百分比" />
 </p>
 
 <details>
