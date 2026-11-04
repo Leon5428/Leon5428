@@ -27,6 +27,7 @@ from urllib.parse import quote, unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent
+SITE_NAME = "潘小工的小屋"
 T = TypeVar("T")
 MATHJAX_URL = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"
 MANIFEST = ".build-manifest.json"
@@ -429,7 +430,7 @@ def render(template: str, values: dict[str, str]) -> str:
 
 def main_navigation(categories: list[Category], page: str, active: Category | None) -> str:
     links = [f'<a href="{relative_url(page, "index.html")}"'
-             + (' class="active" aria-current="page"' if active is None else '') + '>Home</a>']
+             + (' class="active" aria-current="page"' if active is None else '') + '>首页</a>']
     for category in categories:
         current = "page" if page == category.output else "location"
         state = f' class="active" aria-current="{current}"' if category is active else ''
@@ -487,8 +488,10 @@ def copy_static_file(source: Path, destination: Path) -> None:
         shutil.copyfile(source, destination)
 
 
-def page_values(categories: list[Category], category: Category, page: str, title: str) -> dict[str, str]:
-    return {"page_title": escape(f"{title} | LeonBlog"), "title": escape(title),
+def page_values(categories: list[Category], category: Category, page: str, title: str,
+                site_name: str = SITE_NAME, icp_number: str = "") -> dict[str, str]:
+    return {"page_title": escape(f"{title} | {site_name}"), "title": escape(title),
+            "site_name": escape(site_name, quote=True), "icp_label": escape(icp_number or "ICP备案"),
             "home_url": relative_url(page, "index.html"),
             "stylesheet_url": relative_url(page, "css/article.css"),
             "article_script_url": relative_url(page, "assets/article-nav.js"),
@@ -538,12 +541,13 @@ def render_readme(root: Path, pandoc: str) -> str:
 
 
 def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
-             warnings: list[str], mathjax_url: str) -> int:
+             warnings: list[str], mathjax_url: str, *, simple_home: bool = False,
+             site_name: str = SITE_NAME, icp_number: str = "") -> int:
     article_template = read_text(root / "WebCode/templates/article.html")
-    home_template = read_text(root / "WebCode/templates/index.html")
+    home_template = read_text(root / "WebCode/templates" / ("index-simple.html" if simple_home else "index.html"))
     # Content-derived URLs prevent stale homepage styles after deployment.
     import hashlib
-    for stylesheet in ("base.css", "style.css"):
+    for stylesheet in ("base.css", "style.css", "simple.css"):
         version = hashlib.sha256((root / "WebCode/css" / stylesheet).read_bytes()).hexdigest()[:12]
         home_template = home_template.replace(f'css/{stylesheet}"', f'css/{stylesheet}?v={version}"')
     category_template = read_text(root / "WebCode/templates/category.html")
@@ -570,27 +574,27 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
                 copy_static_file(path, destination)
         for subject in category.subjects:
             subject_index = f"{category.directory.name}/{subject.directory.name}/index.html"
-            subject_values = page_values(categories, category, subject_index, subject.title)
+            subject_values = page_values(categories, category, subject_index, subject.title, site_name, icp_number)
             subject_values["body"] = '<ol class="subject-index-list">' + ''.join(
                 f'<li><a href="{relative_url(subject_index, c.output)}">{escape(c.title)}</a></li>'
                 for c in subject.chapters) + '</ol>'
             write_page(stage, subject_index, render(article_template, subject_values))
             for chapter in subject.chapters:
                 body, toc, math = convert(pandoc, chapter, subject, stage, warnings)
-                values = page_values(categories, category, chapter.output, chapter.title)
+                values = page_values(categories, category, chapter.output, chapter.title, site_name, icp_number)
                 values.update(body=body, toc=toc,
                               sidebar=sidebar(category, chapter.output, chapter), pagination=pagination(subject, chapter))
                 if toc:
                     values.update(toc_visibility="", article_layout_class="")
                 values["breadcrumbs"] += ('<span class="meta-divider" aria-hidden="true">/</span>'
                                           f'<a href="{relative_url(chapter.output, subject_index)}">{escape(subject.title)}</a>')
-                values["page_title"] = escape(f"{chapter.title} · {subject.title} | LeonBlog")
+                values["page_title"] = escape(f"{chapter.title} · {subject.title} | {site_name}")
                 if math:
                     script_url = mathjax_url if urlsplit(mathjax_url).scheme else relative_url(chapter.output, mathjax_url)
                     values["math_script"] = f'<script defer src="{escape(script_url, quote=True)}"></script>'
                 write_page(stage, chapter.output, render(article_template, values))
                 count += 1
-        values = page_values(categories, category, category.output, category.title)
+        values = page_values(categories, category, category.output, category.title, site_name, icp_number)
         hero_image = f"assets/images/hero-{category.directory.name.lower()}.jpg"
         if not (root / "WebCode" / hero_image).is_file():
             hero_image = "assets/images/background.jpg"
@@ -624,7 +628,9 @@ def generate(root: Path, stage: Path, categories: list[Category], pandoc: str,
     write_page(stage, "index.html", render(home_template,
                {"main_navigation": main_navigation(categories, "index.html", None),
                 "category_cards": "\n".join(cards),
-                "readme_content": render_readme(root, pandoc)}))
+                "site_name": escape(site_name, quote=True),
+                "icp_label": escape(icp_number or "ICP备案"),
+                "readme_content": "" if simple_home else render_readme(root, pandoc)}))
     return count
 
 
@@ -758,13 +764,19 @@ def publish(stage: Path, output: Path) -> None:
 
 
 def build(root: Path = ROOT, *, strict: bool = False, check: bool = False,
-          pandoc: str | None = None, mathjax_url: str = MATHJAX_URL) -> tuple[int, list[str]]:
+          pandoc: str | None = None, mathjax_url: str = MATHJAX_URL,
+          simple_home: bool = False, site_name: str | None = None,
+          icp_number: str = "") -> tuple[int, list[str]]:
     warnings: list[str] = []
+    if site_name is not None and not site_name.strip():
+        raise BuildError("--site-name must not be blank")
+    site_name = site_name.strip() if site_name is not None else SITE_NAME
     categories = discover(root, warnings)
     executable = find_pandoc(root, pandoc)
     with tempfile.TemporaryDirectory(prefix=".build-", dir=root) as directory:
         stage = Path(directory)
-        count = generate(root, stage, categories, executable, warnings, mathjax_url)
+        count = generate(root, stage, categories, executable, warnings, mathjax_url,
+                         simple_home=simple_home, site_name=site_name, icp_number=icp_number.strip())
         validate_output(stage)
         if strict and warnings:
             raise BuildError("Strict build stopped:\n" + "\n".join(warnings))
@@ -783,11 +795,15 @@ def main() -> int:
                         help="MathJax URL or Output-relative asset path (default: pinned CDN)")
     parser.add_argument("--serve", action="store_true", help="build, then preview on localhost")
     parser.add_argument("--port", type=int, default=8000, help="local preview port (default: 8000)")
+    parser.add_argument("--simple-home", action="store_true", help="use the simple personal-notes homepage")
+    parser.add_argument("--site-name", help="display name used in page titles, header and footer")
+    parser.add_argument("--icp-number", default="", help="actual approved ICP number shown in page footers")
     args = parser.parse_args()
     if args.check and args.serve:
         parser.error("--check and --serve cannot be combined")
     try:
-        count, warnings = build(strict=args.strict, check=args.check, pandoc=args.pandoc, mathjax_url=args.mathjax_url)
+        count, warnings = build(strict=args.strict, check=args.check, pandoc=args.pandoc, mathjax_url=args.mathjax_url,
+                                simple_home=args.simple_home, site_name=args.site_name, icp_number=args.icp_number)
         for warning in warnings:
             print(f"WARNING: {warning}", file=sys.stderr)
         print(f"{'Validated' if args.check else 'Built'} {count} articles; {len(warnings)} warnings.")

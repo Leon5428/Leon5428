@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Leon 的个人知识笔记，记录数学、密码学、科研、项目与日常思考。">
-    <title>LeonBlog</title>
+    <meta name="description" content="个人知识笔记，记录数学、密码学、科研、项目与日常思考。">
+    <title>{{ site_name }}</title>
     <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/style.css">
@@ -13,7 +13,7 @@
     <a class="skip-link" href="#main">跳转到正文</a>
     <header class="site-header">
         <div class="header-container">
-            <a href="index.html" class="logo" aria-label="LeonBlog 首页">LeonBlog</a>
+            <a href="index.html" class="logo" aria-label="{{ site_name }} 首页">{{ site_name }}</a>
             <nav class="main-nav" aria-label="主导航">{{ main_navigation }}</nav>
         </div>
     </header>
@@ -21,7 +21,7 @@
         <section class="hero" aria-labelledby="home-title">
             <img class="hero-image" src="assets/images/background.jpg" alt="" fetchpriority="high">
             <div class="hero-content">
-                <h1 id="home-title">Per Aspera Ad Astra</h1>
+                <h1 id="home-title">{{ site_name }}</h1>
                 <p>循此苦旅，以达天际。穿越逆境，直抵繁星。</p>
             </div>
         </section>
@@ -31,8 +31,8 @@
         <section class="about-section" id="about" aria-labelledby="about-title">
             <div class="section-heading">
                 <div>
-                    <h2 id="about-title">About Me</h2>
-                    <p>A brief introduction</p>
+                    <h2 id="about-title">关于我</h2>
+                    <p>我的学习与生活</p>
                 </div>
             </div>
             <div class="readme-introduction">{{ readme_content }}</div>
@@ -40,9 +40,9 @@
     </main>
     <footer class="site-footer">
         <div class="footer-container">
-            <div><strong>LeonBlog</strong><p>记录数学、密码学、科研与项目。</p></div>
-            <p class="footer-quote">“Per Aspera Ad Astra.”</p>
-            <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">ICP备案</a>
+            <div><strong>{{ site_name }}</strong><p>记录数学、密码学、科研与项目。</p></div>
+            <p class="footer-quote">“穿越逆境，直抵繁星。”</p>
+            <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">{{ icp_label }}</a>
         </div>
     </footer>
 </body>

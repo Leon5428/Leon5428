@@ -14,7 +14,7 @@
     <a class="skip-link" href="#subjects">跳转到内容列表</a>
     <header class="site-header">
         <div class="header-container">
-            <a href="{{ home_url }}" class="logo">LeonBlog</a>
+            <a href="{{ home_url }}" class="logo">{{ site_name }}</a>
             <nav class="main-nav" aria-label="主导航">{{ main_navigation }}</nav>
         </div>
     </header>
@@ -36,9 +36,9 @@
     </main>
     <footer class="site-footer">
         <div class="footer-container">
-            <div><strong>LeonBlog</strong><p>记录数学、密码学、科研与项目。</p></div>
-            <p class="footer-quote">“Per Aspera Ad Astra.”</p>
-            <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">ICP备案</a>
+            <div><strong>{{ site_name }}</strong><p>记录数学、密码学、科研与项目。</p></div>
+            <p class="footer-quote">“穿越逆境，直抵繁星。”</p>
+            <a class="icp-link" href="https://beian.miit.gov.cn" target="_blank" rel="noopener noreferrer">{{ icp_label }}</a>
         </div>
     </footer>
 </body>

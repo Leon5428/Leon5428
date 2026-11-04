@@ -1,0 +1,27 @@
+/* Optional simple homepage; the reading pages keep their established layout. */
+.simple-home { --page-width: 1080px; }
+.simple-home .logo { font-size: 24px; letter-spacing: 0; overflow-wrap: anywhere; }
+.simple-home .header-container { flex-wrap: wrap; gap: 8px 24px; padding-block: 10px; }
+.simple-home .main-nav { gap: 22px; max-width: 100%; }
+.simple-home .main-nav a { padding-block: 12px; }
+.simple-home .landing-main { padding-bottom: 64px; }
+.simple-introduction { padding: 64px 0 44px; border-bottom: 1px solid var(--line); }
+.simple-eyebrow { color: var(--muted); font-size: 13px; letter-spacing: .1em; }
+.simple-introduction h1 { margin: 14px 0 20px; font-size: clamp(28px, 4vw, 42px); line-height: 1.4; overflow-wrap: anywhere; }
+.simple-introduction p { max-width: 44em; margin: 12px 0; color: var(--muted); line-height: 1.9; }
+.simple-section-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 24px; margin: 32px 0 18px; }
+.simple-section-heading h2, .simple-about h2 { margin: 0; font-size: 23px; }
+.simple-section-heading p { margin: 0; color: var(--muted); font-size: 14px; }
+.simple-home .category-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.simple-home .category-card { min-height: 130px; padding: 20px; }
+.simple-home .category-card:hover { transform: none; box-shadow: none; }
+.simple-home .category-icon { display: none; }
+.simple-home .category-card h2 { font-size: 20px; }
+.simple-about { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.simple-about p { max-width: 46em; margin: 14px 0 0; color: var(--muted); line-height: 1.9; }
+@media (max-width: 760px) {
+    .simple-home .landing-main { width: calc(100% - 40px); }
+    .simple-introduction { padding-top: 36px; }
+    .simple-home .category-container { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .simple-home .category-card { padding: 16px; min-height: 118px; }
+}
