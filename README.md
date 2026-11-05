@@ -158,8 +158,7 @@ LeonBlog/
 </details>
 
 ## 🤝 Let's Connect
-
-如果某段证明让你产生了不同的想法，或者有一步还可以解释得更清楚，欢迎留下来一起讨论。
+欢迎一起讨论!
 
 **[提出问题 / 笔记勘误](https://github.com/Leon5428/Leon5428/issues) · [参与修订](https://github.com/Leon5428/Leon5428/pulls) · [浏览我的仓库](https://github.com/Leon5428?tab=repositories)**
 
