@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1052" height="178" viewBox="0 0 1052 178" role="img" aria-labelledby="title desc"><style id="profile-theme">:root{--c-161b22:#ebedf0}@media (prefers-color-scheme:dark){:root{--c-161b22:#161b22}}</style><style id="calendar-theme">@media (prefers-color-scheme:dark){.contribution-level-0{fill:#161b22}.contribution-level-1{fill:#0e4429}.contribution-level-2{fill:#006d32}.contribution-level-3{fill:#26a641}.contribution-level-4{fill:#39d353}}</style>
 <title id="title">Leon5428 GitHub contribution calendar</title>
-<desc id="desc">Public GitHub contribution levels, 2025-11-16 to 2026-11-17. Levels 0 to 4 indicate increasing activity; colors follow the light or dark theme.</desc>
+<desc id="desc">Public GitHub contribution levels, 2025-11-16 to 2026-11-21. Levels 0 to 4 indicate increasing activity; colors follow the light or dark theme.</desc>
 <!-- Source: https://github.com/users/Leon5428/contributions. Refresh: python WebCode/update_contributions.py -->
 <rect width="1052" height="178" rx="8" fill="none"/>
 <rect x="25" y="25" width="14" height="14" rx="2" class="contribution-level-0" fill="#eff2f5"><title>2025-11-16: level 0/4</title></rect>
@@ -369,5 +369,9 @@
 <rect x="994" y="139" width="14" height="14" rx="2" class="contribution-level-0" fill="#eff2f5"><title>2026-11-14: level 0/4</title></rect>
 <rect x="1013" y="25" width="14" height="14" rx="2" class="contribution-level-0" fill="#eff2f5"><title>2026-11-15: level 0/4</title></rect>
 <rect x="1013" y="44" width="14" height="14" rx="2" class="contribution-level-1" fill="#aceebb"><title>2026-11-16: level 1/4</title></rect>
-<rect x="1013" y="63" width="14" height="14" rx="2" class="contribution-level-1" fill="#aceebb"><title>2026-11-17: level 1/4</title></rect>
+<rect x="1013" y="63" width="14" height="14" rx="2" class="contribution-level-2" fill="#4ac26b"><title>2026-11-17: level 2/4</title></rect>
+<rect x="1013" y="82" width="14" height="14" rx="2" class="contribution-level-1" fill="#aceebb"><title>2026-11-18: level 1/4</title></rect>
+<rect x="1013" y="101" width="14" height="14" rx="2" class="contribution-level-0" fill="#eff2f5"><title>2026-11-19: level 0/4</title></rect>
+<rect x="1013" y="120" width="14" height="14" rx="2" class="contribution-level-1" fill="#aceebb"><title>2026-11-20: level 1/4</title></rect>
+<rect x="1013" y="139" width="14" height="14" rx="2" class="contribution-level-1" fill="#aceebb"><title>2026-11-21: level 1/4</title></rect>
 </svg>
